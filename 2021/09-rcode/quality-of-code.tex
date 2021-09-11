@@ -1,0 +1,271 @@
+% (The MIT License)
+%
+% Copyright (c) 2021 Yegor Bugayenko
+%
+% Permission is hereby granted, free of charge, to any person obtaining a copy
+% of this software and associated documentation files (the 'Software'), to deal
+% in the Software without restriction, including without limitation the rights
+% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+% copies of the Software, and to permit persons to whom the Software is
+% furnished to do so, subject to the following conditions:
+%
+% The above copyright notice and this permission notice shall be included in all
+% copies or substantial portions of the Software.
+%
+% THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+% SOFTWARE.
+
+% \documentclass[landscape]{/code/huawei.cls/huawei}
+
+\documentclass{article}
+\usepackage[nocn]{/code/ffcode/ffcode}
+\usepackage{/code/ssd16/inno}
+
+\usepackage[fontsize=24pt]{fontsize}
+\usepackage{anyfontsize}
+\usepackage{/code/ssd16/slides}
+\usepackage[static]{/code/clicks/clicks}
+\usepackage{changepage}
+\usepackage{soul}
+\usepackage{amsmath}
+\usepackage{setspace}
+% \renewcommand*\theauthor{Yegor Bugayenko}
+% \renewcommand*\theid{00538675}
+% \renewcommand*\thetitle{What is Quality of Code?}
+% \renewcommand*\thesubtitle{How Can We Increase It?}
+\newcommand\nospell[1]{#1}
+\newcommand*\theauthor{Yegor Bugayenko}
+\newcommand*\thetitle{What is Quality of Code?}
+\newcommand*\thesubtitle{How Can We Increase It?}
+\begin{document}
+
+% \plush[2]{
+%   \innoMiddle{
+%     \innoTitle{\thetitle}{\thesubtitle}\par
+%     {\scshape\theauthor}\par
+%     Moscow Research Center (MRC)\newline
+%     Russian Research Institute (RRI)\par
+%     30 minutes
+%   }
+% }
+
+\plush[2]{
+  \innoMiddle{
+    \innoTitle{\thetitle}{\thesubtitle}\par
+    {\scshape\theauthor}
+  }
+}
+
+\plick{\innoBanner{What is Quality?}}
+\plick{``The \textbf{degree} of excellence of something''
+  \br\small\hspace*{1in}
+  --- Cambridge English Dictionary\par}
+\plick{``The \textbf{degree} to which the set of functions covers all the specified tasks and user objectives''
+  \br\small\hspace*{1in}
+  --- ISO/IEC 25010:2011---System and software quality models}
+\print{``The \textbf{degree} to which a software product meets established \textbf{requirements}''
+  \br\small\hspace*{1in}
+  --- IEEE 730-2014}
+\flush
+
+\plush{\innoMiddle{
+  Formally speaking, quality may be defined as\par
+  {\LARGE$Q = \dfrac{F}{U+F} \in [0,1],$}\par\vspace{1in}
+  where $Q$ is the degree of quality,
+  $F$ is the number of bugs found by us,
+  and
+  $U$ is the number of bugs reported by our users.
+}}
+
+\plush{\innoQuote{/code/ssd16/images/books/rex-black}
+  {A common metric of test team effectiveness measures whether the test team manages to find a sizeable majority of the bugs prior to release. The production or customer bugs are sometimes called test escapes. The implication is that your test team missed these problems but could reasonably have detected them during test execution.}
+  {\nospell{Rex Black}, \emph{ Managing the Testing Process: Practical Tools and Techniques for Managing Hardware and Software Testing}, 2009, p. 109}
+}
+
+\plush{\innoQuote{/code/ssd16/images/books/dre-paper}
+  {Serious software quality control involves measurement of \textbf{Defect Removal Efficiency (DRE)}, which is the percentage of defects found and repaired prior to release. In principle the measurement of DRE is simple. Keep records of all defects found during development. After a fixed period of 90 days, add customer-reported defects to internal defects and calculate the efficiency of internal removal. If the development team found 90 defects and customers reported 10 defects, then DRE is of course 90\%.}
+  {\nospell{Capers Jones}, \emph{Software Defect Removal Efficiency}, Computer, Volume 29, Issue 4, 1996}
+}
+
+\print{\innoPin{\Large$Q = \dfrac{F}{U+F}$}}
+\plick{\innoBanner{Five \ul{types} of bugs}}
+\plick{1) Missing features}
+\plick{2) Functional bugs}
+\plick{3) Security loopholes}
+\plick{4) Slow, unreliable, non-resilient, unavailable, etc.}
+\print{5) Code is not clean}
+\flush
+
+\newenvironment{snippet}
+  {\begin{adjustwidth}{-2in}{-1in}\setstretch{0.85}\begin{multicols}{2}\small}
+  {\end{multicols}\end{adjustwidth}\flush}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\innoBanner{1) Missing features}
+\begin{snippet}
+\begin{ffcode*}{highlightlines={3},highlightcolor=red!50}
+char[] buffer;
+while ((data = reader.read()) > 0) {
+  // To be done later
+}
+\end{ffcode*}
+\columnbreak
+\begin{ffcode*}{highlightlines={2,4},highlightcolor=green!50}
+char[] buffer = new char[1024];
+int pos = 0;
+while ((data = reader.read()) > 0) {
+  buffer[pos++] = (char) data;
+}
+\end{ffcode*}
+\end{snippet}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\innoBanner{2) Functional bugs}
+\begin{snippet}
+\begin{ffcode*}{highlightlines={4},highlightcolor=red!50}
+char[] buffer = new char[1024];
+int pos = 0;
+while ((data = reader.read()) > 0) {
+  buffer[pos++] = (char) data;
+}
+\end{ffcode*}
+\columnbreak
+\begin{ffcode*}{highlightlines={4-6},highlightcolor=green!50}
+char[] buffer = new char[1024];
+int pos = 0;
+while ((data = reader.read()) > 0) {
+  if (pos >= buffer.length) {
+    throw new RuntimeException();
+  }
+  buffer[pos++] = (char) data;
+}
+\end{ffcode*}
+\end{snippet}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\innoBanner{3) Security loopholes}
+\begin{snippet}
+\begin{ffcode*}{highlightlines={5},highlightcolor=red!50}
+char[] buffer = new char[1024];
+int pos = 0;
+while ((data = reader.read()) > 0) {
+  if (pos >= buffer.length) {
+    throw new RuntimeException();
+  }
+  buffer[pos++] = (char) data;
+}
+\end{ffcode*}
+\columnbreak
+\begin{ffcode*}{highlightlines={5},highlightcolor=green!50}
+char[] buffer = new char[1024];
+int pos = 0;
+while ((data = reader.read()) > 0) {
+  if (pos >= buffer.length) {
+    Arrays.fill(buffer, 0);
+    throw new RuntimeException();
+  }
+  buffer[pos++] = (char) data;
+}
+\end{ffcode*}
+\end{snippet}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\innoBanner{4) Code is not clean}
+\begin{snippet}
+\begin{ffcode*}{highlightlines={3},highlightcolor=red!50}
+char[] buffer = new char[1024];
+int pos = 0;
+while ((data = reader.read()) > 0) {
+  if (pos >= buffer.length) {
+    Arrays.fill(buffer, 0);
+    throw new RuntimeException();
+  }
+  buffer[pos++] = (char) data;
+}
+\end{ffcode*}
+\columnbreak
+\begin{ffcode*}{highlightlines={3-7},highlightcolor=green!50}
+char[] buffer = new char[1024];
+int pos = 0;
+while (true) {
+  data = reader.read(input);
+  if (data < 0) {
+    break;
+  }
+  if (pos >= buffer.length) {
+    Arrays.fill(buffer, 0);
+    throw new RuntimeException();
+  }
+  buffer[pos++] = (char) data;
+}
+\end{ffcode*}
+\end{snippet}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\innoBanner{5) Inefficient}
+\begin{snippet}
+\begin{ffcode*}{highlightlines={4},highlightcolor=red!50}
+char[] buffer = new char[1024];
+int pos = 0;
+while (true) {
+  data = reader.read(input);
+  if (data < 0) {
+    break;
+  }
+  if (pos >= buffer.length) {
+    Arrays.fill(buffer, 0);
+    throw new RuntimeException();
+  }
+  buffer[pos++] = (char) data;
+}
+\end{ffcode*}
+\columnbreak
+\begin{ffcode*}{highlightlines={4-9,13-14},highlightcolor=green!50}
+char[] buffer = new char[1024];
+int pos = 0;
+while (true) {
+  char[] temp = new char[100];
+  int t = reader.read(temp);
+  if (t < 0) {
+    break;
+  }
+  if (pos + t >= buffer.length) {
+    Arrays.fill(buffer, 0);
+    throw new RuntimeException();
+  }
+  arraycopy(buffer, pos, temp, 0, t);
+  pos += t;
+}
+\end{ffcode*}
+\end{snippet}
+
+\print{\innoPin{\Large$Q = \dfrac{F}{U+F}$}}
+\print{\innoBanner{How to Find More Bugs? ($F\uparrow$)}}
+\plick{1) Automated Tests}
+\plick{2) Coverage Control}
+\plick{3) Static Analysis}
+\plick{4) Style Checking}
+\plick{5) String Deployment Pipeline}
+\print{6) Manual Code Reviews}
+\flush
+
+\print{\innoPin{\Large$Q = \dfrac{F}{U+F}$}}
+\print{\innoBanner{How to Prevent Bugs? ($U\downarrow$)}}
+\plick{1) Better Programming Languages}
+\plick{2) Automated Refactoring}
+\plick{3) Better IDEs}
+\plick{4) Code Completion}
+\plick{5) NoCode}
+\print{6) Education}
+\flush
+
+\end{document}
