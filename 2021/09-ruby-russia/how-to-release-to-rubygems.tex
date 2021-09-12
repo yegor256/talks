@@ -1,0 +1,145 @@
+% (The MIT License)
+%
+% Copyright (c) 2021 Yegor Bugayenko
+%
+% Permission is hereby granted, free of charge, to any person obtaining a copy
+% of this software and associated documentation files (the 'Software'), to deal
+% in the Software without restriction, including without limitation the rights
+% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+% copies of the Software, and to permit persons to whom the Software is
+% furnished to do so, subject to the following conditions:
+%
+% The above copyright notice and this permission notice shall be included in all
+% copies or substantial portions of the Software.
+%
+% THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+% SOFTWARE.
+
+% \documentclass[landscape]{/code/huawei.cls/huawei}
+
+\documentclass{article}
+\usepackage[nocn]{/code/ffcode/ffcode}
+\usepackage{/code/ssd16/inno}
+
+\usepackage[fontsize=24pt]{fontsize}
+\usepackage{anyfontsize}
+\usepackage{/code/ssd16/slides}
+\usepackage[static]{/code/clicks/clicks}
+\usepackage{changepage}
+\usepackage{soul}
+\usepackage{amsmath}
+\usepackage{setspace}
+\newcommand*\theauthor{Yegor Bugayenko}
+\newcommand*\thetitle{RubyGems}
+\newcommand*\thesubtitle{How to release to it?}
+\begin{document}
+
+\plush[2]{
+  \innoMiddle{
+    \innoTitle{\thetitle}{\thesubtitle}\par
+    {\scshape\theauthor}
+  }
+}
+
+\plick{\innoHeader{My Story}}
+\plick{I'm a Java programmer, since Java 1.0 (1996)}
+\plick{I met Ruby in 2018 (just three years ago)}
+\plick{Since then I released 35 Ruby gems}
+\plick{One of them is a cryptocurrency}
+\plick{Total 800+ GitHub stars}
+\plush{Total 1.4M downloads at RubyGems.org}
+
+\plick{\innoHeader{My/Your Motivation}}
+\plick{Pull requests from volunteers}
+\plick{Higher quality due to better discipline}
+\plick{Publicity}
+\plush{Money}
+
+\plick{\innoHeader{Steps}}
+\plick{1) StackOverflow question}
+\plick{2) README prototype}
+\plick{3) Telegram groups}
+\plick{4) \ttfamily xcop.gemspec}
+\plick{5) \ttfamily rubygems.yml}
+\plick{6) \ttfamily .rultor.yml}
+\plush{7) Twitter post + spam in groups}
+
+\plush{
+  \innoHeader{StackOverflow}
+  \innoPic{0.5}{so1}
+}
+
+\innoBanner{\ttfamily xcop.gemspec}
+\begin{innoWide}{2}
+\begin{ffcode*}{fontsize=\scriptsize}
+require 'English'
+require_relative 'lib/xcop/version'
+Gem::Specification.new do |s|
+  s.rubygems_version = '2.2'
+  s.required_ruby_version = '>= 2.2'
+  s.name = 'xcop'
+  s.version = Xcop::VERSION
+  s.license = 'MIT'
+  s.summary = 'XML Formatting Static Validator'
+  s.description = 'Validates XML-like documents for proper formatting'
+  s.authors = ['Yegor Bugayenko']
+  s.email = 'yegor256@gmail.com'
+  s.homepage = 'http://github.com/yegor256/xcop'
+  s.files = `git ls-files`.split(\$RS)
+  s.executables = s.files.grep(%r{^bin/}) { |f| File.basename(f) }
+  s.test_files = s.files.grep(%r{^(test|spec|features)/})
+  s.rdoc_options = ['--charset=UTF-8']
+  s.extra_rdoc_files = ['README.md', 'LICENSE.txt']
+  s.add_runtime_dependency 'differ', '~>0.1.2'
+  s.add_runtime_dependency 'nokogiri', '~>1.10'
+  s.add_runtime_dependency 'rainbow', '~>3.0'
+  s.add_runtime_dependency 'slop', '~>4.4'
+  s.add_development_dependency 'codecov', '0.2.12'
+  s.add_development_dependency 'cucumber', '5.2.0'
+  s.add_development_dependency 'minitest', '5.14.2'
+  s.add_development_dependency 'rake', '13.0.1'
+  s.add_development_dependency 'rdoc', '6.2.1'
+  s.add_development_dependency 'rubocop', '0.52.0'
+  s.add_development_dependency 'rubocop-rspec', '1.5.1'
+end
+\end{ffcode*}
+\end{innoWide}
+\flush
+
+\innoBanner{\ttfamily rubygems.yml}
+\begin{ffcode*}{fontsize=\scriptsize}
+---
+:rubygems_api_key: d355d.....b051bfb9ac.....0daac0d
+\end{ffcode*}
+\flush
+
+\innoBanner{\ttfamily .rultor.yml}
+\begin{ffcode*}{fontsize=\scriptsize,highlightlines={14},highlightcolor=green!80}
+assets:
+  rubygems.yml: yegor256/home#assets/rubygems.yml
+install: >
+  bundle install
+release:
+  script: >
+    bundle exec rake
+    rm -rf *.gem
+    sed -i "s/1\.0\.snapshot/\${tag}/g" lib/xcop/version.rb
+    git add lib/xcop/version.rb
+    git commit -m "version set to \${tag}"
+    gem build xcop.gemspec
+    chmod 0600 ../rubygems.yml
+    gem push *.gem --config-file ../rubygems.yml
+\end{ffcode*}
+\flush
+
+\plush{
+  \innoHeader{StackOverflow}
+  \innoPic{0.5}{so2}
+}
+
+\end{document}
