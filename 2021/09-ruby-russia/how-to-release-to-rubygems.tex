@@ -37,6 +37,8 @@
 \newcommand*\theauthor{Yegor Bugayenko}
 \newcommand*\thetitle{RubyGems}
 \newcommand*\thesubtitle{How to release to it?}
+\innoLeft{\thetitle{} \thesubtitle}
+\innoRight{@yegor256}
 \begin{document}
 
 \plush[2]{
@@ -52,94 +54,118 @@
 \plick{Since then I released 35 Ruby gems}
 \plick{One of them is a cryptocurrency}
 \plick{Total 800+ GitHub stars}
-\plush{Total 1.4M downloads at RubyGems.org}
+\plush[2]{Total 1.4M downloads at RubyGems.org}
 
 \plick{\innoHeader{My/Your Motivation}}
 \plick{Pull requests from volunteers}
 \plick{Higher quality due to better discipline}
 \plick{Publicity}
-\plush{Money}
+\plush[6]{Money}
+
+\innoHeader{\ttfamily iri}
+\begin{ffcode*}{fontsize=\scriptsize}
+require 'iri'
+url = Iri.new('http://google.com/')
+  .append('find').append('me')
+  .add(q: 'books about OOP', limit: 50)
+  .del(:q)
+  .del('limit')
+  .over(q: 'books about tennis', limit: 10)
+  .scheme('https')
+  .host('localhost')
+  .port('443')
+  .fragment('page-4')
+  .query('a=1&b=2')
+  .path('/new/path')
+  .cut('/q')
+  .to_s
+\end{ffcode*}
+\flush[3]
 
 \plick{\innoHeader{Steps}}
 \plick{1) StackOverflow question}
 \plick{2) README prototype}
 \plick{3) Telegram groups}
-\plick{4) \ttfamily xcop.gemspec}
+\plick{4) \ttfamily iri.gemspec}
 \plick{5) \ttfamily rubygems.yml}
 \plick{6) \ttfamily .rultor.yml}
-\plush{7) Twitter post + spam in groups}
+\plush[3]{7) Twitter post + spam in groups}
 
-\plush{
-  \innoHeader{StackOverflow}
-  \innoPic{0.5}{so1}
+\plush[2]{
+  \innoHeader{StackOverflow Question}
+  \innoPic{0.7}{so1}
 }
 
-\innoBanner{\ttfamily xcop.gemspec}
+\innoHeader{\ttfamily iri.gemspec}
 \begin{innoWide}{2}
 \begin{ffcode*}{fontsize=\scriptsize}
 require 'English'
-require_relative 'lib/xcop/version'
 Gem::Specification.new do |s|
-  s.rubygems_version = '2.2'
-  s.required_ruby_version = '>= 2.2'
-  s.name = 'xcop'
-  s.version = Xcop::VERSION
+  s.rubygems_version = '2.5'
+  s.required_ruby_version = '>=2.2'
+  s.name = 'iri'
+  s.version = '0.0.0'
   s.license = 'MIT'
-  s.summary = 'XML Formatting Static Validator'
-  s.description = 'Validates XML-like documents for proper formatting'
+  s.summary = 'Simple Immutable Ruby URI Builder'
+  s.description = 'Class Iri helps you build a URI and then modify its \
+parts via a simple fluent interface.'
   s.authors = ['Yegor Bugayenko']
   s.email = 'yegor256@gmail.com'
-  s.homepage = 'http://github.com/yegor256/xcop'
+  s.homepage = 'https://github.com/yegor256/iri'
   s.files = `git ls-files`.split(\$RS)
-  s.executables = s.files.grep(%r{^bin/}) { |f| File.basename(f) }
-  s.test_files = s.files.grep(%r{^(test|spec|features)/})
+  s.test_files = s.files.grep(%r{^(test)/})
   s.rdoc_options = ['--charset=UTF-8']
-  s.extra_rdoc_files = ['README.md', 'LICENSE.txt']
-  s.add_runtime_dependency 'differ', '~>0.1.2'
-  s.add_runtime_dependency 'nokogiri', '~>1.10'
-  s.add_runtime_dependency 'rainbow', '~>3.0'
-  s.add_runtime_dependency 'slop', '~>4.4'
-  s.add_development_dependency 'codecov', '0.2.12'
-  s.add_development_dependency 'cucumber', '5.2.0'
-  s.add_development_dependency 'minitest', '5.14.2'
-  s.add_development_dependency 'rake', '13.0.1'
-  s.add_development_dependency 'rdoc', '6.2.1'
-  s.add_development_dependency 'rubocop', '0.52.0'
-  s.add_development_dependency 'rubocop-rspec', '1.5.1'
+  s.extra_rdoc_files = ['README.md']
+  s.add_development_dependency 'codecov', '0.2.11'
+  s.add_development_dependency 'minitest', '5.11.3'
+  s.add_development_dependency 'rake', '12.3.3'
+  s.add_development_dependency 'rdoc', '6.3.1'
+  s.add_development_dependency 'rubocop', '0.62.0'
+  s.add_development_dependency 'rubocop-rspec', '1.31.0'
 end
 \end{ffcode*}
 \end{innoWide}
-\flush
+\flush[3]
 
-\innoBanner{\ttfamily rubygems.yml}
+\innoHeader{\ttfamily rubygems.yml}
 \begin{ffcode*}{fontsize=\scriptsize}
 ---
 :rubygems_api_key: d355d.....b051bfb9ac.....0daac0d
 \end{ffcode*}
-\flush
+\flush[1]
 
-\innoBanner{\ttfamily .rultor.yml}
+\innoHeader{\ttfamily .rultor.yml}
 \begin{ffcode*}{fontsize=\scriptsize,highlightlines={14},highlightcolor=green!80}
 assets:
   rubygems.yml: yegor256/home#assets/rubygems.yml
-install: >
+install: |$\vert$|-
   bundle install
 release:
-  script: >
+  script: |$\vert$|-
     bundle exec rake
     rm -rf *.gem
-    sed -i "s/1\.0\.snapshot/\${tag}/g" lib/xcop/version.rb
-    git add lib/xcop/version.rb
-    git commit -m "version set to \${tag}"
-    gem build xcop.gemspec
+    sed -i "s/0\.0\.0/${tag}/g" iri.gemspec
+    git add iri.gemspec
+    git commit -m "Version set to ${tag}"
+    gem build iri.gemspec
     chmod 0600 ../rubygems.yml
     gem push *.gem --config-file ../rubygems.yml
 \end{ffcode*}
-\flush
+\flush[3]
 
-\plush{
-  \innoHeader{StackOverflow}
-  \innoPic{0.5}{so2}
+\plush[4]{
+  \innoHeader{Relase via Rultor}
+  \innoPic{0.5}{github}
+}
+
+\plush[1]{
+  \innoHeader{Email from Rubygems}
+  \innoPic{0.6}{email}
+}
+
+\plush[1]{
+  \innoHeader{StackOverflow Answer}
+  \innoPic{0.7}{so2}
 }
 
 \end{document}
