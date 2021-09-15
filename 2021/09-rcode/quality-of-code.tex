@@ -29,7 +29,7 @@
 \usepackage[fontsize=24pt]{fontsize}
 \usepackage{anyfontsize}
 \usepackage{/code/ssd16/slides}
-\usepackage[static]{/code/clicks/clicks}
+\usepackage{/code/clicks/clicks}
 \usepackage{changepage}
 \usepackage{soul}
 \usepackage{amsmath}
@@ -61,26 +61,27 @@
   }
 }
 
-\plick{\innoBanner{What is Quality?}}
-\plick{``The \textbf{degree} of excellence of something''
+\plick{\innoHeader{What is Quality?}}
+\plick{``The \ul{degree} of excellence of something''
   \br\small\hspace*{1in}
   --- Cambridge English Dictionary\par}
-\plick{``The \textbf{degree} to which the set of functions covers all the specified tasks and user objectives''
+\plick{``The \ul{degree} to which the set of functions covers all the specified tasks and user objectives''
   \br\small\hspace*{1in}
   --- ISO/IEC 25010:2011---System and software quality models}
-\print{``The \textbf{degree} to which a software product meets established \textbf{requirements}''
+\print{``The \ul{degree} to which a software product meets established \ul{requirements}''
   \br\small\hspace*{1in}
   --- IEEE 730-2014}
 \flush
 
-\plush{\innoMiddle{
+\plush{
+  \innoHeader{The Formula}
   Formally speaking, quality may be defined as\par
-  {\LARGE$Q = \dfrac{F}{U+F} \in [0,1],$}\par\vspace{1in}
+  {\LARGE$Q = \dfrac{F}{U+F} \in [0,1],$}\par
   where $Q$ is the degree of quality,
   $F$ is the number of bugs found by us,
   and
   $U$ is the number of bugs reported by our users.
-}}
+}
 
 \plush{\innoQuote{/code/ssd16/images/books/rex-black}
   {A common metric of test team effectiveness measures whether the test team manages to find a sizeable majority of the bugs prior to release. The production or customer bugs are sometimes called test escapes. The implication is that your test team missed these problems but could reasonably have detected them during test execution.}
@@ -93,7 +94,7 @@
 }
 
 \print{\innoPin{\Large$Q = \dfrac{F}{U+F}$}}
-\plick{\innoBanner{Five \ul{types} of bugs}}
+\plick{\innoHeader{Five \ul{types} of bugs}}
 \plick{1) Missing features}
 \plick{2) Functional bugs}
 \plick{3) Security loopholes}
@@ -106,16 +107,16 @@
   {\end{multicols}\end{adjustwidth}\flush}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\innoBanner{1) Missing features}
+\innoHeader{1) Missing features}
 \begin{snippet}
-\begin{ffcode*}{highlightlines={3},highlightcolor=red!50}
+\begin{ffcode*}{highlightlines={3},highlightcolor=red!80}
 char[] buffer;
 while ((data = reader.read()) > 0) {
   // To be done later
 }
 \end{ffcode*}
 \columnbreak
-\begin{ffcode*}{highlightlines={2,4},highlightcolor=green!50}
+\begin{ffcode*}{highlightlines={2,4},highlightcolor=green!80}
 char[] buffer = new char[1024];
 int pos = 0;
 while ((data = reader.read()) > 0) {
@@ -126,9 +127,9 @@ while ((data = reader.read()) > 0) {
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
-\innoBanner{2) Functional bugs}
+\innoHeader{2) Functional bugs}
 \begin{snippet}
-\begin{ffcode*}{highlightlines={4},highlightcolor=red!50}
+\begin{ffcode*}{highlightlines={4},highlightcolor=red!80}
 char[] buffer = new char[1024];
 int pos = 0;
 while ((data = reader.read()) > 0) {
@@ -136,7 +137,7 @@ while ((data = reader.read()) > 0) {
 }
 \end{ffcode*}
 \columnbreak
-\begin{ffcode*}{highlightlines={4-6},highlightcolor=green!50}
+\begin{ffcode*}{highlightlines={4-6},highlightcolor=green!80}
 char[] buffer = new char[1024];
 int pos = 0;
 while ((data = reader.read()) > 0) {
@@ -150,9 +151,9 @@ while ((data = reader.read()) > 0) {
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
-\innoBanner{3) Security loopholes}
+\innoHeader{3) Security loopholes}
 \begin{snippet}
-\begin{ffcode*}{highlightlines={5},highlightcolor=red!50}
+\begin{ffcode*}{highlightlines={5},highlightcolor=red!80}
 char[] buffer = new char[1024];
 int pos = 0;
 while ((data = reader.read()) > 0) {
@@ -163,7 +164,7 @@ while ((data = reader.read()) > 0) {
 }
 \end{ffcode*}
 \columnbreak
-\begin{ffcode*}{highlightlines={5},highlightcolor=green!50}
+\begin{ffcode*}{highlightlines={5},highlightcolor=green!80}
 char[] buffer = new char[1024];
 int pos = 0;
 while ((data = reader.read()) > 0) {
@@ -178,9 +179,9 @@ while ((data = reader.read()) > 0) {
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
-\innoBanner{4) Code is not clean}
+\innoHeader{4) Code is not clean}
 \begin{snippet}
-\begin{ffcode*}{highlightlines={3},highlightcolor=red!50}
+\begin{ffcode*}{highlightlines={3},highlightcolor=red!80}
 char[] buffer = new char[1024];
 int pos = 0;
 while ((data = reader.read()) > 0) {
@@ -192,7 +193,7 @@ while ((data = reader.read()) > 0) {
 }
 \end{ffcode*}
 \columnbreak
-\begin{ffcode*}{highlightlines={3-7},highlightcolor=green!50}
+\begin{ffcode*}{highlightlines={3-7},highlightcolor=green!80}
 char[] buffer = new char[1024];
 int pos = 0;
 while (true) {
@@ -211,9 +212,9 @@ while (true) {
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
-\innoBanner{5) Inefficient}
+\innoHeader{5) Inefficient}
 \begin{snippet}
-\begin{ffcode*}{highlightlines={4},highlightcolor=red!50}
+\begin{ffcode*}{highlightlines={4},highlightcolor=red!80}
 char[] buffer = new char[1024];
 int pos = 0;
 while (true) {
@@ -229,7 +230,7 @@ while (true) {
 }
 \end{ffcode*}
 \columnbreak
-\begin{ffcode*}{highlightlines={4-9,13-14},highlightcolor=green!50}
+\begin{ffcode*}{highlightlines={4-9,13-14},highlightcolor=green!80}
 char[] buffer = new char[1024];
 int pos = 0;
 while (true) {
@@ -249,23 +250,21 @@ while (true) {
 \end{snippet}
 
 \print{\innoPin{\Large$Q = \dfrac{F}{U+F}$}}
-\print{\innoBanner{How to Find More Bugs? ($F\uparrow$)}}
-\plick{1) Automated Tests}
-\plick{2) Coverage Control}
-\plick{3) Static Analysis}
-\plick{4) Style Checking}
-\plick{5) String Deployment Pipeline}
-\print{6) Manual Code Reviews}
-\flush
+\print{\innoHeader{How to Find More Bugs? ($F\uparrow$)}}
+\plick{1) Style Checking: laziness and legacy code}
+\plick{2) Static Analysis: false positives}
+\plick{3) Automated Tests: dependencies}
+\plick{4) Coverage Control: false accusations}
+\plick{5) Manual Code Reviews: friendship}
+\plush{6) Strict Deployment Pipeline: deadlines}
 
 \print{\innoPin{\Large$Q = \dfrac{F}{U+F}$}}
-\print{\innoBanner{How to Prevent Bugs? ($U\downarrow$)}}
-\plick{1) Better Programming Languages}
-\plick{2) Automated Refactoring}
-\plick{3) Better IDEs}
-\plick{4) Code Completion}
-\plick{5) NoCode}
-\print{6) Education}
-\flush
+\print{\innoHeader{How to Prevent Bugs? ($U\downarrow$)}}
+\plick{1) Better Programming Languages: programmers}
+\plick{2) Automated Refactoring: lack of trust}
+\plick{3) Better IDEs: old languages}
+\plick{4) Code Completion: ML is still behind}
+\plick{5) NoCode: diversity in APIs}
+\plush{6) Education: fast-growing market}
 
 \end{document}
