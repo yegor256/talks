@@ -1,0 +1,230 @@
+% (The MIT License)
+%
+% Copyright (c) 2021 Yegor Bugayenko
+%
+% Permission is hereby granted, free of charge, to any person obtaining a copy
+% of this software and associated documentation files (the 'Software'), to deal
+% in the Software without restriction, including without limitation the rights
+% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+% copies of the Software, and to permit persons to whom the Software is
+% furnished to do so, subject to the following conditions:
+%
+% The above copyright notice and this permission notice shall be included in all
+% copies or substantial portions of the Software.
+%
+% THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+% SOFTWARE.
+
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[nocn]{ffcode}
+\usepackage{/code/ssd16/inno}
+\usepackage{/code/ssd16/slides}
+\usepackage[fontsize=24pt]{fontsize}
+\usepackage{anyfontsize}
+\usepackage{clicks}
+\newcommand\nospell[1]{#1}
+\newcommand*\theauthor{Yegor Bugaeynko}
+\newcommand*\thetitle{Veil Objects}
+\newcommand*\thesubtitle{instead of DTOs}
+\innoLeft{\thetitle{} \thesubtitle}
+\innoRight{@yegor256}
+\begin{document}
+
+\plush{
+  \innoMiddle{
+    \innoTitle{\thetitle}{\thesubtitle}\par
+    {\scshape\theauthor}
+  }
+}
+
+\clearpage
+\innoHeader{Fetch Many Items from PostgreSQL}
+\begin{innoWideOne}\footnotesize
+\begin{ffcode*}{highlightlines={3},highlightcolor=green!80}
+class Books
+  def fetch
+    @pgsql.exec('SELECT * FROM book')
+  end
+end
+
+# This is what I get back:
+[
+  {"id": 1, "author": "David West", "title": "Object Thinking"},
+  {"id": 2, "author": "Martin Fowler", "author": "Refactoring"}
+]
+\end{ffcode*}
+\end{innoWideOne}
+\url{https://github.com/yegor256/pgql}
+\clearpage
+
+\clearpage
+\innoHeader{I Need Books, Not Hashes}
+\begin{innoWideOne}\footnotesize
+\begin{ffcode*}{highlightlines={11},highlightcolor=red!80}
+class Book
+  def toHTML
+    # Here we create HTML from the book,
+    # using its 'title' and 'author'
+    # properties
+  end
+end
+
+books = Books.new(real_pgsql_client)
+books.fetch do |b|
+  puts b.toHTML
+end
+\end{ffcode*}
+\end{innoWideOne}
+\clearpage
+
+\clearpage
+\innoHeader{With DTO Design Pattern}
+\begin{innoWideOne}\footnotesize
+\begin{ffcode*}{highlightlines={11-15},highlightcolor=red!80}
+class BookDTO
+  def initialize(hash)
+    @hash = hash
+  end
+  def title
+    @hash[:title]
+  end
+  def author
+    @hash[:author]
+  end
+  def rename(new_title)
+    # Oops, this is not possible, since
+    # it's an anemic object, with no
+    # connection to the database
+  end
+end
+\end{ffcode*}
+\end{innoWideOne}
+\clearpage
+
+\clearpage
+\innoHeader{Without DTO}
+\begin{innoWideOne}\footnotesize
+\begin{ffcode*}{highlightlines={10},highlightcolor=red!80}
+class Book
+  def initialize(pgsql, id)
+    @pgsql = pgsql
+    @id = id
+  end
+  def title
+    @pgsql.exec('SELECT title FROM book WHERE id=$1', [@id])[0]['title']
+  end
+  def rename(new_title)
+    @pgsql.exec('UPDATE book SET title=$1 book WHERE id=$2', [new_title, @id])
+  end
+end
+\end{ffcode*}
+\end{innoWideOne}
+\clearpage
+
+\clearpage
+\innoHeader{With Veil (Object Decorator)}
+\begin{innoWideOne}\footnotesize
+\begin{ffcode*}{highlightlines={5},highlightcolor=green!80}
+require 'veils'
+class Books
+  def fetch
+    @pgsql.exec('SELECT * FROM book').map do |r|
+      Veil.new(
+        Book.new(@pgsql, r['id'].to_i),
+        title: r['title'],
+        author: r['author']
+      )
+    end
+  end
+end
+\end{ffcode*}
+\end{innoWideOne}
+\clearpage
+
+\clearpage
+\innoHeader{How It Behaves}
+\begin{innoWideOne}\footnotesize
+\begin{ffcode*}{}
+books = Books.new(real_pgsql_client)
+books.fetch do |b|
+  b.toHTML # taking from the hash in veil
+  b.rename('New Name') # the veil is pierced
+  b.toHTML # making round-trips to PostgreSQL
+end
+\end{ffcode*}
+\end{innoWideOne}
+\clearpage
+
+\clearpage
+\innoHeader{Unpiercable}
+\begin{innoWideOne}\footnotesize
+\begin{ffcode*}{}
+require 'veils'
+class Books
+  def fetch
+    @pgsql.exec('SELECT * FROM book').map do |r|
+      Unpiercable.new(
+        Book.new(@pgsql, r['id'].to_i),
+        title: r['title'],
+        author: r['author'],
+        html: calculate_html(r)
+      )
+    end
+  end
+end
+\end{ffcode*}
+\end{innoWideOne}
+\clearpage
+
+\clearpage
+\innoHeader{Class 'Veil'}
+\begin{innoWide}{2}\scriptsize
+\begin{ffcode*}{highlightlines={3},highlightcolor=green!80}
+class Veil
+  def initialize(origin, methods = {})
+    @origin = origin
+    @methods = methods
+    @pierced = false
+  end
+  def method_missing(*args)
+    method = args[0]
+    if @pierced |$\vert\vert$| !@methods.key?(method)
+      @pierced = true
+      unless @origin.respond_to?(method)
+        raise "#{method} is not in #{@origin}"
+      end
+      if block_given?
+        @origin.__send__(*args) do |$\vert$|*a|$\vert$|
+          yield(*a)
+        end
+      else
+        @origin.__send__(*args)
+      end
+    else
+      @methods[method]
+    end
+  end
+  def respond_to?(method, inc = false)
+    @origin.respond_to?(method, inc) |$\vert\vert$| @methods[method]
+  end
+  def respond_to_missing?(_m, _i = false)
+    true
+  end
+end
+\end{ffcode*}
+\end{innoWide}
+\clearpage
+
+\plush{
+  \innoHeader{Real Sample from Codexia.org}
+  \innoPic{0.7}{codexia}
+  \url{https://github.com/yegor256/codexia}
+}
+
+\end{document}

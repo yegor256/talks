@@ -20,12 +20,12 @@
 % OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 % SOFTWARE.
 
-% \documentclass[landscape]{/code/huawei.cls/huawei}
-
 \documentclass{article}
-\usepackage[nocn]{/code/ffcode/ffcode}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian,english]{babel}
+\usepackage[nocn]{ffcode}
 \usepackage{/code/ssd16/inno}
-
 \usepackage[fontsize=24pt]{fontsize}
 \usepackage{anyfontsize}
 \usepackage{/code/ssd16/slides}
@@ -34,34 +34,27 @@
 \usepackage{soul}
 \usepackage{amsmath}
 \usepackage{setspace}
-% \renewcommand*\theauthor{Yegor Bugayenko}
-% \renewcommand*\theid{00538675}
-% \renewcommand*\thetitle{What is Quality of Code?}
-% \renewcommand*\thesubtitle{How Can We Increase It?}
 \newcommand\nospell[1]{#1}
-\newcommand*\theauthor{Yegor Bugayenko}
-\newcommand*\thetitle{What is Quality of Code?}
-\newcommand*\thesubtitle{How Can We Increase It?}
+\newcommand*\theauthor{Егор Буга\'{е}нко}
+\newcommand*\thetitle{Что есть качество кода}
+\newcommand*\thesubtitle{и как его повысить?}
+\innoLeft{\thetitle{} \thesubtitle}
+\innoRight{@yegor256}
 \begin{document}
 
-% \plush[2]{
-%   \innoMiddle{
-%     \innoTitle{\thetitle}{\thesubtitle}\par
-%     {\scshape\theauthor}\par
-%     Moscow Research Center (MRC)\newline
-%     Russian Research Institute (RRI)\par
-%     30 minutes
-%   }
-% }
+\renewcommand{\familydefault}{\sfdefault}
+\renewcommand{\sfdefault}{PTSans-TLF}\normalfont
 
-\plush[2]{
+\newcommand\subs{\br\footnotesize\color{gray}\quad}
+
+\plush{
   \innoMiddle{
     \innoTitle{\thetitle}{\thesubtitle}\par
     {\scshape\theauthor}
   }
 }
 
-\plick{\innoHeader{What is Quality?}}
+\print{\innoHeader{Что такое качество?}}
 \plick{``The \ul{degree} of excellence of something''
   \br\small\hspace*{1in}
   --- Cambridge English Dictionary\par}
@@ -71,35 +64,35 @@
 \print{``The \ul{degree} to which a software product meets established \ul{requirements}''
   \br\small\hspace*{1in}
   --- IEEE 730-2014}
-\flush
+\flush[2]
 
-\plush{
-  \innoHeader{The Formula}
-  Formally speaking, quality may be defined as\par
+\plush[2]{
+  \innoHeader{Формула качества}
+  Строго говоря, качество можно определить как\par
   {\LARGE$Q = \dfrac{F}{U+F} \in [0,1],$}\par
-  where $Q$ is the degree of quality,
-  $F$ is the number of bugs found by us,
-  and
-  $U$ is the number of bugs reported by our users.
+  где $Q$ --- это качество,
+  $F$ --- количество дефектов найденных нами
+  и
+  $U$ --- количество дефектов найденных нашими пользователями.
 }
 
 \plush{\innoQuote{/code/ssd16/images/books/rex-black}
-  {A common metric of test team effectiveness measures whether the test team manages to find a sizeable majority of the bugs prior to release. The production or customer bugs are sometimes called test escapes. The implication is that your test team missed these problems but could reasonably have detected them during test execution.}
-  {\nospell{Rex Black}, \emph{ Managing the Testing Process: Practical Tools and Techniques for Managing Hardware and Software Testing}, 2009, p. 109}
+  {A common metric of \ul{Test Team Effectiveness} measures whether the test team manages to find a sizeable majority of the bugs prior to release. The production or customer bugs are sometimes called test escapes. The implication is that your test team missed these problems but could reasonably have detected them during test execution.}
+  {\nospell{Rex Black}, \emph{Managing the Testing Process: Practical Tools and Techniques for Managing Hardware and Software Testing}, 2009, p. 109}
 }
 
-\plush{\innoQuote{/code/ssd16/images/books/dre-paper}
-  {Serious software quality control involves measurement of \textbf{Defect Removal Efficiency (DRE)}, which is the percentage of defects found and repaired prior to release. In principle the measurement of DRE is simple. Keep records of all defects found during development. After a fixed period of 90 days, add customer-reported defects to internal defects and calculate the efficiency of internal removal. If the development team found 90 defects and customers reported 10 defects, then DRE is of course 90\%.}
+\plush[2]{\innoQuote{/code/ssd16/images/books/dre-paper}
+  {Serious software quality control involves measurement of \ul{Defect Removal Efficiency (DRE)}, which is the percentage of defects found and repaired prior to release. In principle the measurement of DRE is simple. Keep records of all defects found during development. After a fixed period of 90 days, add customer-reported defects to internal defects and calculate the efficiency of internal removal. If the development team found 90 defects and customers reported 10 defects, then DRE is of course 90\%.}
   {\nospell{Capers Jones}, \emph{Software Defect Removal Efficiency}, Computer, Volume 29, Issue 4, 1996}
 }
 
 \print{\innoPin{\Large$Q = \dfrac{F}{U+F}$}}
-\plick{\innoHeader{Five \ul{types} of bugs}}
-\plick{1) Missing features}
-\plick{2) Functional bugs}
-\plick{3) Security loopholes}
-\plick{4) Slow, unreliable, non-resilient, unavailable, etc.}
-\print{5) Code is not clean}
+\print{\innoHeader{Пять типов дефектов}}
+\plick{1) Missing features \subs функция не реализована}
+\plick{2) Functional bugs \subs функциональный дефект}
+\plick{3) Security loopholes \subs угрозы безопасности}
+\plick{4) Slow, unreliable, non-resilient, unavailable, etc. \subs нефункциональные дефекты}
+\print{5) Code is not clean \subs грязный нечитаемый код}
 \flush
 
 \newenvironment{snippet}
@@ -179,7 +172,7 @@ while ((data = reader.read()) > 0) {
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
-\innoHeader{4) Code is not clean}
+\innoHeader{5) Code is not clean}
 \begin{snippet}
 \begin{ffcode*}{highlightlines={3},highlightcolor=red!80}
 char[] buffer = new char[1024];
@@ -212,7 +205,7 @@ while (true) {
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
-\innoHeader{5) Inefficient}
+\innoHeader{4) Inefficient}
 \begin{snippet}
 \begin{ffcode*}{highlightlines={4},highlightcolor=red!80}
 char[] buffer = new char[1024];
@@ -250,21 +243,21 @@ while (true) {
 \end{snippet}
 
 \print{\innoPin{\Large$Q = \dfrac{F}{U+F}$}}
-\print{\innoHeader{How to Find More Bugs? ($F\uparrow$)}}
-\plick{1) Style Checking: laziness and legacy code}
-\plick{2) Static Analysis: false positives}
-\plick{3) Automated Tests: dependencies}
-\plick{4) Coverage Control: false accusations}
-\plick{5) Manual Code Reviews: friendship}
-\plush{6) Strict Deployment Pipeline: deadlines}
+\print{\innoHeader{Как находить больше дефектов? ($F\uparrow$)}}
+\plick[1]{1) Style Checking \subs контролеры стиля}
+\plick[2]{2) Static Analysis \subs статические анализаторы}
+\plick[2]{3) Automated Tests \subs автоматизированное тестирование}
+\plick[2]{4) Coverage Control \subs контроль покрытия тестами}
+\plick[2]{5) Manual Code Reviews \subs ручные инспекции кода}
+\plush[2]{6) Strict Deployment Pipeline \subs строгий контроль при доставке}
 
 \print{\innoPin{\Large$Q = \dfrac{F}{U+F}$}}
-\print{\innoHeader{How to Prevent Bugs? ($U\downarrow$)}}
-\plick{1) Better Programming Languages: programmers}
-\plick{2) Automated Refactoring: lack of trust}
-\plick{3) Better IDEs: old languages}
-\plick{4) Code Completion: ML is still behind}
-\plick{5) NoCode: diversity in APIs}
-\plush{6) Education: fast-growing market}
+\print{\innoHeader{Как предотвращать дефекты? ($U\downarrow$)}}
+\plick[2]{1) Better Programming Languages \subs новые языки программирования}
+\plick[2]{2) Automated Refactoring \subs автоматизированный рефакторинг}
+\plick[2]{3) Better IDEs \subs новые IDE}
+\plick[2]{4) Code Completion \subs автоподстановка при кодировании}
+\plick[2]{5) NoCode \subs код без кода}
+\plush[1]{6) Education \subs образование/обучение}
 
 \end{document}
