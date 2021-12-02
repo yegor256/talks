@@ -1,0 +1,88 @@
+% (The MIT License)
+%
+% Copyright (c) 2021 Yegor Bugayenko
+%
+% Permission is hereby granted, free of charge, to any person obtaining a copy
+% of this software and associated documentation files (the 'Software'), to deal
+% in the Software without restriction, including without limitation the rights
+% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+% copies of the Software, and to permit persons to whom the Software is
+% furnished to do so, subject to the following conditions:
+%
+% The above copyright notice and this permission notice shall be included in all
+% copies or substantial portions of the Software.
+%
+% THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+% SOFTWARE.
+
+\documentclass[landscape,slides,nodate,nosecurity]{huawei}
+\usepackage{/code/ssd16/slides}
+\usepackage[static]{clicks}
+\usepackage{soul}
+\usepackage{href-ul}
+
+\renewcommand*\theauthor{Yegor Bugayenko}
+\renewcommand*\thetitle{Line No. Zero}
+\renewcommand*\thesubtitle{Why Most Projects Fail?}
+\begin{document}
+
+\plush[2]{
+  \innoMiddle{
+    \innoTitle{\thetitle}{\thesubtitle}\par
+    {\scshape\theauthor}\par
+    \thecompany
+  }
+}
+
+\plick{\innoHeader{Some Background:}}
+\plick{I'm a head of an R\&D lab in Huawei MRC}
+\plick{We create \textbf{experimental} tools for developers}
+\plick{For example: \href{https://www.polystat.org}{polystat.org} and \href{https://www.artipie.com}{artipie.com}}
+\plick{About 30 ppl in-house and 40 \textbf{external}}
+\plick{\textbf{Nine} projects running at the moment}
+\plick{I do both: coding and managing}
+\plush{If you want to join, find me in TG: \textbf{@yegor256}}
+
+\plick{\innoHeader{\ul{Usual} Flow of Events:}}
+\plick{They: ``What do you want us to create?''}
+\plick{They: ``Let us write some code and \textbf{think}!''}
+\plick{They: ``Let us code more, it's a \textbf{complex} case!''}
+\plick{6 months later, they: ``We have something to demo!!''}
+\plick{We: ``Well, what is this?...''}
+\plick{They: ``OK, maybe you should hire another team :(''}
+\plick{We: ``Wait, let us help you, show us the code!''}
+\plick{We: ``Oops, the code is a \textbf{mess} too...''}
+\plush{They: ``Bye!''}
+
+\plick{\innoHeader{\ul{Desired} Flow of Events:}}
+\plick{They: ``What do you want us to create?''}
+\plick{They, one week after: ``Here is what've done, check it''}
+\plick{We: ``Cool, but it's not what we meant''}
+\plick{They: ``No worries, let us redo it''}
+\plick{We: ``Let us review the code too''}
+\plick{They: ``It's in GitHub and in Maven Central''}
+\plush{We: ``Come back next week! Love you!''}
+
+\plick{\innoHeader{Why Developers Don't Release First?}}
+\plick{Coding is fun}
+\plick{Arrogance and self-confidence}
+\plick{Perfectionism}
+\plick{Fear}
+\plick{Beliefs}
+\plush{No experience}
+
+\plick{\innoHeader{Weekly Routine}}
+\plick{README is sufficient enough}
+\plick{\textbf{Build} is automated}
+\plick{Strict \textbf{style checking} is part of the build}
+\plick{CI \textbf{badge} is green}
+\plick{Test coverage badge is accurate}
+\plick{Latest \textbf{binary} is released}
+\plush{Delivered to the \textbf{customer}}
+
+\end{document}
