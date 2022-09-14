@@ -1,0 +1,478 @@
+% (The MIT License)
+%
+% Copyright (c) 2022 Yegor Bugayenko
+%
+% Permission is hereby granted, free of charge, to any person obtaining a copy
+% of this software and associated documentation files (the 'Software'), to deal
+% in the Software without restriction, including without limitation the rights
+% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+% copies of the Software, and to permit persons to whom the Software is
+% furnished to do so, subject to the following conditions:
+%
+% The above copyright notice and this permission notice shall be included in all
+% copies or substantial portions of the Software.
+%
+% THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+% SOFTWARE.
+
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[nocn,nonumbers]{ffcode}
+\usepackage{clicks}
+\usepackage{setspace}
+\usepackage{href-ul}
+\usepackage{titling}
+\usepackage{mathtools}
+\usepackage[template,scheme=dark,directory=/code/ctan/ppt-slides,nominutes]{/code/ctan/ppt-slides/ppt-slides}
+\newcommand\nospell[1]{#1}
+\title{Immutability + Generics}
+\newcommand*{\thesubtitle}{An Immutable Collection of Strategies for EO Compiler}
+\author{Yegor Bugayenko}
+\pptLeft{\thetitle{}}
+\pptRight{\theauthor}
+\begin{document}
+
+\plush{
+  \pptMiddle{
+    \pptTitle{\thetitle}{\thesubtitle}\par
+    {\scshape \theauthor}\par
+    \pptQR{https://www.yegor256.com/2022/08/10/xsline-immutable-pipeline.html}
+  }
+}
+
+\pptHeader{What is DOM?}
+\begin{pptWide}{2}
+This is XML:
+\begin{ffcode*}{fontsize=\scriptsize}
+<garage>
+  <car country="DE">BMW</car>
+  <car country="SE">Volvo</car>
+  <car country="DE">Audi</car>
+  <car country="JP">Toyota</car>
+</garage>
+\end{ffcode*}
+This is the result:
+\begin{ffcode*}{fontsize=\scriptsize,highlightlines={1},highlightcolor=gray!50!black}
+<garage DE="2">
+  <car country="DE">BMW</car>
+  <car country="SE">Volvo</car>
+  <car country="DE">Audi</car>
+  <car country="JP">Toyota</car>
+</garage>
+\end{ffcode*}
+\columnbreak
+This is DOM API of Java:
+\begin{ffcode*}{fontsize=\scriptsize}
+var garage = dom.getOwnerDocument()
+  .getDocumentElement();
+var count = 0;
+var cars = garage.getChildNodes();
+for (int i; i < cars.getLength(); ++i) {
+  if (cars.item(i).getAttributes()
+    .getNamedItem("country")
+    .getTextContent().equals("DE")) {
+    ++count;
+  }
+}
+garage.setAttribute("total",
+  Integer.toString(count));
+\end{ffcode*}
+\end{pptWide}
+
+\plush{}
+\pptHeader{What is XSL?}
+\begin{pptWide}{2}
+This is XML:
+\begin{ffcode*}{fontsize=\scriptsize}
+<garage>
+  <car country="DE">BMW</car>
+  <car country="SE">Volvo</car>
+  <car country="DE">Audi</car>
+  <car country="JP">Toyota</car>
+</garage>
+\end{ffcode*}
+This is the result of XSL ``transformation'':
+\begin{ffcode*}{fontsize=\scriptsize}
+<garage DE="2">
+  <car country="DE">BMW</car>
+  <car country="SE">Volvo</car>
+  <car country="DE">Audi</car>
+  <car country="JP">Toyota</car>
+</garage>
+\end{ffcode*}
+\columnbreak
+This is XSL ``stylesheet'':
+\begin{ffcode*}{fontsize=\scriptsize,highlightlines={4-5},highlightcolor=gray!50!black}
+<xsl:stylesheet>
+  <xsl:template match="/garage">
+    <xsl:copy>
+      <xsl:attribute name="DE"
+        select="count(car[country='DE'])"/>
+      <xsl:apply-templates
+        select="node()"/>
+    </xsl:copy>
+  </xsl:template>
+</xsl:stylesheet>
+\end{ffcode*}
+\end{pptWide}
+
+\plush{}
+\pptHeader{What is Xembly?}
+\begin{pptWide}{2}
+This is XML:
+\begin{ffcode*}{fontsize=\scriptsize}
+<garage>
+  <car country="DE">BMW</car>
+  <car country="SE">Volvo</car>
+  <car country="DE">Audi</car>
+  <car country="JP">Toyota</car>
+</garage>
+\end{ffcode*}
+This is the result of Xembly evaluation:
+\begin{ffcode*}{fontsize=\scriptsize}
+<garage DE="2">
+  <car country="DE">BMW</car>
+  <car country="SE">Volvo</car>
+  <car country="DE">Audi</car>
+  <car country="JP">Toyota</car>
+</garage>
+\end{ffcode*}
+\columnbreak
+This is Xembly script:
+\begin{ffcode*}{fontsize=\small}
+XPATH "/garage";
+XATTR "DE", "count(car[country='DE'])";
+\end{ffcode*}
+Check it out at \href{https://www.xembly.org}{xembly.org}:\par
+\pptQR[1in]{https://www.xembly.org}
+\end{pptWide}
+
+\plush{}
+\plick{\pptHeader{How EOLANG Compiler Works?}}
+\plick{
+  EO $\xrightarrow{\text{ANTLR}}$ XMIR
+  \pptPin{
+    ``XMIR'' stands for XML Intermediate Representation\\[18pt]
+    ``Saxon'' is a Java library doing XSL transformations\\[18pt]
+    ``Xembly'' is our Java library for imperative XML manipulations
+  }
+}
+\plick{XMIR $\xrightarrow{\text{Saxon}}$ XMIR$_1$}
+\plick{XMIR$_1$ $\xrightarrow{\text{Xembly}}$ XMIR$_2$}
+\plick{$\dots$}
+\plick{XMIR$_{n > 30}$ $\xrightarrow{\text{Saxon}}$ Java}
+\plush{Java $\xrightarrow{\text{javac}}$ Bytecode}
+
+\plush{
+  \pptHeader{Want to Follow EOLANG Development?}
+  Join our Telegram group: @polystat\_org\par
+  \pptQR{https://t.me/polystat_org}
+}
+
+\pptHeader{Example: Detecting Duplicate Attributes}
+\begin{pptWide}{2}
+This is EO program:
+\begin{ffcode*}{fontsize=\scriptsize}
+[] > app
+  "Hello" > x
+  42 > x
+\end{ffcode*}
+This is XMIR generated by ANTLR4:
+\begin{ffcode*}{fontsize=\scriptsize}
+<program>
+  <objects>
+    <o name="app">
+      <o name="x">Hello</o>
+      <o name="x">42</o>
+    </o>
+  </objects>
+</program>
+\end{ffcode*}
+\columnbreak
+This is the XSL to check for duplicates:
+\begin{ffcode*}{fontsize=\scriptsize}
+<xsl:stylesheet>
+  <xsl:template match="o[
+    count(distinct-values(o/@name)) !=
+    count(o/@name)]">
+    <!-- add 'error' element -->
+  </xsl:template>
+</xsl:stylesheet>
+\end{ffcode*}
+This is XMIR after the XSL:
+\begin{ffcode*}{fontsize=\scriptsize}
+<program>
+  <errors>
+    <error>Attribute 'x' is duplicated</error>
+  </errors>
+  <objects>...</objects>
+</program>
+\end{ffcode*}
+\end{pptWide}
+
+\pptHeader{Simple Immutable Train}
+\begin{ffcode*}{fontsize=\small}
+interface Shift {
+  XML apply(XML input);
+}
+
+interface Train {
+  Train with(Shift extra);
+}
+
+var train = new TrDefault();
+var xsl = new XSLDocument("<xsl:stylesheet>...");
+var shift = new StXSL(xsl);
+train = train.with(shift);
+var before = new XMLDocument("<garage>...");
+var after = new Xsline(train).pass(before);
+\end{ffcode*}
+
+\plush{}
+\pptHeader{Decorators of Shift}
+\begin{ffcode*}{fontsize=\footnotesize}
+var train = new TrDefault()
+  .with(new StXSL("<xsl:stylesheet>..."))
+  .with(new StClasspath("/org/eolang/parser/dups.xsl"))
+  .with(new StEndless(new StXSL("...")))
+  .with(new StLogged(new StXSL("...")))
+  .with(new StFast(new StXSL("...")))
+  .with(new StFast(new StLogged(new StXSL("..."))))
+  .with(
+    new StFast(
+      new StLogged(
+        new StEndless(
+          new StXSL("...")
+        )
+      )
+    )
+  )
+\end{ffcode*}
+
+\pptHeader{Reducing Noise: Train Decorators}
+\begin{pptWide}{2}
+\begin{ffcode*}{fontsize=\footnotesize}
+var train = new TrDefault()
+  .with(
+    new StFast(
+      new StLogged(
+        new StClasspath("/org/eo...")
+      )
+    )
+  )
+  .with(
+    new StFast(
+      new StLogged(
+        new StXSL("<xsl:styl...")
+      )
+    )
+  );
+\end{ffcode*}
+\columnbreak
+\begin{ffcode*}{fontsize=\small}
+var t1 = new TrFast(
+  new TrLogged(
+    new TrDefault()
+  )
+);
+var train = t1
+  .with(new StClasspath("/org/eo..."))
+  .with(new StXSL("<xsl:styl..."));
+\end{ffcode*}
+\end{pptWide}
+
+\plush{}
+\pptHeader{Reducing Noise Even More: Generics}
+\begin{pptWide}{2}
+\begin{ffcode*}{fontsize=\footnotesize}
+var t1 = new TrFast(
+  new TrLogged(
+    new TrDefault()
+  )
+);
+var train = t1
+  .with(new StClasspath("add-refs.xsl"))
+  .with(new StClasspath("duplicates.xsl"))
+  .with(new StClasspath("catch.xsl"))
+  .with(new StClasspath("no-names.xsl"));
+\end{ffcode*}
+\columnbreak
+\begin{ffcode*}{fontsize=\small}
+Train<Shift> t1 = new TrDefault();
+Train<String> t2 = new TrClasspath(t1)
+  .with("add-refs.xsl")
+  .with("duplicates.xsl")
+  .with("catch.xsl")
+  .with("no-names.xsl");
+Train<Shift> t3 = t2.back();
+\end{ffcode*}
+\end{pptWide}
+
+\plush{}
+\pptHeader{Backward Transition of Types}
+\begin{pptWide}{2}
+\begin{ffcode*}{fontsize=\footnotesize}
+Train<Shift> t1 = new TrDefault();
+Train<String> t2 = new TrClasspath(t1)
+  .with("add-refs.xsl")
+  .with("duplicates.xsl")
+  .with("catch.xsl")
+  .with("no-names.xsl");
+Train<Shift> t3 = t2.back();
+\end{ffcode*}
+\columnbreak
+\begin{ffcode*}{fontsize=\small,highlightlines={3-5},highlightcolor=gray!50!black}
+interface Train<T> {
+  Train<T> with(T extra);
+  interface Temporary<X> {
+    Train<X> back();
+  }
+}
+
+class TrClasspath implements
+  Train<String>,
+  Train.Temporary<Shift> {
+  // ...
+}
+\end{ffcode*}
+\end{pptWide}
+
+\plush{}
+\pptHeader{Reducing Noise Completely: Bulk Ops}
+\begin{pptWide}{2}
+\begin{ffcode*}{fontsize=\footnotesize}
+Train<Shift> t1 = new TrDefault();
+Train<String> t2 = new TrClasspath(t1)
+Train<Shift, TrClasspath> t3 =
+  new TrBulk<>(t2);
+Train<Shift> t4 = t3.with(
+  Arrays.asList(
+    "add-refs.xsl",
+    "duplicates.xsl",
+    "catch.xsl",
+    "no-names.xsl"
+  )
+).back().back();
+Train<Shift> t3 = t2.back();
+\end{ffcode*}
+\columnbreak
+\begin{ffcode*}{fontsize=\small}
+class TrBulk<T, R extends Train<T>>
+  implements Train<Iterable<T>>,
+  Train.Temporary<T> {
+  private final R origin;
+  @Override
+  TrBulk<T, R> with(Iterable<T> shifts) {
+    // return new 'origin' + shifts
+  }
+  @Override
+  R back() {
+    return this.origin;
+  }
+}
+\end{ffcode*}
+\end{pptWide}
+
+\plush{}
+\pptHeader{Secondary Ctors to Help}
+\begin{pptWide}{2}
+\begin{ffcode*}{fontsize=\footnotesize}
+var t = new TrBulk<>(
+  new TrClasspath(
+    new TrFast(
+      new TrLogged(
+        new TrDefault()
+      )
+    )
+)
+var train = t
+  .with("add-refs.xsl")
+  .with("duplicates.xsl")
+  .with("catch.xsl")
+  .back()
+  .back();
+\end{ffcode*}
+\columnbreak
+\begin{ffcode*}{fontsize=\small}
+Train<Shift> t = new TrBulk<>(
+  new TrClasspath(
+    new TrFast(
+      new TrLogged(
+        new TrDefault()
+      )
+    )
+  ),
+  "add-refs.xsl",
+  "duplicates.xsl",
+  "catch.xsl"
+).back().back();
+\end{ffcode*}
+\end{pptWide}
+
+\plush{}
+\pptHeader{Real Example from EO Sources}
+\begin{pptWide}{2}
+\setstretch{0.9}
+\begin{ffcode*}{fontsize=\scriptsize}
+private static final String[] SHEETS = {
+  "/org/eolang/parser/errors/not-empty-atoms.xsl",
+  "/org/eolang/parser/errors/middle-varargs.xsl",
+  "/org/eolang/parser/errors/duplicate-names.xsl",
+  "/org/eolang/parser/errors/many-free-attributes.xsl",
+  "/org/eolang/parser/errors/broken-aliases.xsl",
+  "/org/eolang/parser/errors/duplicate-aliases.xsl",
+  "/org/eolang/parser/errors/global-nonames.xsl",
+  "/org/eolang/parser/errors/same-line-names.xsl",
+  "/org/eolang/parser/errors/self-naming.xsl",
+  "/org/eolang/parser/add-refs.xsl",
+  "/org/eolang/parser/wrap-method-calls.xsl",
+  "/org/eolang/parser/vars-float-up.xsl",
+  "/org/eolang/parser/add-refs.xsl",
+  "/org/eolang/parser/warnings/unsorted-metas.xsl",
+  "/org/eolang/parser/expand-aliases.xsl",
+  "/org/eolang/parser/resolve-aliases.xsl",
+  "/org/eolang/parser/synthetic-references.xsl",
+  "/org/eolang/parser/add-default-package.xsl",
+  // ... and more
+};
+\end{ffcode*}
+\columnbreak
+\begin{ffcode*}{fontsize=\scriptsize}
+new TrBulk<>(
+  new TrClasspath<>(
+    new TrLambda(
+      new TrFast(
+        new TrLogged(
+          new TrDefault<>()
+        )
+      ),
+      shift -> new StAfter(
+        shift,
+        new StLambda(
+          shift::uid,
+          (pos, xml) -> EACH.with("step", pos)
+            .with("sheet", shift.uid())
+            .transform(xml)
+        )
+      )
+    ),
+    SHEETS
+  )
+).back().back()
+\end{ffcode*}
+\end{pptWide}
+
+\plush{
+  \pptHeader{Check It Out on GitHub:}
+  \url{https://github.com/yegor256/xsline}\par
+  \pptQR{https://github.com/yegor256/xsline}\par
+  ... and give it a star! :)
+}
+
+\end{document}
