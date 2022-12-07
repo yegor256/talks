@@ -1,0 +1,217 @@
+% (The MIT License)
+%
+% Copyright (c) 2022 Yegor Bugayenko
+%
+% Permission is hereby granted, free of charge, to any person obtaining a copy
+% of this software and associated documentation files (the 'Software'), to deal
+% in the Software without restriction, including without limitation the rights
+% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+% copies of the Software, and to permit persons to whom the Software is
+% furnished to do so, subject to the following conditions:
+%
+% The above copyright notice and this permission notice shall be included in all
+% copies or substantial portions of the Software.
+%
+% THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+% SOFTWARE.
+
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[nocn,nonumbers,noframes,sf,bold]{ffcode}
+\usepackage{lmodern}
+\usepackage{clicks}
+\usepackage{setspace}
+\usepackage{href-ul}
+\usepackage{titling}
+\usepackage{mathtools}
+\renewcommand{\ttdefault}{cmtt}
+\usepackage[template,scheme=light,nominutes]{ppt-slides}
+\newcommand\nospell[1]{#1}
+\title{Exceptions as Containers}
+\newcommand*{\thesubtitle}{EOLANG Implementation Example}
+\author{Yegor Bugayenko}
+\pptLeft{\thetitle{}}
+\pptRight{\theauthor}
+\begin{document}
+
+\plush{
+  \begin{pptMiddle}
+    \pptTitle{\thetitle}{\thesubtitle}\par
+    {\scshape \theauthor}
+  \end{pptMiddle}
+}
+
+\pptHeader{Objects and Their Names in EOLANG}
+\begin{pptWide}{2}
+``Two plus two'':
+\begin{ffcode*}{fontseries=bf}
+2.plus 2 > a
+\end{ffcode*}
+Similar to Pascal (almost):
+\begin{ffcode*}{fontseries=bf}
+var a : integer;
+a := 2 + 2;
+\end{ffcode*}
+\columnbreak
+Similar to Java (almost):
+\begin{ffcode*}{fontseries=bf}
+Integer a = new Integer(2)
+  .plus(new Integer(2));
+\end{ffcode*}
+Alternative ``vertical'' syntax in EO:
+\begin{ffcode*}{fontseries=bf}
+plus. > x
+  2
+  2
+\end{ffcode*}
+\end{pptWide}
+
+\plush{}
+\pptHeader{Fibonacci in EOLANG}
+\begin{pptWide}{2}
+Canonical syntax:
+\begin{ffcode*}{fontseries=bf}
+[n] > fibo
+  if. > @
+    $.n.gt 2
+    plus.
+      fibo
+        n.minus 1
+        n.minus 2
+\end{ffcode*}
+\columnbreak
+Alternative syntax:
+\begin{ffcode*}{fontseries=bf}
+[n] > fibo
+  (n.gt 2).if > @
+  fibo (n.minus 1)
+  .plus (n.minus 2)
+\end{ffcode*}
+Now, we can make a copy of the abstract object and then ``dataize'' it:
+\begin{ffcode*}{fontseries=bf}
+fibo 13 > x
+print x
+\end{ffcode*}
+\end{pptWide}
+
+\plush{}
+\pptHeader{The Error Object}
+\begin{pptWide}{2}
+Instead of throwing an exception we return a copy of the |error| object:
+\begin{ffcode*}{fontseries=bf}
+[x] > foo
+  if.
+    x.eq 0
+    error "Can't divide by zero!"
+    42.div x
+\end{ffcode*}
+\columnbreak
+Later:
+\begin{ffcode*}{fontseries=bf}
+(foo 0).plus 1 > x
+\end{ffcode*}
+Even later:
+\begin{ffcode*}{fontseries=bf}
++alias org.eolang.io.stdout
++alias org.eolang.txt.sprintf
+
+stdout
+  sprintf
+    "The result is %d"
+    x
+\end{ffcode*}
+\end{pptWide}
+
+\plush{}
+\pptHeader{The Try Object}
+\begin{pptWide}{2}
+The dataization of the |error| object leads to a runtime error and immediate program termination, however it may be ``caught'' by the |try| object:
+\begin{ffcode*}{fontsize=\scriptsize,fontseries=bf}
+QQ.io.stdout
+  try
+    QQ.txt.sprintf
+      "The result is %d"
+      x
+    [e]
+      QQ.txt.sprintf > @
+        "Oops: %s"
+        e
+    nop
+\end{ffcode*}
+\columnbreak
+This code would be similar to the following code in Java (almost):
+\begin{ffcode*}{fontsize=\scriptsize,fontseries=bf}
+System.out.println(
+  try {
+    String.format(
+      "The result is %d", x()
+    )
+  } catch (Exception e) {
+    String.format(
+      "Oops: %s", e.getMessage()
+    )
+  } finally {
+    // nothing
+  }
+);
+\end{ffcode*}
+\end{pptWide}
+
+\plush{}
+\pptHeader{The Implementation}
+\begin{pptWide}{2}
+The following EO code:
+\begin{ffcode*}{fontsize=\scriptsize,fontseries=bf}
+error "Can't divide by zero!"
+\end{ffcode*}
+Is compiled to the following pseudo-Java:
+\begin{ffcode*}{fontsize=\scriptsize,fontseries=bf}
+class EOerror {
+  private theEnclosure;
+  dataize() {
+    // Instead of "return data;"
+    throw new ExError(
+      theEnclosure
+      // "Can't divide by zero!"
+    );
+  }
+}
+\end{ffcode*}
+\columnbreak
+Then, the |try| object is compiled to:
+\begin{ffcode*}{fontsize=\scriptsize,fontseries=bf}
+class EOtry {
+  private theBody;
+  private theCatch;
+  private theFinally;
+  dataize() {
+    try {
+      return dataize(theBody)
+    } catch (ExError e) {
+      return dataize(
+        theCatch(e.getEnclosure())
+      );
+    } finally {
+      return dataize(theFinally));
+    }
+  }
+}
+\end{ffcode*}
+\end{pptWide}
+
+\plush{}
+
+\plush{
+  \pptHeader{Check It Out on GitHub:}
+  \url{https://github.com/objectionary/eo}\par
+  \pptQR{https://github.com/objectionary/eo}\par
+  ... and give it a star! :)
+}
+
+\end{document}

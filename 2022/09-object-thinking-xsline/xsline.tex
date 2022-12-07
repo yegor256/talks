@@ -29,7 +29,8 @@
 \usepackage{href-ul}
 \usepackage{titling}
 \usepackage{mathtools}
-\usepackage[template,scheme=dark,directory=/code/ctan/ppt-slides,nominutes]{/code/ctan/ppt-slides/ppt-slides}
+\renewcommand{\ttdefault}{cmtt}
+\usepackage[template,scheme=light,nominutes]{ppt-slides}
 \newcommand\nospell[1]{#1}
 \title{Immutability + Generics}
 \newcommand*{\thesubtitle}{An Immutable Collection of Strategies for EO Compiler}
@@ -49,7 +50,7 @@
 \pptHeader{What is DOM?}
 \begin{pptWide}{2}
 This is XML:
-\begin{ffcode*}{fontsize=\scriptsize}
+\begin{ffcode*}{fontsize=\scriptsize,fontseries=bf}
 <garage>
   <car country="DE">BMW</car>
   <car country="SE">Volvo</car>
@@ -58,7 +59,7 @@ This is XML:
 </garage>
 \end{ffcode*}
 This is the result:
-\begin{ffcode*}{fontsize=\scriptsize,highlightlines={1},highlightcolor=gray!50!black}
+\begin{ffcode*}{fontsize=\scriptsize}
 <garage DE="2">
   <car country="DE">BMW</car>
   <car country="SE">Volvo</car>
@@ -108,7 +109,7 @@ This is the result of XSL ``transformation'':
 \end{ffcode*}
 \columnbreak
 This is XSL ``stylesheet'':
-\begin{ffcode*}{fontsize=\scriptsize,highlightlines={4-5},highlightcolor=gray!50!black}
+\begin{ffcode*}{fontsize=\scriptsize}
 <xsl:stylesheet>
   <xsl:template match="/garage">
     <xsl:copy>
@@ -327,7 +328,7 @@ Train<String> t2 = new TrClasspath(t1)
 Train<Shift> t3 = t2.back();
 \end{ffcode*}
 \columnbreak
-\begin{ffcode*}{fontsize=\small,highlightlines={3-5},highlightcolor=gray!50!black}
+\begin{ffcode*}{fontsize=\small}
 interface Train<T> {
   Train<T> with(T extra);
   interface Temporary<X> {
