@@ -24,7 +24,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[nocn,nonumbers,noframes,sf,bold]{ffcode}
-\usepackage{clicks}
+\usepackage[static]{clicks}
 \usepackage{tikzsymbols}
 \usetikzlibrary{positioning}
 \usepackage[increment]{crumbs}
@@ -204,7 +204,7 @@ I found this picture in the \href{https://codescene.com/engineering-blog/refacto
 \path[->] (repo) -- (scanners);
 \path[->] (scanners) -- (metrics);
 \path[->] (metrics) -- (tom);
-\path[->] (tom) -- (tickets);
+\path[->] (tom) edge[bend left=25,line width=.2em,draw=orange] node[fill=white,left=-1em] {CAPAs} (tickets);
 \path[->] (tickets) -- (dev1);
 \path[->] (tickets) -- (dev2);
 \path[->] (dev1) -- (repo);
