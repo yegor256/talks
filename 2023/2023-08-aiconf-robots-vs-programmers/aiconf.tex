@@ -1,0 +1,201 @@
+% (The MIT License)
+%
+% Copyright (c) 2023 Yegor Bugayenko
+%
+% Permission is hereby granted, free of charge, to any person obtaining a copy
+% of this software and associated documentation files (the 'Software'), to deal
+% in the Software without restriction, including without limitation the rights
+% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+% copies of the Software, and to permit persons to whom the Software is
+% furnished to do so, subject to the following conditions:
+%
+% The above copyright notice and this permission notice shall be included in all
+% copies or substantial portions of the Software.
+%
+% THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+% SOFTWARE.
+
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[nocn,nonumbers,noframes,sf,bold]{ffcode}
+\usepackage{clicks}
+\usepackage{tikzsymbols}
+\usetikzlibrary{positioning}
+\usepackage[increment]{crumbs}
+\usepackage[template,scheme=light,nominutes]{ppt-slides}
+\usepackage{href-ul}
+\usepackage{svg}
+\renewcommand{\ttdefault}{cmtt}
+\newcommand\nospell[1]{#1}
+\newcommand*{\thetitle}{Robots vs. Programmers}
+\newcommand*{\thesubtitle}{...}
+\newcommand*{\theauthor}{Yegor Bugayenko}
+\pptLeft{\includesvg[height=.6in]{innopolis-logo.svg}}
+\pptRight{\includesvg[height=.6in]{aiin-logo.svg}}
+
+\newcommand\person[2]{%
+  \parbox{1in}{\raggedright%
+    \includegraphics[height=1.2in]{#1-#2.jpg}\par
+    \scriptsize #1 \newline #2 \par
+  }
+}
+
+\begin{document}
+
+\plush{
+  \begin{pptMiddle}
+    \includesvg[height=1in]{aiin-logo.svg}
+    \pptTitle{\thetitle}{\thesubtitle}\par
+    {\scshape \theauthor}
+    \newline
+    {\small Huawei Technologies Co., Ltd.\par}
+  \end{pptMiddle}
+}
+
+\pptToc
+
+\plush{\pptChapter{Today}}
+
+\pptSection[Complete]{Auto Code Completion}
+This is how \href{https://github.com/features/copilot}{Copilot} by GitHub is suggesting code completion in our \href{https://www.eolang.org}{own programming language}, which it definitely hasn't seen before:
+\par
+\begin{multicols}{4}
+\pptPic{.9}{copilot-1.png}
+\pptPic{.9}{copilot-2.png}
+\pptPic{.9}{copilot-3.png}
+\pptPic{.9}{copilot-4.png}
+\end{multicols}
+\par
+Read also about \href{https://aws.amazon.com/codewhisperer/}{AWS CodeWhisperer} at \href{https://www.allthingsdistributed.com/2023/04/how-ai-coding-companions-will-change-the-way-developers-work.html}{Werner Vogels' blog}. Also, about \href{https://github.com/codota}{TabNine} (used to be Codota).
+\plush{}
+
+\pptSection[PR]{Pull Request Explanation}
+\pptPic{0.75}{pr-codex.png}
+\par
+\href{https://github.com/decentralizedlabs/pr-codex}{PR-Codex} plugin for GitHub by \href{https://www.dlabs.app/}{dlabs}
+\plush{}
+
+\pptSection[Review]{Reviewing Changes}
+\pptPic{0.75}{codex-qa.png}
+\par
+The discussion happened in this GitHub issue: \href{https://github.com/objectionary/eo/pull/2034}{objectionary/eo:2034}
+\plush{}
+
+\pptSection[Risks]{Pull Request Risk Analysis}
+\pptPic{0.9}{codeball.png}
+\par
+\href{https://codeball.ai/}{Codeball} plugin for GitHub
+\plush{}
+
+\pptSection[Explain]{Explain This to Me!}
+\pptPic{0.9}{mintlify.png}
+\par
+\href{https://github.com/mintlify/writer}{Writer} plugin for VS-Code by \href{https://writer.mintlify.com/}{Mintlify}
+\plush{}
+
+\pptSection[Safurai]{All in One Package}
+\pptPic{0.9}{safurai.png}
+\par
+Plugin for VS-Code by \href{https://www.safurai.com/}{Safurai}
+\plush{}
+
+\pptSection[Repeat]{Repeat After Me!}
+\pptPic{0.6}{intellicode.png}
+\par
+Read about ``\href{https://devblogs.microsoft.com/visualstudio/making-repeated-edits-easier-with-intellicode-suggestions/}{making repeated edits easier with IntelliCode suggestions}'', by Peter Groenewegen.
+\plush{}
+
+\pptSection[Bugs]{Detecting Bugs}
+\pptPic{.7}{catid.png}
+\par
+Can open-source LLMs detect bugs in C++ code?
+\newline
+\url{https://catid.io/posts/llm_bugs/}
+\plush{}
+
+\pptSection[OverflowAI]{OverflowAI}
+\pptPic{.7}{overflowai.png}
+\par
+\url{https://stackoverflow.blog/2023/07/27/announcing-overflowai/}
+\plush{}
+
+\pptSection[PDD]{Puzzle Driven Development}
+\begin{pptWide}{2}
+\resizebox{\columnwidth}{!}{\begin{tikzpicture}[
+  every node/.style={draw=black, line width=.1em, font={\ttfamily},inner sep=.5em, outer sep=.2em},
+  every path/.style={draw=black, line width=.1em},
+]
+\node[] (problem) {Problem};
+\node[draw=none,below=2em of problem] (dev) {\parbox{5em}{\centering\Strichmaxerl[5] \\ Developer}};
+\node[right=2em of dev] (solution) {Solution};
+\node[draw=none,below=0cm of solution] {\parbox{8em}{\centering + more problems (aka "puzzles")}};
+\node[right=4em of solution] (scanner) {\parbox{6em}{\centering Source Code Scanner}};
+\node[below=5em of scanner] (tickets) {\parbox{6em}{\centering Ticket Tracking System}};
+\node[draw=none,left=2em of tickets] (robot) {\parbox{3em}{\centering\Strichmaxerl[5] \\ PDD Robot}};
+\path[->] (problem) -- (dev);
+\path[->] (dev) -- (solution);
+\path[->] (solution) -- (scanner);
+\path[->] (scanner) -- (tickets);
+\path[->] (tickets) -- (robot);
+\path[->] (robot) edge[bend left=25,line width=.2em,draw=orange] node[fill=white,left=-1em] {\parbox{8em}{\centering New Prioritized Problems}} (dev);
+\end{tikzpicture}}
+\par\columnbreak\par
+\person{Giancarlo}{Succi}
+\person{Witold}{Pedrycz}
+\person{Mirko}{Farina}
+\person{Artem}{Kruglov}
+\par
+{\small Y. Bugayenko, M. Farina, A. Kruglov, W. Pedrycz, Y. Plaksin, G. Succi,
+\textit{Automatically Prioritizing Tasks in Software Development}, IEEE Access, 2023 (accepted for publication)}
+\par
+The robot is a GitHub chatbot: \url{www.0pdd.com}
+\end{pptWide}
+\plush{}
+
+\plush{\pptChapter{Tomorrow}}
+
+\pptSection[Review]{Review pull requests (Copilot X)}
+\plush{}
+
+\pptSection[Tests]{Write unit tests (Copilot X)}
+\plush{}
+
+\pptSection[Visualise]{Visualise code base (Copilot X)}
+\plush{}
+
+\pptSection[Refactor]{Automated Refactoring}
+\begin{multicols}{2}
+\pptPic{.9}{codescene.png}
+\par\columnbreak\par
+I found this picture in the \href{https://codescene.com/engineering-blog/refactoring-recommendations}{CodeScene website}.
+\end{multicols}
+\plush{}
+
+\pptSection[CAPA]{Suggest Corrective and Preventive Actions}
+\plush{}
+
+\plush{\pptChapter[Five]{In Five Years}}
+
+\pptSection[Reject]{Reject builds for suspicious quality}
+\plush{}
+
+\pptSection[Fix]{Make Pull Requests}
+\plush{}
+
+\pptSection[Appraise]{Appraise our work}
+\plush{}
+
+\plush{\pptChapter[Twenty]{In Twenty Years}}
+
+\print{They will tell us what to do}
+\print{They will fire and hire}
+\print{They will decide how much to pay}
+\plush{They will start and stop projects}
+
+\end{document}
