@@ -39,12 +39,13 @@
 \pptLeft{\includesvg[height=.6in]{innopolis-logo.svg}}
 \pptRight{\includesvg[height=.6in]{aiin-logo.svg}}
 
-\newcommand\person[2]{%
+\newcommand\personAndPhoto[3]{%
   \parbox{1in}{\raggedright%
-    \includegraphics[height=1.2in]{#1-#2.jpg}\par
+    \includegraphics[height=1.2in]{#3}\par
     \scriptsize #1 \newline #2 \par
   }
 }
+\newcommand\person[2]{\personAndPhoto{#1}{#2}{#1-#2.jpg}}
 
 \begin{document}
 
@@ -125,7 +126,7 @@ Can open-source LLMs detect bugs in C++ code?
 \url{https://stackoverflow.blog/2023/07/27/announcing-overflowai/}
 \plush{}
 
-\pptSection[PDD]{Puzzle Driven Development}
+\pptSection[PDD]{Puzzle Driven Development (PDD)}
 \begin{pptWide}{2}
 \resizebox{\columnwidth}{!}{\begin{tikzpicture}[
   every node/.style={draw=black, line width=.1em, font={\ttfamily},inner sep=.5em, outer sep=.2em},
@@ -148,10 +149,11 @@ Can open-source LLMs detect bugs in C++ code?
 \par\columnbreak\par
 \person{Giancarlo}{Succi}
 \person{Witold}{Pedrycz}
+\person{Yaroslav}{Plaksin}
 \person{Mirko}{Farina}
 \person{Artem}{Kruglov}
 \par
-{\small Y. Bugayenko, M. Farina, A. Kruglov, W. Pedrycz, Y. Plaksin, G. Succi,
+{\small Y.~Bugayenko, M.~Farina, A.~Kruglov, W.~Pedrycz, Y.~Plaksin, G.~Succi,
 \textit{Automatically Prioritizing Tasks in Software Development}, IEEE Access, 2023 (accepted for publication)}
 \par
 The robot is a GitHub chatbot: \url{www.0pdd.com}
@@ -184,9 +186,45 @@ I found this picture in the \href{https://codescene.com/engineering-blog/refacto
 \plush{}
 
 \pptSection[CAPA]{Suggest Corrective and Preventive Actions}
+\begin{pptWide}{2}
+\resizebox{.7\columnwidth}{!}{\begin{tikzpicture}[
+  every node/.style={draw=black, line width=.1em, font={\ttfamily},inner sep=.5em, outer sep=.2em},
+  every path/.style={draw=black, line width=.1em},
+]
+\node[draw=none] (tom) {\parbox{4em}{\centering\Strichmaxerl[5] \\ TOM Robot w/ML}};
+\node[above right=4em and 0em of tom] (metrics) {\parbox{5em}{\centering Code Metrics}};
+\node[above left=2em of tom] (tickets) {\parbox{6em}{\centering Tickets}};
+\node[above=6em of metrics] (scanners) {\parbox{6em}{\centering Source Code Scanners}};
+\node[draw=none,above left=4em and 0em of tickets, anchor=base] (dev1) {\parbox{2em}{\centering\Strichmaxerl[5] \\ Dev}};
+\node[draw=none,above right=4em and 0em of tickets, anchor=base] (dev2) {\parbox{2em}{\centering\Strichmaxerl[5] \\ Dev}};
+\node[above=9em of tickets] (repo) {\parbox{6em}{\centering GitHub Repository}};
+\path[->] (repo) -- (scanners);
+\path[->] (scanners) -- (metrics);
+\path[->] (metrics) -- (tom);
+\path[->] (tom) -- (tickets);
+\path[->] (tickets) -- (dev1);
+\path[->] (tickets) -- (dev2);
+\path[->] (dev1) -- (repo);
+\path[->] (dev2) -- (repo);
+\end{tikzpicture}}
+\par\columnbreak\par
+\person{Giancarlo}{Succi}
+\person{Witold}{Pedrycz}
+\person{Mirko}{Farina}
+\person{Artem}{Kruglov}
+\\
+\person{Zamira}{Kholmatova}
+\person{Firas}{Jolha}
+\person{Arina}{Cheverda}
+% \person{Kirill}{Daniakin}
+\par
+{\scriptsize Y.~Bugayenko, K.~Daniakin, M.~Farina, F.~Jolha, A.~Kruglov, G.~Succi, W.~Pedrycz,
+\textit{Extracting Corrective Actions from Code Repositories},
+Proceedings of the 19th International Conference on Mining Software Repositories (MSR), 2022\par}
+\end{pptWide}
 \plush{}
 
-\plush{\pptChapter[Five]{In Five Years}}
+\plush{\pptChapter[Years]{In a Few Years}}
 
 \pptSection[Reject]{Reject builds for suspicious quality}
 \plush{}
@@ -197,7 +235,7 @@ I found this picture in the \href{https://codescene.com/engineering-blog/refacto
 \pptSection[Appraise]{Appraise our work}
 \plush{}
 
-\plush{\pptChapter[Twenty]{In Twenty Years}}
+\plush{\pptChapter[Decades]{In a Few Decades}}
 
 \pptBanner{The robots...}
 \pptPin{\raggedright%
@@ -206,7 +244,7 @@ I found this picture in the \href{https://codescene.com/engineering-blog/refacto
 }
 \par
 \print{They will tell us what to do}
-\print{They will fire and hire us}
+\print{They will hire and fire us}
 \print{They will decide how much to pay us}
 \plush{They will start and stop our projects}
 
