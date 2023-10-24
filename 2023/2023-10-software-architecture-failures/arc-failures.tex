@@ -1,0 +1,96 @@
+% (The MIT License)
+%
+% Copyright (c) 2023 Yegor Bugayenko
+%
+% Permission is hereby granted, free of charge, to any person obtaining a copy
+% of this software and associated documentation files (the 'Software'), to deal
+% in the Software without restriction, including without limitation the rights
+% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+% copies of the Software, and to permit persons to whom the Software is
+% furnished to do so, subject to the following conditions:
+%
+% The above copyright notice and this permission notice shall be included in all
+% copies or substantial portions of the Software.
+%
+% THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+% SOFTWARE.
+
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[nocn,nonumbers,noframes,sf,bold]{ffcode}
+\usepackage[static]{clicks}
+\usepackage{tikzsymbols}
+\usetikzlibrary{positioning}
+\usepackage[increment]{crumbs}
+\usepackage[template,scheme=light,nominutes]{ppt-slides}
+\usepackage{href-ul}
+\usepackage{svg}
+\renewcommand{\ttdefault}{cmtt}
+\newcommand*{\thetitle}{Architectures Fail}
+\newcommand*{\thesubtitle}{Top 10 reasons of their failures}
+\newcommand*{\theauthor}{Yegor Bugayenko}
+\pptLeft{\includesvg[height=.4in]{innopolis-logo.svg}}
+\pptRight{@yegor256}
+
+\begin{document}
+
+\plush{
+  \begin{pptMiddle}
+    \pptTitle{\thetitle}{\thesubtitle}\par
+    {\scshape \theauthor}
+    \newline
+    {\small Huawei Technologies Co., Ltd.\par}
+  \end{pptMiddle}
+}
+
+\newcounter{reason}
+\newcommand\printReason[1]{\stepcounter{reason}\plush{\pptThought{\thereason. #1}}}
+
+\printReason{Many Architects}
+
+\printReason{Co-located Team}
+
+\printReason{Private Code Base}
+
+\printReason{Code Ownership}
+
+\printReason{Easy to Contribute}
+
+\printReason{Code First, Release Later}
+
+\printReason{Tight Coupling}
+
+\printReason{Low Cohesion}
+
+\printReason{Size \& Complexity}
+
+\plush{
+\begin{multicols}{2}
+\small
+{David West}, \emph{Object Thinking}, 2004\\[3pt]
+{David West}, \emph{Design Thinking}, 2017\\[3pt]
+{Robert Martin}, \emph{Clean Code}, 2008\\[3pt]
+{Steve McConnell}, \emph{Code Complete}, 1993\\[3pt]
+{Yegor Bugayenko}, \emph{Elegant Objects}, 2016\\[3pt]
+{Yegor Bugayenko}, \emph{Code Ahead}, 2018\\[3pt]
+Karl Wiegers et al., \emph{Software Requirements}, 2013\\[3pt]
+Alistair Cockburn, \emph{Writing Effective Use Cases}, 2000\\[3pt]
+Steve McConnell, \emph{Software Estimation: Demystifying the Black Art}, 2006\\[3pt]
+Robert Martin, \emph{Clean Architecture: A Craftsman's Guide to Software Structure and Design}, 2017\\[3pt]
+Michael Feathers, \emph{Working Effectively with Legacy Code}, 2004\\[3pt]
+Martin Fowler, \emph{Refactoring: Improving the Design of Existing Code}, 1999\\[3pt]
+Martin Fowler, \emph{UML Distilled}, 1997\\[3pt]
+Jez Humble et al., \emph{Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation}, 2010\\[3pt]
+Michael T. Nygard, \emph{Release It!: Design and Deploy Production-Ready Software}, 2007\\[3pt]
+\end{multicols}
+}
+
+\plush{\begin{pptMiddle}\centering\Huge \textsf{tg: @yegor256news}\end{pptMiddle}}
+
+\end{document}
