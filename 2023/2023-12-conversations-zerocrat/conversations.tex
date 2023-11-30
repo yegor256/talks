@@ -1,0 +1,156 @@
+% (The MIT License)
+%
+% Copyright (c) 2023 Yegor Bugayenko
+%
+% Permission is hereby granted, free of charge, to any person obtaining a copy
+% of this software and associated documentation files (the 'Software'), to deal
+% in the Software without restriction, including without limitation the rights
+% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+% copies of the Software, and to permit persons to whom the Software is
+% furnished to do so, subject to the following conditions:
+%
+% The above copyright notice and this permission notice shall be included in all
+% copies or substantial portions of the Software.
+%
+% THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+% SOFTWARE.
+
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[nocn,nonumbers,noframes,sf,bold]{ffcode}
+\usepackage[static]{clicks}
+\usepackage{tikzsymbols}
+\usetikzlibrary{positioning}
+\usepackage[increment]{crumbs}
+\usepackage[template,scheme=light,nominutes]{ppt-slides}
+\usepackage{href-ul}
+\usepackage{svg}
+\usepackage{soul}
+\usepackage{qrcode}
+\renewcommand{\ttdefault}{cmtt}
+\newcommand\nospell[1]{#1}
+\newcommand*{\thetitle}{AI to Help a PM}
+\newcommand*{\thesubtitle}{How much future LLM can predict?}
+\newcommand*{\theauthor}{Yegor Bugayenko}
+\pptLeft{\includesvg[height=.4in]{conversations.svg}}
+\pptRight{@yegor256}
+
+\renewcommand\emph[1]{\ul{#1}}
+
+\begin{document}
+
+\plush{
+  \begin{pptMiddle}
+    \includesvg[height=.8in]{conversations.svg}
+    \pptTitle{\thetitle}{\thesubtitle}\par
+    {\scshape \theauthor}
+    \newline
+    {\small Huawei Technologies Co., Ltd.\par}
+  \end{pptMiddle}
+}
+
+\plush{\pptThought{AI's mission is solving problems that people \emph{can't} solve or too \emph{lazy} to solve}}
+
+\plush{\pptThought{For example, AI can \emph{find} flaws, \emph{suggest} code refactorings, and even \emph{fix} bugs}}
+
+\plush{\pptThought{We believe that AI can also help managers do the \emph{boring} part of project management}}
+
+\plush{\pptThought{As we know, a project manager 1)~\emph{observes} the past and then 2)~\emph{estimates} the future}}
+
+\plush{\pptThought{Since most activities in a software development project are \emph{digitizable}, it's relatively easy to observe}}
+
+\plush{\pptThought{Estimating the future consists of two parts: \emph{calculating} and \emph{speculating}}}
+
+\plush{\pptThought{Calculating is relatively easy, having the \emph{metrics} collected from the past (for example, from GitHub API)}}
+
+\plush{\pptThought{Speculating takes a lot of \emph{brain power} --- this is where AI may help}}
+
+\plush{\pptThought{In project management speculating about the future is called \emph{risk management}}}
+
+\plush{\pptThought{Risk management mostly consists of risk \emph{identification}, \emph{qualification}, and \emph{quantification}}}
+
+\plush{\pptThought{We found out that LLM may be helpful in risk \emph{qualification} --- help us classify some risks as \emph{primary}}}
+
+\plush{\pptThought{1) First, we manually \emph{identify} risks, using risk \emph{taxonomy}}}
+
+\begin{multicols}{2}
+Risk Taxonomy:\par
+{\small\begin{ffcode}
+Causes:
+  C2: AWS
+  C3: Java devs
+Risks:
+  R1: Dev my quit
+  R2: Server may fail
+  R3: Data may corrupt
+Effects:
+  E1: We lose money
+  E2: We lose time
+  E3: Reputation damage
+\end{ffcode}
+}
+\par\columnbreak\par
+Risk List:\par
+{\small\begin{ffcode}
+C1 → R1 → E4
+   → R2 → E2
+        → E5
+C2 → R2 → E5
+   → R5 → E1
+        → E8
+        → E13
+C2 → R3 → E5
+        → E1
+\end{ffcode}
+}
+\par
+{\scriptsize Read more about this approach in this blog post: \href{https://www.yegor256.com/2019/05/14/cause-risk-effect.html}{0rsk.com: Cause + Risk + Effect}\par}
+\end{multicols}
+\plush{}
+
+\plush{\pptThought{2) Then, we detect \emph{anomalies} using time series on metrics}}
+
+\plush{\pptPic{.75}{anomaly.png}\par{\scriptsize \textit{Are you an Anomaly? I am and Here’s Why.} by Claude Jones, 2018, \href{https://medium.com/walmartglobaltech/are-you-an-anomaly-i-am-and-heres-why-541a77297fce}{here}\par}}
+
+\plush{\pptThought{3) Then, we explain the anomaly in English, making a \emph{chain} of \emph{prompts}}}
+
+\begin{multicols}{2}
+Prompt \#1:\par
+{\scriptsize There are ten programmers in our team, all of them write in Java, the size of the code base is average (53 KLoC), we use GitFlow with a "master" branch and feature branches, most programmers make 5-10 commits per day, most of them create three pull requests per week. In the last three weeks we've observed an anomaly in the number of lines being changed by two programmers per day: it was increased three times. At the same time, the stability of CI pipeline was decreased: we got three times more failed builds than usual. We think that we should update the probability of some risks in our risk list. What "\emph{cause}" of the risk you would suggest to choose for further risk qualification: AWS servers, development team, customer, product users?\par}
+\par\columnbreak\par
+Answer \#1 (ChatGPT 4.0):\par
+{\scriptsize Given the details you provided, the most likely "cause" of the risk for further risk qualification in your scenario is the \emph{development team}. This focus is due to the direct correlation between the team's coding activities, the significant increase in lines of code changes by specific members, and the resultant decrease in CI pipeline stability. Addressing issues within the team dynamics, coding practices, and review processes should be a priority for mitigating the risk.\par}
+\end{multicols}
+\plush{}
+
+\begin{multicols}{2}
+Prompt \#2:\par
+{\scriptsize What is the possible "risk", pick one: 1) some developers may quit the project, 2) some developers may lose motivation to work in the project, 3) some developers may introduce too many mistakes into the code base due to flaws in automated testing, 4) some developers may spend too much time understanding highly complex code.\par}
+\par\columnbreak\par
+Answer \#2 (ChatGPT 4.0):\par
+{\scriptsize Among the options provided, the most probable "risk" in your scenario is: \emph{Some developers may introduce too many mistakes into the code base due to flaws in automated testing}. This risk is directly related to the observed increase in code changes and the decrease in CI pipeline stability. If automated testing is not adequately catching errors or is flawed, this could lead to an increase in mistakes in the code base, which aligns with the symptoms you've described in your team's recent experience. Addressing this risk would involve reviewing and possibly enhancing your automated testing processes and practices.\par}
+\end{multicols}
+\plush{}
+
+\begin{multicols}{2}
+Prompt \#3:\par
+{\scriptsize What is the effect of this risk in this particular case, pick one: 1) the time spent on manual regression testing will increase, 2) the team will loose motivation because of the growing technical debt, 3) the amount of bugs reported by the user will increase, 4) the delivery time will increase due to broken CI/CD pipeline, 5) the quality of code will decrease.\par}
+\par\columnbreak\par
+Answer \#3 (ChatGPT 4.0):\par
+{\scriptsize In your specific case, the effect of the risk "Some developers may introduce too many mistakes into the code base due to flaws in automated testing" is most likely: \emph{The amount of bugs reported by the user will increase}. This outcome is a direct consequence of more mistakes being introduced into the code base. If automated testing fails to catch these errors, they are more likely to make it into production, where users will encounter and report them. This increase in reported bugs reflects a decline in the overall quality and reliability of the software from the user's perspective.\par}
+\end{multicols}
+\plush{}
+
+\plush{\pptThought{4) Finally, we update the \emph{probability} of the qualified risk in the risk list, increasing it by +1}}
+
+\plush{\pptThought{Preliminary experiments give us confidence that LLM's contribution to risk qualification may help managers increase \emph{predictability} of their projects}}
+
+\plush{\pptBanner{My Telegram Channel:}\qrcode[height=3in]{https://t.me/yegor256news}\par\texttt{@yegor256news}}
+
+\end{document}
