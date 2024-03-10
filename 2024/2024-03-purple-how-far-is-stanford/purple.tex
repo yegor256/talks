@@ -28,7 +28,7 @@
 \usepackage{tikzsymbols}
 \usetikzlibrary{positioning}
 \usepackage[dry,increment]{crumbs}
-\usepackage[template,scheme=dark,nominutes]{ppt-slides}
+\usepackage[template,scheme=light,nominutes]{ppt-slides}
 \usepackage{href-ul}
 \usepackage{booktabs}
 \usepackage{svg}
@@ -50,14 +50,16 @@
 
 \begin{document}
 
-\plush{
-  \begin{pptMiddle}
-    \textbf{\scshape IT Purple Conf}\par
-    \pptTitle{\thetitle}{}\par
-    {\scshape \theauthor}
-    \newline
-    {\small Huawei Technologies Co., Ltd.\par}
-  \end{pptMiddle}
+\definecolor{purpleconf}{HTML}{8f00ff}
+\definecolor{green}{HTML}{8f00ff}
+
+\newcommand\pitch[1]{\plush{\begin{pptMiddle} #1 \end{pptMiddle}}}
+\pitch{
+  \includegraphics[height=.4in]{logo.png}\par
+  \textbf{\Huge\scshape\color{purpleconf} IT Purple Conf}\\[1in]
+  \pptTitle{\thetitle}{}\par
+  {\scshape \theauthor}\newline
+  {\small Huawei Technologies Co., Ltd.\par}
 }
 
 \plick{\pptBanner{Who Am I?}}

@@ -8,3 +8,5 @@
 --ignore=pptSnippet:p
 --ignore=pptPic:p
 --ignore=bibliographystyle
+--ignore=definecolor:ppp
+--ignore=color
