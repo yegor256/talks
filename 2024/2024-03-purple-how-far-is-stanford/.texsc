@@ -1,0 +1,10 @@
+--pws=aspell.en.pws
+--ignore=href,ffcode,ffcode*
+--ignore=ff,nospell,citet,citep
+--ignore=source
+--ignore=tabular:p
+--ignore=pptPic:pp
+--ignore=pptQuote:p
+--ignore=pptSnippet:p
+--ignore=pptPic:p
+--ignore=bibliographystyle

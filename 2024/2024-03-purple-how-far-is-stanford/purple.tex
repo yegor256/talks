@@ -1,0 +1,159 @@
+% (The MIT License)
+%
+% Copyright (c) 2024 Yegor Bugayenko
+%
+% Permission is hereby granted, free of charge, to any person obtaining a copy
+% of this software and associated documentation files (the 'Software'), to deal
+% in the Software without restriction, including without limitation the rights
+% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+% copies of the Software, and to permit persons to whom the Software is
+% furnished to do so, subject to the following conditions:
+%
+% The above copyright notice and this permission notice shall be included in all
+% copies or substantial portions of the Software.
+%
+% THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+% SOFTWARE.
+
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[nocn,nonumbers,noframes,sf,bold]{ffcode}
+\usepackage[static]{clicks}
+\usepackage{tikzsymbols}
+\usetikzlibrary{positioning}
+\usepackage[dry,increment]{crumbs}
+\usepackage[template,scheme=dark,nominutes]{ppt-slides}
+\usepackage{href-ul}
+\usepackage{booktabs}
+\usepackage{svg}
+\usepackage{natbib}
+\usepackage{soul}
+\usepackage{bibentry}
+\usepackage{qrcode}
+\renewcommand{\ttdefault}{cmtt}
+\newcommand\nospell[1]{#1}
+\newcommand*{\thetitle}{Stanford: How Far Is It?}
+\newcommand*{\theauthor}{Yegor Bugayenko}
+\pptLeft{@yegor256}
+\pptRight{\includegraphics[height=0.2in]{logo.png}}
+
+\newcommand\source[1]{\par{\scriptsize Source: \bibentry{#1}\par}}
+
+\nobibliography*
+\bibliographystyle{plainnat}
+
+\begin{document}
+
+\plush{
+  \begin{pptMiddle}
+    \textbf{\scshape IT Purple Conf}\par
+    \pptTitle{\thetitle}{}\par
+    {\scshape \theauthor}
+    \newline
+    {\small Huawei Technologies Co., Ltd.\par}
+  \end{pptMiddle}
+}
+
+\plick{\pptBanner{Who Am I?}}
+\plick{Programmer: 30+ years}
+\plick{Open sourcer: 12+ years}
+\plick{Book writer: 8+ years}
+\plick{Lab Director in Huawei: 4+ years}
+\plush{Lecturer in HSE \& Innopolis: 2+ years}
+
+\plush{\pptBanner{Computer Science Publications by Countries}
+  \begin{multicols}{2}
+  \includegraphics[width=.85\linewidth]{by-countries.png}
+  \par\columnbreak\par
+  ``The country of origin of computer science, the USA, is by far the \ul{primary source} of computing publications with 24.8\% of all papers. However, the impact of U.S. computer science research is even more outstanding with 46\% of all citations referencing papers from that country.''
+  \source{fiala2017computer}
+  \end{multicols}}
+
+\plush{\pptBanner{CS Publications by Universities}
+  \begin{multicols}{2}
+  \includegraphics[width=.95\linewidth]{universities.png}
+  \par\columnbreak\par
+  ``Position in the ranking is based on a sum of D-indexes (Discipline H-index).
+  We list only scientists having D-Index \(\geq\) 30 within the area of Computer Science.''
+  \source{research2023}
+  \end{multicols}}
+
+\plush{\pptBanner{Some Statistics}
+  \renewcommand{\arraystretch}{1.5}
+  \begin{tabular}{lrrr}
+  \toprule
+  & Stanford & HSE & \\
+  \midrule
+  Age, years
+    & 138
+    & 31
+    & \\
+  Publications
+    & 22,707
+    & 177
+    & 128x \\
+  Annual budget
+    & \href{https://stanforddaily.com/2023/05/15/provost-announces-annual-budget/}{\$8,900M}
+    & \href{https://www.hse.ru/sveden/budget}{\$330M}
+    & 27x \\
+  Students
+    & \href{https://facts.stanford.edu/}{17K}
+    & \href{https://www.topuniversities.com/universities/hse-university}{47K}
+    & \\
+  Teachers
+    & \href{https://facts.stanford.edu/academics/faculty/}{2,323}
+    & \href{https://www.hse.ru/en/info/}{5,000}
+    & \\
+  Dollars per teacher
+    & \$3,800K
+    & \$66K
+    & 58x \\
+  Dollars per student
+    & \$523K
+    & \$7K
+    & 75x \\
+  \bottomrule
+  \end{tabular}}
+
+\plick{\includegraphics[height=2in]{acm-logo.png}\par\pptBanner{How Many ACM Award Winners from Russia?}}
+\plick{\href{https://www.sigplan.org/Awards/}{ACM SIGPLAN Awards}: 0/103}
+\plick{\href{https://www.sigplan.org/Awards/}{POPL, PLDI, ICFP, OOPSLA Most Influential Papers}: 1/291}
+\plick{\href{https://amturing.acm.org/byyear.cfm}{ACM Turing Awards}: 0/52}
+\plush{\href{https://icpc.global/community/world-finals-champions}{ICPC World Champions}: 15/29}
+
+\plick{\pptBanner{Why?}}
+\plick{Why? Because students \ul{don't want} to become scientists.}
+\plick{Why? Because it's not \ul{prestige} and not \ul{well-paid}.}
+\plick{Why? Because companies don't need \ul{scientists}, they need \ul{programmers}.}
+\plick{Why? Because there are almost no \ul{global} market makers here.}
+\plush{Why? Because there are no scientists.}
+
+\plick{\pptBanner{What we (universities) can do to help?}}
+\plick{\ul{Published} papers instead of exams and course/diploma works}
+\plick{Help students \ul{find} conferences where to publish}
+\plick{Paper \ul{readings} as a form of laboratory classes}
+\plick{Student research \ul{competitions} (SRC)}
+\plush{\ul{International} CS conferences and workshops}
+
+\plick{\begin{tabular}{l>{\raggedright}p{13em}}\raisebox{-.5\height}{\includegraphics[height=1.4in]{iccq-logo.png}} & \textbf{I}nternational \textbf{C}onference on \textbf{C}ode \textbf{Q}uality (ICCQ)\end{tabular}}
+\plick{In-cooperation with IEEE \st{and ACM SIGPLAN/SIGSOFT}}
+\plick{70+ PC members from Carnegie Mellon, MIT, Uni of Passau, ETH, Technion, Uni of Calif, Sorbonne, Purdue, Uni of British Columbia, Uni of Edinburgh, Seoul National Uni, Uni of Twente, 30+ more}
+\plick{Accepted papers from USA, Germany, Spain, Canada, China, Hungary, Russia, and Kyrgyzstan}
+\plick{Papers published by IEEE Xplore, indexed by Scopus}
+\plush{Accepted papers: 6/23 (2021), 4/11 (2022), 4/13 (2023), ?/23 (2024)}
+
+\plush{\pptBanner{Subscribe to my Telegram Channel:}\qrcode[height=3in]{https://t.me/yegor256news}\par\texttt{@yegor256news}}
+
+\begin{multicols}{2}
+\setlength{\bibsep}{.2em}
+\renewcommand{\bibfont}{\scriptsize}
+\bibliography{purple}
+\end{multicols}
+
+\end{document}
