@@ -1,0 +1,83 @@
+% (The MIT License)
+%
+% Copyright (c) 2024 Yegor Bugayenko
+%
+% Permission is hereby granted, free of charge, to any person obtaining a copy
+% of this software and associated documentation files (the 'Software'), to deal
+% in the Software without restriction, including without limitation the rights
+% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+% copies of the Software, and to permit persons to whom the Software is
+% furnished to do so, subject to the following conditions:
+%
+% The above copyright notice and this permission notice shall be included in all
+% copies or substantial portions of the Software.
+%
+% THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+% SOFTWARE.
+
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[nocn,nonumbers,noframes,sf,bold]{ffcode}
+\usepackage[static]{clicks}
+\usepackage{tikzsymbols}
+\usetikzlibrary{positioning}
+\usepackage[increment]{crumbs}
+\usepackage[template,scheme=light,nominutes]{ppt-slides}
+\usepackage{href-ul}
+\usepackage{svg}
+\usepackage{soul}
+\usepackage{qrcode}
+\renewcommand{\ttdefault}{cmtt}
+\newcommand\nospell[1]{#1}
+\newcommand*{\thetitle}{GitHub and StackOverflow}
+\newcommand*{\thesubtitle}{Can we offer a decent alternative?}
+\newcommand*{\theauthor}{Yegor Bugayenko}
+\pptLeft{}
+\pptRight{@yegor256}
+
+\renewcommand\emph[1]{\ul{#1}}
+
+\begin{document}
+
+\plush{
+  \begin{pptMiddle}
+    % \includegraphics[height=1.6in]{logo.png}
+    \pptTitle{\thetitle}{\thesubtitle}\par
+    {\scshape \theauthor}
+    \newline
+    {\small Huawei Technologies Co., Ltd.\par}
+  \end{pptMiddle}
+}
+
+\plush{\pptThought{GitHub and StackOverflow are two primary platforms that rule the world of software development. If we want to offer an alternative, what \ul{killer features} it must have?}}
+
+\plush{\pptThought{GitHub was founded in 2008. StackOverflow was founded in 2008.}}
+
+\plush{\pptThought{There are 26.9 million programmers in the world. 765 million in Russia.}}
+
+% https://techcrunch.com/2023/01/26/github-says-it-now-has-100m-active-users/
+\plush{\pptThought{GitHub has 100 million accounts.}}
+
+\plush{\pptThought{StackOverflow has 20 million accounts.}}
+
+\plush{\pptThought{Feature \#1: \ul{Decentralization} of the entire feature-set, not only Git hosting.}}
+
+\plush{\pptThought{Feature \#2: API access to their \ul{big data}.}}
+
+\plush{\pptThought{Feature \#3: Monetization of contribution, by \ul{rewarding} questions, answers, pull requests, and issues.}}
+
+\plush{\pptThought{Feature \#4: Richer quality and quantity \ul{metrics} to help employers.}}
+
+
+\plush{
+  \pptBanner{My Telegram Channel:}\par
+  \qrcode[height=3in]{https://t.me/yegor256news}\par\texttt{@yegor256news}\par
+  6,500+ subscribers and counting}
+
+\end{document}
