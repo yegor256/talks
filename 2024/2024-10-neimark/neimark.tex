@@ -1,0 +1,162 @@
+% (The MIT License)
+%
+% Copyright (c) 2023 Yegor Bugayenko
+%
+% Permission is hereby granted, free of charge, to any person obtaining a copy
+% of this software and associated documentation files (the 'Software'), to deal
+% in the Software without restriction, including without limitation the rights
+% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+% copies of the Software, and to permit persons to whom the Software is
+% furnished to do so, subject to the following conditions:
+%
+% The above copyright notice and this permission notice shall be included in all
+% copies or substantial portions of the Software.
+%
+% THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+% SOFTWARE.
+
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[nocn,nonumbers,noframes,sf,bold]{ffcode}
+\usepackage[static]{clicks}
+\usepackage{tikzsymbols}
+\usetikzlibrary{positioning}
+\usepackage[increment]{crumbs}
+\usepackage[template,scheme=light,nominutes]{ppt-slides}
+\usepackage{href-ul}
+\usepackage{svg}
+\usepackage{soul}
+\usepackage{doi}
+\usepackage{qrcode}
+\renewcommand{\ttdefault}{cmtt}
+\newcommand\nospell[1]{#1}
+\newcommand*{\thetitle}{Open Source Kung-Fu}
+\newcommand*{\thesubtitle}{Nine Levels of It}
+\newcommand*{\theauthor}{Yegor Bugayenko}
+\pptLeft{\includegraphics[height=1.4em]{neimark-logo.png}\\[.6em] October 18th, 2024}
+\pptRight{@yegor256}
+
+\newcounter{level}
+\newcommand\level[1]{\stepcounter{level}\plush{\pptThought{{\scshape\sffamily Level \thelevel}: #1.}}}
+
+\newcommand\pitch[1]{\plush{\begin{pptMiddle} #1 \end{pptMiddle}}}
+\newcommand\qte[4][]{
+  \pitch{
+    \pptQuote
+      [\scriptsize\scshape\color{gray}{#1}]
+      {#2.jpg}
+      {#3}
+      {\color{gray}\rmfamily\scriptsize\bibentry{#4}}
+  }
+}
+\newcommand\source[1]{\par{\scriptsize\color{gray} Source: \bibentry{#1}\par}}
+
+\AtBeginDocument{%
+  \pptLeft{\thetitle{}}%
+  \pptRight{@yegor256}%
+  \nobibliography*
+  \bibliographystyle{plainnat}
+}
+
+\RequirePackage{bibentry}
+\RequirePackage{natbib}
+\AtEndDocument{%
+  \begin{multicols}{2}
+  \setlength{\bibsep}{.2em}
+  \renewcommand{\bibfont}{\scriptsize}
+  \bibliography{main}
+  \end{multicols}
+}
+
+\begin{document}
+
+\plush{
+  \begin{pptMiddle}
+    % \includegraphics[height=2.6em]{neimark-logo.png}
+    \pptTitle{\thetitle}{\thesubtitle}\par
+    {\scshape \theauthor}
+    \newline
+    {\small Zerocracy\par}
+  \end{pptMiddle}
+}
+
+\level{You've got your own GitHub account}
+
+\level{Your pull request has been merged}
+
+\qte
+  [\nospell{\nospell{Bram Adams}}]
+  {bram-adams}
+  {We found that \ul{33\%} of the patches makes it into a Linux release, and that most of them need \ul{3 to 6 months} for this.}
+  {jiang2013will}
+
+\qte
+  [\nospell{Caitlin Sadowski}]
+  {caitlin-sadowski}
+  {A correlation between \ul{change size} and \ul{review quality} is acknowledged by Google and developers are strongly encouraged to make small, incremental changes (with the exception of large deletions and automated refactoring).}
+  {sadowski2018modern}
+
+\qte
+  [\nospell{Carolyn D. Egelman}]
+  {carolyn-egelman}
+  {Google categorizes CRs into specific sizes, these sizes are indicated as part of the code review tool and in the notification to the reviewer of the code change... The general advice is to \ul{split} change requests for \ul{easier} and \ul{quicker} reviews when possible.}
+  {egelman2020predicting}
+
+\level{You've published a package}
+
+\level{You've received a pull request}
+
+\level{Your repository's been taken over}
+
+\plush{
+  \begin{multicols}{2}
+  \pptPic{.9}{micromap.png}
+  \par\columnbreak\par
+  \pptPic{.9}{benchmark.png}
+  \end{multicols}
+  Thanks to \href{https://github.com/zefick}{@Zefick}!}
+
+\level{Your repository's got 100 bugs}
+
+\level{??}
+
+\level{Google's offered to put you on a retainer}
+
+\plush{\pptPic{.9}{github-email.png}}
+
+\level{GitHub's offered you large runners, for free}
+
+\plush{
+  \begin{multicols}{2}
+  \pptPic{.9}{alexander.png}\par
+  Watch the interview \href{https://www.youtube.com/watch?v=xMGNlUZQ-6w}{on YouTube}.\par
+  \qrcode[height=4em]{https://www.youtube.com/watch?v=xMGNlUZQ-6w}
+  \par\columnbreak\par
+  Alexander Medvednikov, the creator of the \href{https://vlang.io/}{V programming language},
+  in the interview mentioned that GitHub offers his project free access
+  to larger CI/CD resources (aka ``\textcolor{orange}{large runners}'').\par
+  \includegraphics[width=3em]{v-logo.png}\par
+  \href{https://vlang.io/}{www.vlang.io}
+  \end{multicols}}
+
+\plush{
+  \begin{multicols}{2}
+  \pptBanner{My Telegram Channel:}\par
+  \qrcode[height=7em]{https://t.me/yegor256news}\par
+  \href{https://t.me/yegor256news}{\texttt{@yegor256news}}
+  \par\columnbreak\par
+  \pptBanner{``Open Source Best Practices''}\par
+  Eight Lectures for Innopolis University:\par
+  \qrcode[height=7em]{https://www.youtube.com/playlist?list=PLaIsQH4uc08zjutyoBOtoa6fnxzrCQK2Q}\par
+  \href{https://www.youtube.com/playlist?list=PLaIsQH4uc08zjutyoBOtoa6fnxzrCQK2Q}{\texttt{PlayList}}
+  \end{multicols}}
+
+\plush{}
+
+\end{document}
