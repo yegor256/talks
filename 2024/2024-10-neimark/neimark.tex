@@ -26,6 +26,7 @@
 \usepackage[nocn,nonumbers,noframes,sf,bold]{ffcode}
 \usepackage[static]{clicks}
 \usepackage{tikzsymbols}
+\usepackage{booktabs}
 \usetikzlibrary{positioning}
 \usepackage[increment]{crumbs}
 \usepackage[template,scheme=light,nominutes]{ppt-slides}
@@ -141,6 +142,33 @@
   Thanks to \href{https://github.com/zefick}{@Zefick}!}
 
 \level{Your repository's got 100 bugs}
+
+\qte
+  [\nospell{Myers, Glenford J.}]
+  {glenford-myers}
+  {You cannot test a program to guarantee that it is error free... It is impractical, often impossible, to find \ul{all} the errors in a program.}
+  {myers2012art}
+
+\qte
+  [\nospell{Reis Christian}]
+  {reis-christian}
+  {Though it commonly has a prejorative connotation, in the Mozilla Project the term \textbf{bug} is used to refer to any field request for modification in the software, be it an \ul{actual} defect, an enhancement, or a change in functionality. (``bug-driven development'')}
+  {reis2002overview}
+
+\pitch{\pptBanner{Repositories With a Lot of Bugs (9 Feb 2024)}
+{\ttfamily\small\begin{tabular}{lr}
+\toprule
+Github Repository & Issues \\
+\midrule
+\href{https://bugzilla.mozilla.org/}{mozilla bugzilla} & 1,8M+ \\
+\href{https://gitlab.com/gitlab-org/gitlab/-/issues}{gitlab-org/gitlab} & 172,462 \\
+\href{https://github.com/flutter/flutter}{flutter/flutter} & 79,386 \\
+\href{https://github.com/kubernetes/kubernetes}{kubernetes/kubernetes} & 42,627 \\
+\href{https://github.com/tensorflow/tensorflow}{tensorflow/tensorflow} & 36,776 \\
+\href{https://github.com/moby/moby}{moby/moby} & 19,367 \\
+\bottomrule
+\end{tabular}}\par
+All repositories are open source.}
 
 \level{Google's offered to put you on a retainer}
 
