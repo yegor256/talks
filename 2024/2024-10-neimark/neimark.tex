@@ -40,11 +40,15 @@
 \newcommand*{\thetitle}{Open Source Kung-Fu}
 \newcommand*{\thesubtitle}{Nine Levels of It}
 \newcommand*{\theauthor}{Yegor Bugayenko}
-\pptLeft{\includegraphics[height=1.4em]{neimark-logo.png}\\[.6em] October 18th, 2024}
+\pptLeft{%
+  \includegraphics[height=3em]{kungfu.pdf}\\
+  \includegraphics[height=1.4em]{neimark-logo.png}\\[.6em]
+  October 18th, 2024}
 \pptRight{@yegor256}
 
 \newcounter{level}
-\newcommand\level[1]{\stepcounter{level}\plush{\pptThought{{\scshape\sffamily \textcolor{orange}{Level \thelevel}:} #1.}}}
+\newcommand\level[1]{\stepcounter{level}\plush{\pptChapter[L\thelevel]{#1}}}
+% \newcommand\level[1]{\stepcounter{level}\plush{\pptThought{{\scshape\sffamily \textcolor{orange}{Level \thelevel}:} #1.}}}
 
 \newcommand\pitch[1]{\plush{\begin{pptMiddle} #1 \end{pptMiddle}}}
 \newcommand\qte[4][]{
@@ -58,28 +62,16 @@
 }
 \newcommand\source[1]{\par{\scriptsize\color{gray} Source: \bibentry{#1}\par}}
 
-\AtBeginDocument{%
-  \pptLeft{\thetitle{}}%
-  \pptRight{@yegor256}%
-  \nobibliography*
-  \bibliographystyle{plainnat}
-}
-
-\RequirePackage{bibentry}
-\RequirePackage{natbib}
-\AtEndDocument{%
-  \begin{multicols}{2}
-  \setlength{\bibsep}{.2em}
-  \renewcommand{\bibfont}{\scriptsize}
-  \bibliography{main}
-  \end{multicols}
-}
+\usepackage{bibentry}
+\usepackage{natbib}
 
 \begin{document}
+\nobibliography*
+\bibliographystyle{plainnat}
 
 \plush{
   \begin{pptMiddle}
-    % \includegraphics[height=2.6em]{neimark-logo.png}
+    \includegraphics[height=5em]{kungfu.pdf}
     \pptTitle{\thetitle}{\thesubtitle}\par
     {\scshape \theauthor}
     \newline
@@ -87,12 +79,18 @@
   \end{pptMiddle}
 }
 
-\pitch{\includegraphics[width=.95\linewidth]{linus-email.png}}
+\pitch{
+  \begin{tabular}{lr}
+    \includegraphics[height=6em]{linus-torvalds.jpg}
+    &
+    \includegraphics[height=6em]{mauro-carvalho-chehab.jpg} \\
+    \multicolumn{2}{l}{\includegraphics[width=.7\linewidth]{linus-email.png}}
+  \end{tabular}}
 
 \qte
   [\nospell{Isabella Ferreira}]
   {isabella-ferreira}
-  {We conducted a qualitative analysis on 1,545 emails from the Linux Kernel Mailing List that were associated with rejected changes. We found that \ul{more than half} (67\%) of the non-technical emails included uncivil features. Particularly, frustration, name calling, and impatience are the most frequent features in uncivil emails. }
+  {We conducted a qualitative analysis on 1,545 emails from the Linux Kernel Mailing List that were associated with rejected changes. We found that \ul{more than half} (67\%) of the non-technical emails included uncivil features. Particularly, \textcolor{orange}{frustration}, \textcolor{orange}{name calling}, and \textcolor{orange}{impatience} are the most frequent features in uncivil emails. }
   {ferreira2021shut}
 
 \level{You've got your own GitHub account}
@@ -216,11 +214,11 @@ Github Repository & Bugs \\
 \end{tabular}}\par
 All repositories are open source.}
 
-\level{Google's offered to put you on a retainer}
+\level{Google's offered you a retainer}
 
 \plush{\pptPic{.9}{github-email.png}}
 
-\level{GitHub's offered you large runners, for free}
+\level{GitHub's offered you large runners}
 
 \plush{
   \begin{multicols}{2}
@@ -235,7 +233,7 @@ All repositories are open source.}
   \href{https://vlang.io/}{www.vlang.io}
   \end{multicols}}
 
-\level{You've got \$100K/year from GitHub sponsors}
+\level{Sponsors've given you \$100K/year}
 
 \plush{
   \begin{multicols}{2}
@@ -249,18 +247,25 @@ All repositories are open source.}
   \pptPic{.9}{sponsors-2.png}
   \end{multicols}}
 
+\plush{\pptChapter[Next]{What's next?}}
+
 \plush{
   \begin{multicols}{2}
-  \pptBanner{My Telegram Channel:}\par
-  \qrcode[height=7em]{https://t.me/yegor256news}\par
-  \href{https://t.me/yegor256news}{\texttt{@yegor256news}}
+  \pptBanner{1)~Subscribe:}\par
+  \qrcode[height=6em]{https://t.me/yegor256news}\par
+  \href{https://t.me/yegor256news}{\texttt{@yegor256news}}\par
+  \pptBanner{3)~Join:}\par
+  Text me if you need a topic for your open source project or ready to join one of ours.
   \par\columnbreak\par
-  \pptBanner{``Open Source Best Practices''}\par
-  Eight Lectures for Innopolis University:\par
-  \qrcode[height=7em]{https://www.youtube.com/playlist?list=PLaIsQH4uc08zjutyoBOtoa6fnxzrCQK2Q}\par
+  \pptBanner{2)~Watch:}\par
+  \qrcode[height=6em]{https://www.youtube.com/playlist?list=PLaIsQH4uc08zjutyoBOtoa6fnxzrCQK2Q}\par
+  ``Open Source Best Practices'' Course of Eight Lectures for Innopolis University:
   \href{https://www.youtube.com/playlist?list=PLaIsQH4uc08zjutyoBOtoa6fnxzrCQK2Q}{\texttt{PlayList}}
   \end{multicols}}
 
-\plush{}
-
+\begin{multicols}{2}
+\setlength{\bibsep}{.2em}
+\renewcommand{\bibfont}{\scriptsize}
+\bibliography{main}
+\end{multicols}
 \end{document}
