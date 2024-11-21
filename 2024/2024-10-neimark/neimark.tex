@@ -29,16 +29,16 @@
 \newcommand*{\thesubtitle}{Nine Levels of It}
 \newcommand*{\theauthor}{Yegor Bugayenko}
 
+\newcounter{level}
+\newcommand\level[1]{\stepcounter{level}\plush{\pptChapter[L\thelevel]{#1}}}
+
+\begin{document}
+
 \pptLeft{%
   \includegraphics[height=3em]{kungfu.pdf}\\
   \includegraphics[height=1.4em]{neimark-logo.png}\\[.6em]
   October 18th, 2024}
 \pptRight{@yegor256}
-
-\newcounter{level}
-\newcommand\level[1]{\stepcounter{level}\plush{\pptChapter[L\thelevel]{#1}}}
-
-\begin{document}
 
 \plush{
   \begin{pptMiddle}
