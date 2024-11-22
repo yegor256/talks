@@ -24,6 +24,8 @@
 \usepackage{clicks}
 \usepackage{../../lecture-notes/notes}
 \usepackage{svg}
+\usepackage{tikz}
+  \usetikzlibrary{shadows}
 
 \graphicspath{{../../faces/}}
 
@@ -65,7 +67,7 @@
 
 \plick{
   \begin{textblock}{4}(1,3)%
-    Task: ``Implement a lookup function, capable of finding user IDs by their names.''\par
+    Imagine a task for Rust \textcolor{orange}{developer}: ``Implement a lookup function, capable of finding user IDs by their names.''\par
     {\ttfamily\scriptsize
     use std::collections::HashMap;\\
     ~\\
@@ -84,7 +86,16 @@
   \begin{textblock}{4}(6,3)%
     \textcolor{orange}{RQ}: ``Whether HashMap is the best possible map implementation for \(N < 20\)?''\par
     Answer:\par
-
+    \raisebox{-9em}{\begin{tikzpicture}
+    \scope[transform canvas={rotate=-3}]
+    \node[draw=gray,drop shadow,fill=white,anchor=south west] {
+      \parbox{.8\linewidth}{
+        \includegraphics[width=\linewidth]{../2024-10-neimark/benchmark.png}\\
+        {\tiny\url{https://github.com/yegor256/micromap}\par}
+      }
+    };
+    \endscope
+    \end{tikzpicture}}
   \end{textblock}%
 }
 \plush{
@@ -92,13 +103,12 @@
     New \textcolor{orange}{implementation}, based on the \textcolor{orange}{law of nature} just discovered:\par
     {\ttfamily\scriptsize
     use std::collections::HashMap;\\
-    use micromap::Map;\\
     ~\\
     let mut map: Map<String, i16>;\\
-    if (N > 20) \{ \\
+    \textcolor{orange}{if (N > 20)} \{ \\
     ~~map = HashMap::new();\\
     \} else \{\\
-    ~~map = Map::new();\\
+    ~~map = \textcolor{orange}{micromap::Map::new()};\\
     \}\\
     ~\\
     map.insert("Jeff".to_string(), 42);\\
@@ -111,7 +121,18 @@
 }
 \flush{}
 
-\lnThought*{What's in it for you?}
+\lnThought*{How much \ul{criteria of success} is different for researchers and developers?}
+
+\plush{
+  \begin{multicols}{2}
+  \pptBanner{Happy users:}\par
+  \pptPic{.7}{customers.jpg}
+  \par\columnbreak\par
+  \pptBanner{Impressed reviewers:}\par
+  \pptPic{.7}{reviewers.jpg}
+  \end{multicols}}
+
+\lnThought*{What's in it for me?}
 
 \lnQuote
   [Aristotle]
@@ -119,31 +140,55 @@
   {Since happiness is a \ul{working} in the way of excellence, the man of science will be most happy.}
   {aristotle1897nicomachean}
 
-% list of results to be achieved, ending with Hirsh index
-
 \plush{
-  \includegraphics[width=.9\linewidth]{openai.jpg}\par
+  \pptBanner{ChatGPT o1 Team:}
+  \includegraphics[width=.8\linewidth]{openai-before.jpg}\par
   {\small20-Sep-24: \url{https://www.youtube.com/watch?v=tEzs3VHyBDM}\par}}
 
-\lnThought*{Who judges the work of developers and researchers?}
+\plush{
+  \pptBanner{ChatGPT o1 Team:}
+  \includegraphics[width=.8\linewidth]{openai-after.jpg}\par
+  {\small20-Sep-24: \url{https://www.youtube.com/watch?v=tEzs3VHyBDM}\par}}
+
+\lnThought*{How about a few more examples of RQs?}
+
+\lnPitch{
+  \pptBanner[orange]{RQ1: How long Java objects live after instantiation?}
+  \includegraphics[width=.6\linewidth]{spec.png}
+  \par
+  ``We observe that Java programs generate a substantial amount of \ul{short-lived objects} (up to 99\%).''
+  \lnSource{kim2000memory}}
+
+\print{\pptBanner[orange]{RQ2: Larger pull requests mean lower quality?}}
+\lnQuote
+  [\nospell{Caitlin Sadowski}]
+  {caitlin-sadowski}
+  {A correlation between \ul{change size} and \ul{review quality} is acknowledged by Google and developers are strongly encouraged to make small, incremental changes (with the exception of large deletions and automated refactoring).}
+  {sadowski2018modern}
 
 \plush{
+  \pptBanner[orange]{RQ3: Blank lines inside Java methods are code smell?}
   \begin{multicols}{2}
-  \pptBanner{Users:}\par
-  \pptPic{.7}{customers.jpg}
+  \includegraphics[width=.9\linewidth]{blank-lines.png}
   \par\columnbreak\par
-  \pptBanner{Reviewers:}\par
-  \pptPic{.7}{reviewers.jpg}
+  ``We analyzed 605,966 Java methods from 109 public repositories and
+  found a moderate correlation between NoBL
+  and complexity metrics such as LoC, HSV, HSE, and NCL,
+  along with a positive non-linear relationship with MIDX.''
+  \lnSource{galiullin2024}
   \end{multicols}}
 
-\lnThought*{``OK, I'm a programmer, what could be the possible \ul{Research Questions} for me?''}
+\lnThought*{How to write and publish the first paper?}
 
-% how much slower is Xembly
-% which JVM is faster?
-% how the usage of anti-patterns correlate with bugs/LoC?
-%
+\plick{Read the book \textit{Write for Computer Science} by \citet{zobel2004writing}.}
+\plick{Read the book about \LaTeX{} by \citet{lamport1994latex}.}
+\plick{Subscribe, for example, to the \textbf{SEWorld} mailing list.}
+\plick{Find a venue at \href{https://github.com/yegor256/awesome-cfp}{yegor256/awesome-cfp}.}
+\plick{Find a professor to supervise your writing.}
+\plick{Write it up, using the \href{https://www.yegor256.com/2024/02/06/research-flow.html}{Research Flow} process.}
+\plush{Submit and wait for 2--3 months.}
 
-\lnThought*{How do you convince your company to invest into a research project?}
+\lnThought*{How to convince employer that research matters?}
 
 \lnQuote
   [Kenneth Joseph Arrow]
@@ -157,6 +202,10 @@
   {First and most importantly, in practice \textcolor{orange}{50\% or more} of R\&D spending is the \ul{wages and salaries} of highly educated \ul{scientists and engineers}. Their efforts create an intangible asset, the firm’s knowledge base, from which profits in future years will be generated. To the extent that this knowledge is `tacit' rather than codified, it is embedded in the human capital of the firm's employees, and is therefore lost if they \ul{leave} or are \ul{fired}.}
   {hall2002financing}
 
+\plick{\pptBanner{What can we do?}}
+  \plick{Option 1: Change the employer}
+  \plush{Option 2: Don't tell them}
+
 \lnThought*{What's next?}
 
 \plush{
@@ -166,7 +215,7 @@
   \href{https://t.me/yegor256news}{\texttt{@yegor256news}}
   \par\columnbreak\par
   \pptBanner{2)~Join:}\par
-  Text me in Telegram, if you're ready to join one of our research projects:\par
+  Text me in Telegram, to join one of our research projects (instead of inventing your own):\par
   {\Huge\texttt{@yegor256}}
   \end{multicols}}
 
