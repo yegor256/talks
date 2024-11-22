@@ -21,12 +21,13 @@
 % SOFTWARE.
 
 \documentclass{article}
+\usepackage{clicks}
 \usepackage{../../lecture-notes/notes}
 \usepackage{svg}
 
 \graphicspath{{../../faces/}}
 
-\newcommand*{\thetitle}{Coders or Researchers}
+\newcommand*{\thetitle}{Coders vs. Researchers}
 \newcommand*{\thesubtitle}{How to be both?}
 \newcommand*{\theauthor}{Yegor Bugayenko}
 
@@ -51,11 +52,7 @@
 \newpage
 \pagecolor{white}
 
-% - what is R, what is D?
-% - who does R in Russia? AIRI? Sber AI?
-% - types of R: empirical
-% topics:
-% -
+\lnThought*{What exactly is R\&D?}
 
 \lnQuote
   [Richard Nelson]
@@ -66,14 +63,103 @@
 
 \lnThought*{While research discovers laws of nature, development exploits them.}
 
+\plick{
+  \begin{textblock}{4}(1,3)%
+    Task: ``Implement a lookup function, capable of finding user IDs by their names.''\par
+    {\ttfamily\scriptsize
+    use std::collections::HashMap;\\
+    ~\\
+    let mut map: Map<String, i16> = \\
+    ~~HashMap::new();\\
+    ~\\
+    map.insert("Jeff".to_string(), 42);\\
+    map.insert("Lucie".to_string(), 17);\\
+    // +N more items here\\
+    ~\\
+    let id = map.get("Jeff");
+    }
+  \end{textblock}%
+}
+\plick{
+  \begin{textblock}{4}(6,3)%
+    \textcolor{orange}{RQ}: ``Whether HashMap is the best possible map implementation for \(N < 20\)?''\par
+    Answer:\par
+
+  \end{textblock}%
+}
+\plush{
+  \begin{textblock}{4}(11,3)%
+    New \textcolor{orange}{implementation}, based on the \textcolor{orange}{law of nature} just discovered:\par
+    {\ttfamily\scriptsize
+    use std::collections::HashMap;\\
+    use micromap::Map;\\
+    ~\\
+    let mut map: Map<String, i16>;\\
+    if (N > 20) \{ \\
+    ~~map = HashMap::new();\\
+    \} else \{\\
+    ~~map = Map::new();\\
+    \}\\
+    ~\\
+    map.insert("Jeff".to_string(), 42);\\
+    map.insert("Lucie".to_string(), 17);\\
+    // +N more items here\\
+    ~\\
+    let id = m.get("Jeff");
+    }
+  \end{textblock}%
+}
+\flush{}
+
+\lnThought*{What's in it for you?}
+
+\lnQuote
+  [Aristotle]
+  {aristotle}
+  {Since happiness is a \ul{working} in the way of excellence, the man of science will be most happy.}
+  {aristotle1897nicomachean}
+
+% list of results to be achieved, ending with Hirsh index
+
+\plush{
+  \includegraphics[width=.9\linewidth]{openai.jpg}\par
+  {\small20-Sep-24: \url{https://www.youtube.com/watch?v=tEzs3VHyBDM}\par}}
+
+\lnThought*{Who judges the work of developers and researchers?}
+
+\plush{
+  \begin{multicols}{2}
+  \pptBanner{Users:}\par
+  \pptPic{.7}{customers.jpg}
+  \par\columnbreak\par
+  \pptBanner{Reviewers:}\par
+  \pptPic{.7}{reviewers.jpg}
+  \end{multicols}}
+
+\lnThought*{``OK, I'm a programmer, what could be the possible \ul{Research Questions} for me?''}
+
+% how much slower is Xembly
+% which JVM is faster?
+% how the usage of anti-patterns correlate with bugs/LoC?
+%
+
+\lnThought*{How do you convince your company to invest into a research project?}
+
 \lnQuote
   [Kenneth Joseph Arrow]
   {kenneth-joseph-arrow}
   {We expect a free enterprise economy to \textcolor{orange}{underinvest} in invention and research (as compared with an \ul{ideal}) because it is risky, because the product can be appropriated only to a limited extent, and because of increasing returns in use. This underinvestment will be greater for more \ul{basic} research.}
   {arrow1972economic}
 
+\lnQuote
+  [Bronwyn Hall]
+  {bronwyn-hall}
+  {First and most importantly, in practice \textcolor{orange}{50\% or more} of R\&D spending is the \ul{wages and salaries} of highly educated \ul{scientists and engineers}. Their efforts create an intangible asset, the firm’s knowledge base, from which profits in future years will be generated. To the extent that this knowledge is `tacit' rather than codified, it is embedded in the human capital of the firm's employees, and is therefore lost if they \ul{leave} or are \ul{fired}.}
+  {hall2002financing}
+
+\lnThought*{What's next?}
+
 \plush{
-  \pptBanner[orange]{What's Next?}
   \begin{multicols}{2}
   \pptBanner{1)~Subscribe:}\par
   \qrcode[height=8em]{https://t.me/yegor256news}\par
