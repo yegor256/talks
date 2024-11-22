@@ -104,18 +104,11 @@
     {\ttfamily\scriptsize
     use std::collections::HashMap;\\
     ~\\
-    let mut map: Map<String, i16>;\\
     \textcolor{orange}{if (N > 20)} \{ \\
     ~~map = HashMap::new();\\
     \} else \{\\
     ~~map = \textcolor{orange}{micromap::Map::new()};\\
     \}\\
-    ~\\
-    map.insert("Jeff".to_string(), 42);\\
-    map.insert("Lucie".to_string(), 17);\\
-    // +N more items here\\
-    ~\\
-    let id = m.get("Jeff");
     }
   \end{textblock}%
 }
