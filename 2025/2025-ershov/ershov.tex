@@ -1,0 +1,58 @@
+% SPDX-FileCopyrightText: Copyright (c) 2023 Yegor Bugayenko
+% SPDX-License-Identifier: MIT
+
+\documentclass{article}
+\usepackage[template,scheme=light,nominutes]{ppt-slides}
+\usepackage[static]{clicks}
+\usepackage{../../lecture-notes/notes}
+\usepackage[russian,english]{babel}
+\usepackage{svg}
+\usepackage{tikz}
+  \usetikzlibrary{shadows}
+
+\graphicspath{{../../faces/}}
+
+\newcommand*{\thetitle}{Rise and Fall of OOP}
+\newcommand*{\thesubtitle}{{\selectlanguage{russian}Каковы перспективы?}}
+\newcommand*{\theauthor}{Yegor Bugayenko}
+
+\begin{document}
+
+\pptLeft{%
+  \includesvg[height=2em]{../../lecture-notes/logos/ngu.svg}\\
+  April 11th, 2025}
+\pptRight{@yegor256}
+
+\plush{
+  \begin{pptMiddle}
+    \includesvg[height=4em]{../../lecture-notes/logos/ngu.svg}
+    \pptTitle{\thetitle}{\thesubtitle}\par
+    {\scshape \theauthor}
+    \newline
+    {\small Huawei\par}
+  \end{pptMiddle}
+}
+\newpage
+\pagecolor{white}
+
+\plush{
+  \pptSection[Objects]{Who invented Objects?}
+  \pptPic{0.6}{dahl-and-nygaard.jpg}\\
+  ``The SIMULA programming language was created in 1965 at the Norwegian Computing Center in Oslo by Ole-Johan Dahl and Kristen Nygaard. It was designed to model real-world systems through simulation---and in the process, it introduced the foundational concepts of object-oriented programming. SIMULA featured objects and later added classes, class inheritance, and virtual methods.'' -- ChatGPT}
+}
+
+
+\lnThought*{What's next?}
+
+\plush{
+  \begin{multicols}{2}
+  \pptBanner{1)~Subscribe:}\par
+  \qrcode[height=8em]{https://t.me/yegor256news}\par
+  \href{https://t.me/yegor256news}{\texttt{@yegor256news}}
+  \par\columnbreak\par
+  \pptBanner{2)~Join:}\par
+  Text me in Telegram, to join EOLANG research project:\par
+  {\Huge\texttt{@yegor256}}
+  \end{multicols}}
+
+\end{document}
