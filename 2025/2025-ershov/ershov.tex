@@ -2,11 +2,11 @@
 % SPDX-License-Identifier: MIT
 
 \documentclass{article}
-\usepackage[template,scheme=light,nominutes]{ppt-slides}
-\usepackage[static]{clicks}
+\usepackage[increment]{crumbs}
 \usepackage{../../lecture-notes/notes}
 \usepackage[russian,english]{babel}
 \usepackage{svg}
+\usepackage{bibentry}
 \usepackage{tikz}
   \usetikzlibrary{shadows}
 
@@ -15,6 +15,7 @@
 \newcommand*{\thetitle}{Rise and Fall of OOP}
 \newcommand*{\thesubtitle}{{\selectlanguage{russian}Каковы перспективы?}}
 \newcommand*{\theauthor}{Yegor Bugayenko}
+\newcommand\hlt[1]{\textcolor{orange}{#1}}
 
 \begin{document}
 
@@ -23,7 +24,7 @@
   April 11th, 2025}
 \pptRight{@yegor256}
 
-\plush{
+\lnPitch{
   \begin{pptMiddle}
     \includesvg[height=4em]{../../lecture-notes/logos/ngu.svg}
     \pptTitle{\thetitle}{\thesubtitle}\par
@@ -35,16 +36,311 @@
 \newpage
 \pagecolor{white}
 
-\plush{
-  \pptSection[Objects]{Who invented Objects?}
-  \pptPic{0.6}{dahl-and-nygaard.jpg}\\
-  ``The SIMULA programming language was created in 1965 at the Norwegian Computing Center in Oslo by Ole-Johan Dahl and Kristen Nygaard. It was designed to model real-world systems through simulation---and in the process, it introduced the foundational concepts of object-oriented programming. SIMULA featured objects and later added classes, class inheritance, and virtual methods.'' -- ChatGPT}
+\pptToc
+
+\lnPitch{\pptChapter[Intent]{What Is OOP?}}
+
+\lnPitch{
+  \pptSection[SIMULA]{Why Did They Invent OOP?}
+  \begin{multicols}{2}
+  \pptPic{.95}{../../painofoop/01-algorithms/dahl-and-nygaard.jpg}\\
+  \par\columnbreak\par
+  SIMULA was created in 1965 at the Norwegian Computing Center in Oslo by Ole-Johan Dahl and Kristen Nygaard \hlt{to simulate} real-world systems. In doing so, it introduced core concepts of object-oriented programming, including objects, classes, inheritance, and virtual methods.
+  \end{multicols}}
+
+\lnPitch{
+  \pptSection[Proxies]{Objects Are Proxies for Real Things}
+  \begin{multicols}{2}
+  \includegraphics[width=.95\linewidth]{../../painofoop/01-algorithms/abstraction.png}
+  \par\columnbreak\par
+  ``Object-oriented design is first concerned with \hlt{entities}---things. These things may be tangible objects such as traffic lights, chairs, or airplanes. From a design perspective, objects \hlt{model} the entities in the application domain.''
+  \lnSource{korson1990understanding}
+  \end{multicols}}
+
+\pptSection[Dynamic Dispatch]{1)~Dynamic Dispatch}
+\begin{multicols}{2}
+{\small\begin{ffcode}
+interface Animal
+  void jump();
+
+class Cat
+  @Override
+  void run() { /* code */ }
+
+class Dog
+  @Override
+  void run() { /* code */ }
+
+void act(Animal a)
+  a(*@\textcolor{orange}{.run}@*)();
+\end{ffcode}
 }
+\par\columnbreak\par
+  ``A major advantage of object-oriented languages is \hlt{abstraction}. The most important language feature that supports abstraction is the \hlt{dynamic dispatch} of methods based on the run-time type of an object.''
+  \lnSource{bacon1996fast}
+  \end{multicols}
+  \plush{}
 
+\pptSection[Encapsulation]{2)~Encapsulation}
+  \begin{multicols}{2}
+  \includegraphics[width=1.3in]{../../painofoop/01-algorithms/apple.jpg}
+  \begin{itemize}
+  \setlength\itemsep{0em}
+  \item Color: red
+  \item Weight: 120g
+  \item Price: \$0.99
+  \end{itemize}
+  \par\columnbreak\par
+  \includegraphics[width=0.8in]{../../painofoop/01-algorithms/file-on-disc.jpg}
+  \par
+{\small\begin{ffcode}
+var file = {
+  path: '/tmp/data.txt',
+  read: function() { ... },
+  write: function(txt) { ... }
+}
+\end{ffcode}
+}
+  \end{multicols}
+  \plush{}
 
-\lnThought*{What's next?}
+\lnPitch{\pptChapter[Slow]{OOP Is Slow}}
 
-\plush{
+\lnQuote
+  [Craig Chambers]
+  {craig-chambers}
+  {OO languages contain a number of features that make programs \hlt{easier to write} but \hlt{slower to run}. Pure OO languages use message passing for all computation, avoiding built-in operators and control structures. All computation, even low-level operations like variable accessing, arithmetic, and array indexing, is performed by \hlt{sending messages} to objects.}
+  {chambers1991making}
+
+\lnQuote
+  [Jeff Piper]
+  {jeff-piper}
+  {We observe that there is a substantial cost associated with a \hlt{full object-oriented design} in scientific programs, and that the current compilers and VMs have a room for substantial improvements in this area.}
+  {budimlic1999cost}
+\lnPitch{
+  \pptSection[1.2]{JDK 1.2 Was Very Slow}
+  \includegraphics[width=.8\linewidth]{bulimic.png}\par
+  \lnSource{budimlic1999cost}}
+\lnPitch{
+  \pptSection[23]{JDK 23 Is not Much Better}
+  {\small\begin{tabularx}{\linewidth}{lX>{\ttfamily}r>{\ttfamily}r>{\ttfamily\arraybackslash}r}
+  \toprule
+  & & \multicolumn{2}{c}{CPU mInstructions} & \\
+  Language & Compiler & {\rmfamily w/functions} & {\rmfamily w/objects} & {\rmfamily Ratio} \\
+  \midrule
+  C++ & clang 18.1.3 & 93 & 7,203 & 76x \\
+  Java & javac 21.0.4 & 41 & 4,589 & 109x \\
+  C\# & 8.0.108 & 36 & 5,785 & 157x \\
+  Go & go1.22.2 & 39 & 15,907 & 403x \\
+  Pascal & 3.2.2 & 59 & 32,804 & 555x \\
+  \bottomrule
+  \end{tabularx}}\par
+  {\scriptsize The same Fibonacci algorithm was implemented in different programming languages using either functions (the third column) or objects (the forth column). Performance data was collected using \ff{perf} Linux tool (Ubuntu 20.04 at Intel Core i7, 16Gb, 3.3GHz), as millions of CPU instructions per a calculation of the 32\(^\text{nd}\) Fibonacci number. Source: \url{https://github.com/yegor256/fibonacci}.\par}}
+
+\lnPitch{\pptChapter[Reasons]{Objects Are Slow for Two Reasons}}
+
+\lnQuote
+  [Bruno Dufour]
+  {bruno-dufour}
+  {\hlt{Virtual method dispatching} and \hlt{on-heap allocating} are the two primary sources of performance inefficiencies in object-oriented programs.}
+  {dufour2003dynamic}
+
+\pptSection[Streams]{For Example, Java Stream API vs. Loop}
+  \begin{multicols}{2}
+  Calculating the sum with the help of Stream API with OpenJDK Zulu~23.30:
+  \par
+  {\scriptsize
+\begin{ffcode}
+var acc = Stream.of(VALUES)
+  .map(obj -> (String) obj)
+  .map(String::trim)
+  .filter(str -> str.length() == 4)
+  .map(str -> Long.parseLong(str, 16))
+  .mapToLong(num -> num)
+  .sum();
+\end{ffcode}
+  \par}
+  \textcolor{red}{\textbf{154}} milliseconds, where \ff{VALUES} contains 10 million strings, on MacBook M2~Pro 3.5~GHz.
+  \par\columnbreak\par
+  Exactly the same algorithm, but in imperative procedural style:
+  \par
+  {\scriptsize
+\begin{ffcode}
+var acc = 0L;
+for (int i = 0; i < VALUES.length; i++) {
+  var s = ((String) VALUES[i]).trim();
+  if (s.length() != 4) continue;
+  acc += Long.parseLong(s, 16);
+}
+\end{ffcode}
+  \par}
+  \textcolor{green}{\textbf{26}} milliseconds.
+  \end{multicols}
+  \plush{}
+
+\lnPitch{\pptChapter[Compilers]{Compilers May Help}}
+
+\lnQuote
+  [Zoran Budimli{\'c},]
+  {zoran-budimlic}
+  {Although Java implementations have been made great strides, they still fall short on programs that use the full power of Java’s object-oriented features. Ideally, future compiler technologies will be able to \hlt{automatically transform} the [OO style code] into something that approaches the [procedural style] in performance.}
+  {budimlic1999cost}
+
+\lnPitch{\pptChapter[ALGOL]{Instead: ALGOL in Java Syntax}}
+
+\lnQuote
+  [David West]
+  {david-west}
+  {The contemporary mainstream understanding of objects (which is \hlt{not behavioral}) is but a pale shadow of the original idea and anti-ethical to the original intent.}
+  {west2004object}
+
+\pptSection[Static]{Issue \#1: Egocentric Static Methods}
+  \begin{multicols}{2}
+  We do this:
+{\small\begin{ffcode}
+var bytes = "Hello".getBytes();
+Files.(*@\textcolor{orange}{write}@*)(path, bytes);
+\end{ffcode}
+  }\par
+  Instead of this:
+{\small\begin{ffcode}
+"Hello".toBytes().(*@\textcolor{orange}{saveTo}@*)(path);
+\end{ffcode}
+  }
+  \par\columnbreak\par
+  ``Data manipulated and moved by active procedures are passive and helpless. Procedures tend to be \hlt{egocentric} and think that all data, its definitions and its values, are properly determined by the procedure currently using that data. The result is data that is \hlt{inconsistent} in definition and value.''
+  \lnSource{west2004object}
+  \end{multicols}
+  \plush{}
+
+\pptSection[NULL]{Issue \#2: NULL, the Billion Dollar Mistake}
+  \begin{multicols}{2}
+  We do this:
+{\small\begin{ffcode}
+var u = getUser(42);
+(*@\textcolor{orange}{if (u == null)}@*)
+  return "Not found";
+var n = u.getName();
+\end{ffcode}
+  }\par
+  Instead of this:
+{\small\begin{ffcode}
+var n = getUser(42).(*@\textcolor{orange}{getName}@*)();
+\end{ffcode}
+  }
+  \par\columnbreak\par
+  ``This led me to suggest that the null value is a member of every type, and a \hlt{null check is required} on every use of that reference variable, and it may be perhaps a billion dollar mistake.''
+  \lnSource{hoare2009null}
+  \end{multicols}
+  \plush{}
+
+\pptSection[Inheritance]{Issue \#3: Implementation Inheritance}
+  \begin{multicols}{2}
+  We do this:
+{\small\begin{ffcode}
+class Book (*@\textcolor{orange}{extends File}@*)
+  void title()
+    var t = (*@\textcolor{orange}{this.}@*)read();
+    return t.find("title");
+\end{ffcode}
+  }\par
+  Instead of this:
+{\small\begin{ffcode}
+class Book
+  (*@\textcolor{orange}{File file;}@*)
+  void title()
+    var t = (*@\textcolor{orange}{file.}@*)read();
+    return t.find("title");
+\end{ffcode}
+  }
+  \par\columnbreak\par
+  ``Favoring object composition over class inheritance helps you keep each class encapsulated and focused on one task. Your classes and class hierarchies will remain small and will be less likely to grow into \hlt{unmanageable monsters}.''
+  \lnSource{gamma1994design}
+  \end{multicols}
+  \plush{}
+
+\pptSection[Mutability]{Issue \#4: Mutable State}
+  \begin{multicols}{2}
+  We do this:
+{\small\begin{ffcode}
+var u = new User();
+u.setName("Jeff");
+u.setAge(42);
+\end{ffcode}
+  }\par
+  Instead of this:
+{\small\begin{ffcode}
+var u = new User()
+  .withName("Jeff")
+  .withAge(42);
+\end{ffcode}
+  }
+  \par\columnbreak\par
+  ``Immutable classes are \hlt{easier to design}, implement, and use than mutable classes. They are less prone to error and are more secure.''
+  \lnSource{bloch2008effective}
+  \end{multicols}
+  \plush{}
+
+\lnPitch{\pptChapter[Disaster]{OOP Is a Disaster}}
+
+\lnQuote
+  [Alan Kay]
+  {alan-kay}
+  {I made up the term `object-oriented,' and I can tell you I didn't have C++ in mind.}
+  {kay97keynote}
+
+\lnQuote
+  [Edsger Dijkstra]
+  {edsger-dijkstra}
+  {Object oriented programs are offered as alternatives to correct ones... Object-oriented programming is an \hlt{exceptionally bad idea} which could only have originated in California.}
+  {}
+
+\lnQuote
+  [Linus Torvalds]
+  {linus-torvalds}
+  {C++ is a \hlt{horrible language}$\dots$ C++ leads to really, really bad design choices$\dots$ In other words, the only way to do good, efficient, and system-level and portable C++ ends up to limit yourself to all the things that are basically available in C.}
+  {}
+
+\lnQuote
+  [Jeff Atwood]
+  {jeff-atwood}
+  {OO seems to bring at least as \hlt{many problems} to the table as it solves.}
+  {}
+
+\lnQuote
+  [Rich Hickey]
+  {rich-hickey}
+  {I think that large objected-oriented programs struggle with increasing complexity as you build this large object graph of \hlt{mutable objects}. You know, trying to understand and keep in your mind what will happen when you call a method and what will the side effects be.}
+  {}
+
+\lnPitch{\pptChapter[Pure]{Let's Make OOP Great Again}}
+
+\lnPitch{
+  \pptBanner{``Pure'' Objects Are Possible:}
+  \begin{itemize}
+  \setlength\itemsep{0em}
+  \item No static methods or attributes
+  \item No mutability of state
+  \item No implementation inheritance
+  \item No NULL references
+  \item No reflection
+  \item No annotations
+  \item No classes
+  \end{itemize}
+  In some languages most objects are pure,
+  for example in \hlt{Self}, \hlt{Io}, and \hlt{EO}.}
+
+\lnPitch{\pptChapter[Fast]{Can We Make Them Fast?}}
+
+\lnThought{We can design a strict and ``pure'' language, without procedures, NULL references, and mutability.}
+
+\lnThought{Because objects are less complex, in compile time, we can inline them, turning into procedures.}
+
+\lnThought{We can place more objects on stack.}
+
+\lnThought{We can create hardware with object-oriented instruction set that would include NEW and CALL directives.}
+
+\lnPitch{
   \begin{multicols}{2}
   \pptBanner{1)~Subscribe:}\par
   \qrcode[height=8em]{https://t.me/yegor256news}\par

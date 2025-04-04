@@ -7,3 +7,6 @@
 [submodule "lecture-notes"]
 	path = lecture-notes
 	url = https://github.com/yegor256/lecture-notes
+[submodule "painofoop"]
+	path = painofoop
+	url = https://github.com/yegor256/painofoop
