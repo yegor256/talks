@@ -6,6 +6,7 @@
 \usepackage[russian,english]{babel}
 \usepackage{svg}
 \usepackage{bibentry}
+\usepackage{fancyvrb}
 \usepackage{tikz}
   \usetikzlibrary{shadows}
 
@@ -15,6 +16,10 @@
 \newcommand*{\thesubtitle}{{\selectlanguage{russian}Каковы перспективы?}}
 \newcommand*{\theauthor}{Yegor Bugayenko}
 \newcommand\hlt[1]{\textcolor{orange}{#1}}
+
+\newenvironment{xcode}[1][xcode.txt]
+  {\VerbatimEnvironment\begin{VerbatimOut}{#1}}
+  {\end{VerbatimOut}}
 
 \begin{document}
 
@@ -71,31 +76,36 @@
   {Dynamic binding and polymorphism, which only exist in objects, support \hlt{abstraction} and differentiate object-orientation from the \hlt{imperative} programming paradigm.}
   {pande1996data}
 
-\pptSection[Dynamic Dispatch]{1)~Dynamic Dispatch}
-\begin{multicols}{2}
-{\small\begin{ffcode}
+\begin{xcode}[animals.java]
 interface Animal
   void jump();
-
 class Cat
   @Override
   void run() { /* code */ }
-
 class Dog
   @Override
   void run() { /* code */ }
-
 void act(Animal a)
   a(*@\textcolor{orange}{.run}@*)();
-\end{ffcode}
-}
-\par\columnbreak\par
+\end{xcode}
+\lnPitch{
+  \pptSection[Dynamic Dispatch]{1)~Dynamic Dispatch}
+  \begin{multicols}{2}
+  \ffinput{animals.java}
+  \par\columnbreak\par
   ``A major advantage of object-oriented languages is \hlt{abstraction}. The most important language feature that supports abstraction is the \hlt{dynamic dispatch} of methods based on the run-time type of an object.''
   \lnSource{bacon1996fast}
-  \end{multicols}
-  \plush{}
+  \end{multicols}}
 
-\pptSection[Encapsulation]{2)~Encapsulation}
+\begin{xcode}[file.js]
+var file = {
+  path: '/tmp/data.txt',
+  read: function() { ... },
+  write: function(txt) { ... }
+}
+\end{xcode}
+\lnPitch{
+  \pptSection[Encapsulation]{2)~Encapsulation}
   \begin{multicols}{2}
   \includegraphics[width=1.3in]{../../painofoop/01-algorithms/apple.jpg}
   \begin{itemize}
@@ -106,17 +116,8 @@ void act(Animal a)
   \end{itemize}
   \par\columnbreak\par
   \includegraphics[width=0.8in]{../../painofoop/01-algorithms/file-on-disc.jpg}
-  \par
-{\small\begin{ffcode}
-var file = {
-  path: '/tmp/data.txt',
-  read: function() { ... },
-  write: function(txt) { ... }
-}
-\end{ffcode}
-}
-  \end{multicols}
-  \plush{}
+  \par{\small\ffinput{file.js}}
+  \end{multicols}}
 
 \lnPitch{\pptChapter[Slow]{OOP Is Slow}}
 
@@ -159,12 +160,7 @@ var file = {
   {\hlt{Virtual method dispatching} and \hlt{on-heap allocating} are the two primary sources of performance inefficiencies in object-oriented programs.}
   {dufour2003dynamic}
 
-\pptSection[Streams]{For Example, Java Stream API vs. Loop}
-  \begin{multicols}{2}
-  Calculating the sum with the help of Stream API with OpenJDK Zulu~23.30:
-  \par
-  {\scriptsize
-\begin{ffcode}
+\begin{xcode}[streams.java]
 var acc = Stream.of(VALUES)
   .map(obj -> (String) obj)
   .map(String::trim)
@@ -172,25 +168,28 @@ var acc = Stream.of(VALUES)
   .map(str -> Long.parseLong(str, 16))
   .mapToLong(num -> num)
   .sum();
-\end{ffcode}
-  \par}
-  \textcolor{red}{\textbf{154}} milliseconds, where \ff{VALUES} contains 10 million strings, on MacBook M2~Pro 3.5~GHz.
-  \par\columnbreak\par
-  Exactly the same algorithm, but in imperative procedural style:
-  \par
-  {\scriptsize
-\begin{ffcode}
+\end{xcode}
+\begin{xcode}[loop.java]
 var acc = 0L;
 for (int i = 0; i < VALUES.length; i++) {
   var s = ((String) VALUES[i]).trim();
   if (s.length() != 4) continue;
   acc += Long.parseLong(s, 16);
 }
-\end{ffcode}
-  \par}
+\end{xcode}
+\lnPitch{
+  \pptSection[Streams]{For Example, Java Stream API vs. Loop}
+  \begin{multicols}{2}
+  Calculating the sum with the help of Stream API with OpenJDK Zulu~23.30:
+  \par
+  {\scriptsize\ffinput{streams.java}\par}
+  \textcolor{red}{\textbf{154}} milliseconds, where \ff{VALUES} contains 10 million strings, on MacBook M2~Pro 3.5~GHz.
+  \par\columnbreak\par
+  Exactly the same algorithm, but in imperative procedural style:
+  \par
+  {\scriptsize\ffinput{loop.java}\par}
   \textcolor{green}{\textbf{26}} milliseconds.
-  \end{multicols}
-  \plush{}
+  \end{multicols}}
 
 \lnPitch{\pptChapter[Compilers]{Compilers May Help}}
 
@@ -208,92 +207,92 @@ for (int i = 0; i < VALUES.length; i++) {
   {The contemporary mainstream understanding of objects (which is \hlt{not behavioral}) is but a pale shadow of the original idea and anti-ethical to the original intent.}
   {west2004object}
 
-\pptSection[Static]{Issue \#1: Egocentric Static Methods}
-  \begin{multicols}{2}
-  We do this:
-{\small\begin{ffcode}
+\begin{xcode}[static.java]
 var bytes = "Hello".getBytes();
 Files.(*@\textcolor{orange}{write}@*)(path, bytes);
-\end{ffcode}
-  }\par
-  Instead of this:
-{\small\begin{ffcode}
+\end{xcode}
+\begin{xcode}[no-static.java]
 "Hello".toBytes().(*@\textcolor{orange}{saveTo}@*)(path);
-\end{ffcode}
-  }
+\end{xcode}
+\lnPitch{
+  \pptSection[Static]{Issue \#1: Egocentric Static Methods}
+  \begin{multicols}{2}
+  We do this:
+  {\small\ffinput{static.java}\par}
+  Instead of this:
+  {\small\ffinput{no-static.java}\par}
   \par\columnbreak\par
   ``Data manipulated and moved by active procedures are passive and helpless. Procedures tend to be \hlt{egocentric} and think that all data, its definitions and its values, are properly determined by the procedure currently using that data. The result is data that is \hlt{inconsistent} in definition and value.''
   \lnSource{west2004object}
-  \end{multicols}
-  \plush{}
+  \end{multicols}}
 
-\pptSection[NULL]{Issue \#2: NULL, the Billion Dollar Mistake}
-  \begin{multicols}{2}
-  We do this:
-{\small\begin{ffcode}
+\begin{xcode}[with-null.java]
 var u = getUser(42);
 (*@\textcolor{orange}{if (u == null)}@*)
   return "Not found";
 var n = u.getName();
-\end{ffcode}
-  }\par
-  Instead of this:
-{\small\begin{ffcode}
+\end{xcode}
+\begin{xcode}[without-null.java]
 var n = getUser(42).(*@\textcolor{orange}{getName}@*)();
-\end{ffcode}
-  }
+\end{xcode}
+\lnPitch{
+  \pptSection[NULL]{Issue \#2: NULL, the Billion Dollar Mistake}
+  \begin{multicols}{2}
+  We do this:
+  {\small\ffinput{with-null.java}\par}
+  Instead of this:
+  {\small\ffinput{without-null.java}\par}
   \par\columnbreak\par
   ``This led me to suggest that the null value is a member of every type, and a \hlt{null check is required} on every use of that reference variable, and it may be perhaps a billion dollar mistake.''
   \lnSource{hoare2009null}
-  \end{multicols}
-  \plush{}
+  \end{multicols}}
 
-\pptSection[Inheritance]{Issue \#3: Implementation Inheritance}
-  \begin{multicols}{2}
-  We do this:
-{\small\begin{ffcode}
+\begin{xcode}[inheritance.java]
 class Book (*@\textcolor{orange}{extends File}@*)
   void title()
     var t = (*@\textcolor{orange}{this.}@*)read();
     return t.find("title");
-\end{ffcode}
-  }\par
-  Instead of this:
-{\small\begin{ffcode}
+\end{xcode}
+\begin{xcode}[composition.java]
 class Book
   (*@\textcolor{orange}{File file;}@*)
   void title()
     var t = (*@\textcolor{orange}{file.}@*)read();
     return t.find("title");
-\end{ffcode}
-  }
+\end{xcode}
+\lnPitch{
+  \pptSection[Inheritance]{Issue \#3: Implementation Inheritance}
+  \begin{multicols}{2}
+  We do this:
+  {\small\ffinput{inheritance.java}\par}
+  Instead of this:
+  {\small\ffinput{composition.java}\par}
   \par\columnbreak\par
   ``Favoring object composition over class inheritance helps you keep each class encapsulated and focused on one task. Your classes and class hierarchies will remain small and will be less likely to grow into \hlt{unmanageable monsters}.''
   \lnSource{gamma1994design}
-  \end{multicols}
-  \plush{}
+  \end{multicols}}
 
-\pptSection[Mutability]{Issue \#4: Mutable State}
-  \begin{multicols}{2}
-  We do this:
-{\small\begin{ffcode}
+\begin{xcode}[mutable.java]
 var u = new User();
 u.setName("Jeff");
 u.setAge(42);
-\end{ffcode}
-  }\par
-  Instead of this:
-{\small\begin{ffcode}
+\end{xcode}
+\begin{xcode}[immutable.java]
 var u = new User()
   .withName("Jeff")
   .withAge(42);
-\end{ffcode}
-  }
+\end{xcode}
+\lnPitch{
+  \pptSection[Mutability]{Issue \#4: Mutable State}
+  \begin{multicols}{2}
+  We do this:
+  {\small\ffinput{mutable.java}\par}
+  Instead of this:
+  {\small\ffinput{immutable.java}\par}
   \par\columnbreak\par
   ``Immutable classes are \hlt{easier to design}, implement, and use than mutable classes. They are less prone to error and are more secure.''
   \lnSource{bloch2008effective}
-  \end{multicols}
-  \plush{}
+  \end{multicols}}
 
 \lnPitch{\pptChapter[Disaster]{OOP Is a Disaster}}
 
@@ -337,9 +336,7 @@ var u = new User()
   \item No mutability of state
   \item No implementation inheritance
   \item No NULL references
-  \item No reflection
-  \item No annotations
-  \item No classes
+  \item No reflection, no annotations, no classes
   \end{itemize}
   In some languages most objects are pure,
   for example in \hlt{Self}, \hlt{Io}, and \hlt{EO}.}
