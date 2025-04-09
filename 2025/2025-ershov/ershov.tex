@@ -271,8 +271,8 @@ class Book
 \begin{xcode}[casting.java]
 cook(Fruit f)
   var c = nil;
-  if (f (*@\textcolor{orange}{instanceof}@*) Apple)
-    c = ((*@\textcolor{orange}{(Apple)}@*) f).color();
+  if (f (*@\textcolor{orange}{instanceof}@*) Apple a)
+    c = a.color();
   else
     c = "unknown"
 \end{xcode}
@@ -283,7 +283,7 @@ cook(Fruit f)
 \lnPitch{
   \pptSection[Casting]{Issue \#4: Type Casting \& Reflection}
   \begin{multicols}{2}
-  We do this:
+  In Java 14, we do this:
   {\small\ffinput{casting.java}\par}
   Instead of this:
   {\small\ffinput{no-casting.java}\par}
@@ -294,13 +294,13 @@ cook(Fruit f)
 
 \begin{xcode}[mutable.java]
 var c = new Circle();
-c.setRadius(42.0);
-c.setColor("blue");
+c.(*@\textcolor{orange}{setRadius}@*)(42.0);
+c.(*@\textcolor{orange}{setColor}@*)("blue");
 \end{xcode}
 \begin{xcode}[immutable.java]
 var c = new Circle()
-  .resize(42.0)
-  .repaint("blue");
+  .(*@\textcolor{orange}{resize}@*)(42.0)
+  .(*@\textcolor{orange}{repaint}@*)("blue");
 \end{xcode}
 \lnPitch{
   \pptSection[Mutability]{Issue \#5: Mutable State}
@@ -369,13 +369,13 @@ var c = new Circle()
 
 \lnPitch{\pptChapter[Fast]{Can We Make Them Fast?}}
 
-\lnThought{We can design a strict and ``pure'' language, without procedures, NULL references, and mutability.}
+\lnThought{We can design a \textcolor{orange}{strict} and "pure" language—without procedures, null references, or mutability.}
 
-\lnThought{Because objects are less complex, in compile time, we can inline them, turning into procedures.}
+\lnThought{Because objects are less complex, the compiler can \textcolor{orange}{inline} them at compile time, effectively turning them into procedures.}
 
-\lnThought{We can place more objects on stack.}
+\lnThought{We can place more objects on the \textcolor{orange}{stack}, reducing the workload for the memory manager and garbage collector.}
 
-\lnThought{We can create hardware with object-oriented instruction set that would include NEW and CALL directives.}
+\lnThought{We can even build \textcolor{orange}{hardware} with an object-oriented instruction set, including directives like NEW and CALL.}
 
 \lnPitch{
   \begin{multicols}{2}
