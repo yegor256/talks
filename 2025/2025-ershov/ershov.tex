@@ -77,46 +77,40 @@
   {pande1996data}
 
 \begin{xcode}[animals.java]
-interface Animal
-  void jump();
-class Cat
+interface Fruit
+  void calories();
+class Banana
   @Override
-  void run() { /* code */ }
-class Dog
+  void calories() { ... }
+class Apple
   @Override
-  void run() { /* code */ }
-void act(Animal a)
-  a(*@\textcolor{orange}{.run}@*)();
+  void calories() { ... }
+
+void cook(Fruit a)
+  var c = a(*@\textcolor{orange}{.calories}@*)();
 \end{xcode}
 \lnPitch{
-  \pptSection[Dynamic Dispatch]{1)~Dynamic Dispatch}
+  \pptSection[Dynamic Dispatch]{1.~Dynamic Dispatch}
   \begin{multicols}{2}
-  \ffinput{animals.java}
+  {\small\ffinput{animals.java}}
   \par\columnbreak\par
-  ``A major advantage of object-oriented languages is \hlt{abstraction}. The most important language feature that supports abstraction is the \hlt{dynamic dispatch} of methods based on the run-time type of an object.''
+  ``The most important language feature that supports abstraction is the \hlt{dynamic dispatch} of methods based on the run-time type of an object.''
   \lnSource{bacon1996fast}
   \end{multicols}}
 
-\begin{xcode}[file.js]
-var file = {
-  path: '/tmp/data.txt',
-  read: function() { ... },
-  write: function(txt) { ... }
-}
-\end{xcode}
 \lnPitch{
-  \pptSection[Encapsulation]{2)~Encapsulation}
+  \pptSection[Encapsulation]{2.~Encapsulation}
   \begin{multicols}{2}
   \includegraphics[width=1.3in]{../../painofoop/01-algorithms/apple.jpg}
   \begin{itemize}
   \setlength\itemsep{0em}
   \item Color: red
   \item Weight: 120g
-  \item Price: \$0.99
+  \item Calories: 94.6
   \end{itemize}
   \par\columnbreak\par
-  \includegraphics[width=0.8in]{../../painofoop/01-algorithms/file-on-disc.jpg}
-  \par{\small\ffinput{file.js}}
+  ``Once an implementation is selected, it should be treated as a \hlt{secret} of the abstraction and hidden from most clients.''
+  \lnSource{booch1994object}
   \end{multicols}}
 
 \lnPitch{\pptChapter[Slow]{OOP Is Slow}}
@@ -353,11 +347,11 @@ var u = new User()
 
 \lnPitch{
   \begin{multicols}{2}
-  \pptBanner{1)~Subscribe:}\par
+  \pptBanner{1.~Subscribe:}\par
   \qrcode[height=8em]{https://t.me/yegor256news}\par
   \href{https://t.me/yegor256news}{\texttt{@yegor256news}}
   \par\columnbreak\par
-  \pptBanner{2)~Join:}\par
+  \pptBanner{2.~Join:}\par
   Text me in Telegram, to join EOLANG research project:\par
   {\Huge\texttt{@yegor256}}
   \end{multicols}}
