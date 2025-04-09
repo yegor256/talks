@@ -268,6 +268,30 @@ class Book
   \lnSource{gamma1994design}
   \end{multicols}}
 
+\begin{xcode}[casting.java]
+cook(Fruit f)
+  var c = nil;
+  if (f (*@\textcolor{orange}{instanceof}@*) Apple)
+    c = ((*@\textcolor{orange}{(Apple)}@*) f).color();
+  else
+    c = "unknown"
+\end{xcode}
+\begin{xcode}[no-casting.java]
+cook(Fruit f)
+  var c = f(*@\textcolor{orange}{.color()}@*);
+\end{xcode}
+\lnPitch{
+  \pptSection[Casting]{Issue \#4: Type Casting \& Reflection}
+  \begin{multicols}{2}
+  We do this:
+  {\small\ffinput{casting.java}\par}
+  Instead of this:
+  {\small\ffinput{no-casting.java}\par}
+  \par\columnbreak\par
+  ``Type casting turns off your complier's ability to check for type mismatches and therefore creates a \hlt{hole} in your defensive-programming armor. Try to avoid type casts as much as you can.''
+  \lnSource{mcconnell2004codecomplete}
+  \end{multicols}}
+
 \begin{xcode}[mutable.java]
 var c = new Circle();
 c.setRadius(42.0);
@@ -279,7 +303,7 @@ var c = new Circle()
   .repaint("blue");
 \end{xcode}
 \lnPitch{
-  \pptSection[Mutability]{Issue \#4: Mutable State}
+  \pptSection[Mutability]{Issue \#5: Mutable State}
   \begin{multicols}{2}
   We do this:
   {\small\ffinput{mutable.java}\par}
