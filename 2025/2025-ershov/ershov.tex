@@ -213,7 +213,7 @@ Files.(*@\textcolor{orange}{write}@*)(path, bytes);
 \lnPitch{
   \pptSection[Static]{Issue \#1: Egocentric Static Methods}
   \begin{multicols}{2}
-  We do this:
+  In Java, we do this:
   {\small\ffinput{static.java}\par}
   Instead of this:
   {\small\ffinput{no-static.java}\par}
@@ -229,7 +229,7 @@ var u = getUser(42);
 var n = u.getName();
 \end{xcode}
 \begin{xcode}[without-null.java]
-var n = getUser(42).(*@\textcolor{orange}{getName}@*)();
+var n = user(42).(*@\textcolor{orange}{name}@*)();
 \end{xcode}
 \lnPitch{
   \pptSection[NULL]{Issue \#2: NULL, the Billion Dollar Mistake}
@@ -269,14 +269,14 @@ class Book
   \end{multicols}}
 
 \begin{xcode}[mutable.java]
-var u = new User();
-u.setName("Jeff");
-u.setAge(42);
+var c = new Circle();
+c.setRadius(42.0);
+c.setColor("blue");
 \end{xcode}
 \begin{xcode}[immutable.java]
-var u = new User()
-  .withName("Jeff")
-  .withAge(42);
+var c = new Circle()
+  .resize(42.0)
+  .repaint("blue");
 \end{xcode}
 \lnPitch{
   \pptSection[Mutability]{Issue \#4: Mutable State}
