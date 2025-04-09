@@ -323,16 +323,16 @@ var c = new Circle()
 \lnPitch{\pptChapter[Disaster]{OOP Is a Disaster}}
 
 \lnQuote
-  [Alan Kay]
-  {alan-kay}
-  {I made up the term `object-oriented,' and I can tell you I didn't have C++ in mind.}
-  {kay97keynote}
-
-\lnQuote
   [Edsger Dijkstra]
   {edsger-dijkstra}
   {Object oriented programs are offered as alternatives to correct ones... Object-oriented programming is an \hlt{exceptionally bad idea} which could only have originated in California.}
   {crawford1989}
+
+\lnQuote
+  [Alan Kay]
+  {alan-kay}
+  {I made up the term `object-oriented,' and I can tell you I didn't have C++ in mind.}
+  {kay97keynote}
 
 \lnQuote
   [Linus Torvalds]
@@ -351,6 +351,17 @@ var c = new Circle()
   {rich-hickey}
   {I think that large objected-oriented programs struggle with increasing complexity as you build this large object graph of \hlt{mutable objects}. You know, trying to understand and keep in your mind what will happen when you call a method and what will the side effects be.}
   {hickey2010}
+
+\lnPitch{
+  \pptBanner{Design (Anti-)Patterns:}
+  \begin{itemize}
+  \setlength\itemsep{0em}
+  \item Singleton
+  \item Data Transfer Object (DTO)
+  \item Factory Method
+  \item Object Relational Mapping (ORM)
+  \item Model View Controller (MVC)
+  \end{itemize}}
 
 \lnPitch{\pptChapter[Pure]{Let's Make OOP Great Again}}
 
@@ -375,7 +386,7 @@ var c = new Circle()
 
 \lnThought{We can place more objects on the \textcolor{orange}{stack}, reducing the workload for the memory manager and garbage collector.}
 
-\lnThought{We can even build \textcolor{orange}{hardware} with an object-oriented instruction set, including directives like NEW and CALL.}
+\lnThought{We should build \textcolor{orange}{hardware} with an object-oriented instruction set, including directives like NEW and CALL.}
 
 \lnPitch{
   \begin{multicols}{2}
