@@ -138,11 +138,11 @@ void cook(Fruit a)
   & & \multicolumn{2}{c}{CPU mInstructions} & \\
   Language & Compiler & {\rmfamily w/functions} & {\rmfamily w/objects} & {\rmfamily Ratio} \\
   \midrule
-  C++ & clang 18.1.3 & 93 & 7,203 & 76x \\
-  Java & javac 21.0.4 & 41 & 4,589 & 109x \\
-  C\# & 8.0.108 & 36 & 5,785 & 157x \\
-  Go & go1.22.2 & 39 & 15,907 & 403x \\
-  Pascal & 3.2.2 & 59 & 32,804 & 555x \\
+  C++ & clang 18.1.3 & 93 & 7,203 & \textcolor{orange}{76x} \\
+  Java & javac 21.0.4 & 41 & 4,589 & \textcolor{orange}{109x} \\
+  C\# & 8.0.108 & 36 & 5,785 & \textcolor{orange}{157x} \\
+  Go & go1.22.2 & 39 & 15,907 & \textcolor{orange}{403x} \\
+  Pascal & 3.2.2 & 59 & 32,804 & \textcolor{orange}{555x} \\
   \bottomrule
   \end{tabularx}}\par
   {\scriptsize The same Fibonacci algorithm was implemented in different programming languages using either functions (the third column) or objects (the forth column). Performance data was collected using \ff{perf} Linux tool (Ubuntu 20.04 at Intel Core i7, 16Gb, 3.3GHz), as millions of CPU instructions per a calculation of the 32\(^\text{nd}\) Fibonacci number. Source: \url{https://github.com/yegor256/fibonacci}.\par}}
@@ -176,15 +176,22 @@ for (int i = 0; i < VALUES.length; i++) {
   \pptSection[Streams]{For Example, Java Stream API vs. Loop}
   \begin{multicols}{2}
   Calculating the sum with the help of Stream API with OpenJDK Zulu~23.30:
-  \par
-  {\scriptsize\ffinput{streams.java}\par}
-  \textcolor{red}{\textbf{154}} milliseconds, where \ff{VALUES} contains 10 million strings, on MacBook M2~Pro 3.5~GHz.
   \par\columnbreak\par
   Exactly the same algorithm, but in imperative procedural style:
+  \end{multicols}
   \par
+  \begin{multicols}{2}
+  {\scriptsize\ffinput{streams.java}\par}
+  \par\columnbreak\par
   {\scriptsize\ffinput{loop.java}\par}
+  \end{multicols}
+  \par
+  \begin{multicols}{2}
+  \textcolor{red}{\textbf{154}} milliseconds.
+  \par\columnbreak\par
   \textcolor{green}{\textbf{26}} milliseconds.
-  \end{multicols}}
+  \end{multicols}
+  {\scriptsize The \ff{VALUES} contains 10 million strings, on MacBook M2~Pro 3.5~GHz.\par}}
 
 \lnPitch{\pptChapter[Compilers]{Compilers May Help}}
 
@@ -195,12 +202,6 @@ for (int i = 0; i < VALUES.length; i++) {
   {budimlic1999cost}
 
 \lnPitch{\pptChapter[ALGOL]{Instead: ALGOL in Java Syntax}}
-
-\lnQuote
-  [David West]
-  {david-west}
-  {The contemporary mainstream understanding of objects (which is \hlt{not behavioral}) is but a pale shadow of the original idea and anti-ethical to the original intent.}
-  {west2004object}
 
 \begin{xcode}[static.java]
 var bytes = "Hello".getBytes();
@@ -288,6 +289,12 @@ var u = new User()
   ``Immutable classes are \hlt{easier to design}, implement, and use than mutable classes. They are less prone to error and are more secure.''
   \lnSource{bloch2008effective}
   \end{multicols}}
+
+\lnQuote
+  [David West]
+  {david-west}
+  {The contemporary mainstream understanding of objects (which is \hlt{not behavioral}) is but a pale shadow of the original idea and anti-ethical to the original intent.}
+  {west2004object}
 
 \lnPitch{\pptChapter[Disaster]{OOP Is a Disaster}}
 
