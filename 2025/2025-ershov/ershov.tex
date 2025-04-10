@@ -79,10 +79,10 @@
 \begin{xcode}[animals.java]
 interface Fruit
   void calories();
-class Plum
+class (*@\textcolor{orange}{Plum}@*)
   @Override
   void calories() { ... }
-class Apple
+class (*@\textcolor{orange}{Apple}@*)
   @Override
   void calories() { ... }
 
@@ -94,7 +94,7 @@ void cook(Fruit a)
   \begin{multicols}{2}
   {\small\ffinput{animals.java}}
   \par\columnbreak\par
-  ``The most important language feature that supports abstraction is the \hlt{dynamic dispatch} of methods based on the run-time type of an object.''
+  ``The most important language feature that supports abstraction is the dynamic dispatch of methods based on the \hlt{run-time type} of an object.''
   \lnSource{bacon1996fast}
   \end{multicols}}
 
