@@ -127,6 +127,28 @@ void cook(Fruit a)
   {OO languages contain a number of features that make programs \hlt{easier to write} but \hlt{slower to run}. Pure OO languages use message passing for all computation, avoiding built-in operators and control structures. All computation, even low-level operations like variable accessing, arithmetic, and array indexing, is performed by \hlt{sending messages} to objects.}
   {chambers1991making}
 
+\begin{xcode}[max-static.java]
+x = a + b;
+\end{xcode}
+\begin{xcode}[max-method.java]
+x = a.plush(b);
+\end{xcode}
+\begin{xcode}[max-object.java]
+x = new Plus(a, b).get();
+\end{xcode}
+\lnPitch{
+  \begin{multicols}{2}
+  Instead of doing this, in Java:
+  {\small\ffinput{max-static.java}}
+  We should do this:
+  {\small\ffinput{max-method.java}}
+  Or maybe even this:
+  {\small\ffinput{max-object.java}}
+  \par\columnbreak\par
+  ``Pure object-oriented languages exacerbate the performance problem caused by dynamic dispatch because \hlt{every} operation involves a dynamically dispatched message send.''
+  \lnSource{holzle1996reconciling}
+  \end{multicols}}
+
 \lnQuote
   [Jeff Piper]
   {jeff-piper}
