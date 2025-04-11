@@ -51,6 +51,16 @@
   \item \href{https://www.eolang.org}{\textbf{EOLANG}}, pure object-oriented language: 1.2K\(\star\)
   \end{enumerate}}
 
+\lnPitch{
+  \pptBanner{What's the Structure of the Talk?}
+  \begin{enumerate}
+  \item OOP is great!
+  \item Maybe OOP is not so great?
+  \item How to make it great?
+  \end{enumerate}}
+
+\lnPitch{\pptBanner[red]{\HUGE Warning!}}
+
 \lnPitch{\pptChapter[Intent]{Objects Are Abstractions}}
 
 \lnPitch{
@@ -150,13 +160,13 @@ void cook(Fruit a)
   {chambers1991making}
 
 \begin{xcode}[max-static.java]
-x = a + b;
+x = a (*@\textcolor{orange}{+}@*) b;
 \end{xcode}
 \begin{xcode}[max-method.java]
-x = a.plush(b);
+x = a(*@\textcolor{orange}{.plus}@*)(b);
 \end{xcode}
 \begin{xcode}[max-object.java]
-x = new Plus(a, b).get();
+x = (*@\textcolor{orange}{new Plus}@*)(a, b).get();
 \end{xcode}
 \lnPitch{
   \begin{multicols}{2}
