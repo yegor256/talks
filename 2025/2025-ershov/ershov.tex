@@ -17,7 +17,7 @@
 \newcommand*{\theauthor}{Yegor Bugayenko}
 \newcommand\hlt[1]{\textcolor{orange}{#1}}
 
-\newenvironment{xcode}[1][xcode.txt]
+\newenvironment{lnSnippet}[1][lnSnippet.txt]
   {\VerbatimEnvironment\begin{VerbatimOut}{#1}}
   {\end{VerbatimOut}}
 
@@ -110,7 +110,7 @@
   {Dynamic binding and polymorphism, which only exist in objects, support \hlt{abstraction} and differentiate object-orientation from the \hlt{imperative} programming paradigm.}
   {pande1996data}
 
-\begin{xcode}[animals.java]
+\begin{lnSnippet}[animals.java]
 interface Fruit
   void calories();
 class (*@\textcolor{orange}{Plum}@*)
@@ -122,7 +122,7 @@ class (*@\textcolor{orange}{Apple}@*)
 
 void cook(Fruit a)
   var c = a(*@\textcolor{orange}{.calories}@*)();
-\end{xcode}
+\end{lnSnippet}
 \lnPitch{
   \pptSection[Binding]{1.~Dynamic Dispatch}
   \begin{multicols}{2}
@@ -162,15 +162,15 @@ void cook(Fruit a)
   {OO languages contain a number of features that make programs \hlt{easier to write} but \hlt{slower to run}. Pure OO languages use message passing for all computation, avoiding built-in operators and control structures. All computation, even low-level operations like variable accessing, arithmetic, and array indexing, is performed by \hlt{sending messages} to objects.}
   {chambers1991making}
 
-\begin{xcode}[max-static.java]
+\begin{lnSnippet}[max-static.java]
 x = a (*@\textcolor{orange}{+}@*) b;
-\end{xcode}
-\begin{xcode}[max-method.java]
+\end{lnSnippet}
+\begin{lnSnippet}[max-method.java]
 x = a(*@\textcolor{orange}{.plus}@*)(b);
-\end{xcode}
-\begin{xcode}[max-object.java]
+\end{lnSnippet}
+\begin{lnSnippet}[max-object.java]
 x = (*@\textcolor{orange}{new Plus}@*)(a, b).get();
-\end{xcode}
+\end{lnSnippet}
 \lnPitch{
   \begin{multicols}{2}
   Instead of doing this, in Java:
@@ -217,7 +217,7 @@ x = (*@\textcolor{orange}{new Plus}@*)(a, b).get();
   {\hlt{Virtual method dispatching} and \hlt{on-heap allocating} are the two primary sources of performance inefficiencies in object-oriented programs.}
   {dufour2003dynamic}
 
-\begin{xcode}[streams.java]
+\begin{lnSnippet}[streams.java]
 var acc = Stream.of(VALUES)
   .map(obj -> (String) obj)
   .map(String::trim)
@@ -225,15 +225,15 @@ var acc = Stream.of(VALUES)
   .map(str -> Long.parseLong(str, 16))
   .mapToLong(num -> num)
   .sum();
-\end{xcode}
-\begin{xcode}[loop.java]
+\end{lnSnippet}
+\begin{lnSnippet}[loop.java]
 var acc = 0L;
 for (int i = 0; i < VALUES.length; i++) {
   var s = ((String) VALUES[i]).trim();
   if (s.length() != 4) continue;
   acc += Long.parseLong(s, 16);
 }
-\end{xcode}
+\end{lnSnippet}
 \lnPitch{
   \pptSection[Streams]{For Example, Java Stream API vs. Loop}
   \begin{multicols}{2}
@@ -271,13 +271,13 @@ for (int i = 0; i < VALUES.length; i++) {
   {After all, we program in Java, or C\#, or Ruby, and we use object-oriented design. True---and yet the code is still just an assemblage of \hlt{sequence}, \hlt{selection}, and \hlt{iteration}, just as it was back in the 1960s and 1950s.}
   {martin2017clean}
 
-\begin{xcode}[static.java]
+\begin{lnSnippet}[static.java]
 var bytes = "Hello".getBytes();
 Files.(*@\textcolor{orange}{write}@*)(path, bytes);
-\end{xcode}
-\begin{xcode}[no-static.java]
+\end{lnSnippet}
+\begin{lnSnippet}[no-static.java]
 "Hello".toBytes().(*@\textcolor{orange}{saveTo}@*)(path);
-\end{xcode}
+\end{lnSnippet}
 \lnPitch{
   \pptSection[Static]{Issue \#1: Egocentric Static Methods}
   \begin{multicols}{2}
@@ -290,15 +290,15 @@ Files.(*@\textcolor{orange}{write}@*)(path, bytes);
   \lnSource{west2004object}
   \end{multicols}}
 
-\begin{xcode}[with-null.java]
+\begin{lnSnippet}[with-null.java]
 var u = getUser(42);
 (*@\textcolor{orange}{if (u == null)}@*)
   return "Not found";
 var n = u.getName();
-\end{xcode}
-\begin{xcode}[without-null.java]
+\end{lnSnippet}
+\begin{lnSnippet}[without-null.java]
 var n = user(42).(*@\textcolor{orange}{name}@*)();
-\end{xcode}
+\end{lnSnippet}
 \lnPitch{
   \pptSection[NULL]{Issue \#2: NULL, the Billion Dollar Mistake}
   \begin{multicols}{2}
@@ -315,19 +315,19 @@ var n = user(42).(*@\textcolor{orange}{name}@*)();
   \includegraphics[width=.9\linewidth]{tweet.png}\par
   {\scriptsize BTW, my Twitter: @yegor256}}
 
-\begin{xcode}[inheritance.java]
+\begin{lnSnippet}[inheritance.java]
 class Book (*@\textcolor{orange}{extends File}@*)
   void title()
     var t = (*@\textcolor{orange}{this.}@*)read();
     return t.find("title");
-\end{xcode}
-\begin{xcode}[composition.java]
+\end{lnSnippet}
+\begin{lnSnippet}[composition.java]
 class Book
   (*@\textcolor{orange}{File file;}@*)
   void title()
     var t = (*@\textcolor{orange}{file.}@*)read();
     return t.find("title");
-\end{xcode}
+\end{lnSnippet}
 \lnPitch{
   \pptSection[Inheritance]{Issue \#3: Implementation Inheritance}
   \begin{multicols}{2}
@@ -340,18 +340,18 @@ class Book
   \lnSource{gamma1994design}
   \end{multicols}}
 
-\begin{xcode}[casting.java]
+\begin{lnSnippet}[casting.java]
 cook(Fruit f)
   var c = nil;
   if (f (*@\textcolor{orange}{instanceof}@*) Apple a)
     c = a.color();
   else
     c = "unknown"
-\end{xcode}
-\begin{xcode}[no-casting.java]
+\end{lnSnippet}
+\begin{lnSnippet}[no-casting.java]
 cook(Fruit f)
   var c = f(*@\textcolor{orange}{.color()}@*);
-\end{xcode}
+\end{lnSnippet}
 \lnPitch{
   \pptSection[Casting]{Issue \#4: Type Casting \& Reflection}
   \begin{multicols}{2}
@@ -364,16 +364,16 @@ cook(Fruit f)
   \lnSource{mcconnell2004codecomplete}
   \end{multicols}}
 
-\begin{xcode}[mutable.java]
+\begin{lnSnippet}[mutable.java]
 var c = new Circle();
 c.(*@\textcolor{orange}{setRadius}@*)(42.0);
 c.(*@\textcolor{orange}{setColor}@*)("blue");
-\end{xcode}
-\begin{xcode}[immutable.java]
+\end{lnSnippet}
+\begin{lnSnippet}[immutable.java]
 var c = new Circle()
   .(*@\textcolor{orange}{resize}@*)(42.0)
   .(*@\textcolor{orange}{repaint}@*)("blue");
-\end{xcode}
+\end{lnSnippet}
 \lnPitch{
   \pptSection[Mutability]{Issue \#5: Mutable State}
   \begin{multicols}{2}
