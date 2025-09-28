@@ -13,6 +13,8 @@
 \newcommand*{\thesubtitle}{AI vs Humans}
 \newcommand*{\theauthor}{Yegor Bugayenko}
 
+\newcommand\hlt[1]{\textcolor{orange}{\textbf{#1}}}
+
 \begin{document}
 
 \pptLeft{October 29th, 2025}
@@ -31,35 +33,14 @@
 \newpage
 \pagecolor{white}
 
-% who are our enemies?
-  % bugs: they are growing in amount
-  % inconsistent (dirty) code: duplicated, hard to read, too complex, not reusable
-  % security holes
-  % license violation
-% what's the key difference between a junior and an LLM?
-  % no conciousness
-  % no accountability
-  % no guilt
-% why now it's worse?
-  % false sense of security means less scrutiny, more silent bugs slipping through
-  % Repetition of existing errors: once LLM finds it in the source code it copies
-  % LLM doesn't know what code it copies -- violation of licenses
-  % Invisible leak of data to LLM provider: passwords or private Bitcoin keys
-  % management pressure
-% how can we defend ourselves?
-  % focus on quality standards, in written way
-  % explain the architecture - it matters for AI
-  % focus on reviews!
-  % more tests!
-  % traceability matters much more -- who wrote this code?
-  % separate AI written code from others
+\plush{\pptChapter[Threats]{What Are the Threats?}}
 
-\plush{\pptChapter[Enemies]{Who Are Our Enemies?}}
+\plush{\pptSection[Defects]{1. Defects a.k.a Bugs}}
 
 \lnQuote
   [Steve McConnell]
   {steve-mcconnell}
-  {Microsoft experiences about \textbf{10–20 defects per 1000 lines of code} during in-house testing and 0.5 defects per 1000 lines of code in released product.}
+  {Microsoft experiences about \hlt{10–20 defects per 1000 lines of code} during in-house testing and 0.5 defects per 1000 lines of code in released product.}
   {mcconnell2004code}
 
 \lnPitch{\pptBanner{A Few Open Source Repositories of Our Time}
@@ -78,6 +59,34 @@
   \href{https://github.com/google/guava}{guava} & Java & 346 & 3,600 & 10.4 \\
   \bottomrule
   \end{tabular}}}
+
+\plush{\pptSection[Holes]{2. Security Holes}}
+
+\plush{\pptSection[Dirty Code]{3. Dirty Code}}
+  % inconsistent (dirty) code: duplicated, hard to read, too complex, not reusable
+
+\plush{\pptChapter[LLM]{Why Now It's Getting Worse?}}
+
+\lnQuote
+  [Chun Jie Chong]
+  {chun-jie-chong}
+  {Quality-wise, we found that LLM generates bare-bones code that lacks defensive programming constructs, and is typically \hlt{more complex} (per line of code) compared to human-written code. Fuzzing has revealed that LLM-generated code is more \hlt{prone to hangs and crashes} than human-written code.}
+  {chong2024artificial}
+
+  % false sense of security means less scrutiny, more silent bugs slipping through
+  % Repetition of existing errors: once LLM finds it in the source code it copies
+  % LLM doesn't know what code it copies -- violation of licenses
+  % Invisible leak of data to LLM provider: passwords or private Bitcoin keys
+  % management pressure
+
+\plush{\pptChapter[Defense]{How Can We Defend Ourselves?}}
+
+  % focus on quality standards, in written way
+  % explain the architecture - it matters for AI
+  % focus on reviews!
+  % more tests!
+  % traceability matters much more -- who wrote this code?
+  % separate AI written code from others
 
 \plush{
   \begin{multicols}{2}
