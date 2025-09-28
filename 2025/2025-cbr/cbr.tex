@@ -22,20 +22,18 @@
 
 \definecolor{innoBackground}{HTML}{6C717B}
 \pagecolor{innoBackground}
-\plush{
-  \begin{pptMiddle}
-    \pptTitle{\color{black}{\thetitle}}{\color{black}{\thesubtitle}}\par
-    {\color{white}\scshape \theauthor}
-    \newline
-    {\color{white}\small Zerocracy\par}
-  \end{pptMiddle}
+\lnPitch{
+  \pptTitle{\color{black}{\thetitle}}{\color{black}{\thesubtitle}}\par
+  {\color{white}\scshape \theauthor}
+  \newline
+  {\color{white}\small Zerocracy\par}
 }
 \newpage
 \pagecolor{white}
 
-\plush{\pptChapter[Threats]{What Are the Threats?}}
+\lnPitch{\pptChapter[Threats]{What Are the Threats?}}
 
-\plush{\pptSection[Defects]{1. Defects a.k.a Bugs}}
+\lnPitch{\pptSection[Defects]{1. Defects a.k.a Bugs}}
 
 \lnQuote
   [Steve McConnell]
@@ -60,12 +58,14 @@
   \bottomrule
   \end{tabular}}}
 
-\plush{\pptSection[Holes]{2. Security Holes}}
+\lnPitch{\pptSection[Holes]{2. Security Holes}}
 
-\plush{\pptSection[Dirty Code]{3. Dirty Code}}
+\lnPitch{\pptSection[Dirty Code]{3. Dirty Code}}
   % inconsistent (dirty) code: duplicated, hard to read, too complex, not reusable
 
-\plush{\pptChapter[LLM]{Why Now It's Getting Worse?}}
+\lnPitch{\pptChapter[LLM]{Why Now It's Getting Worse?}}
+
+\lnPitch{\pptSection[False]{1. False Sense of Quality}}
 
 \lnQuote
   [Chun Jie Chong]
@@ -73,20 +73,33 @@
   {Quality-wise, we found that LLM generates bare-bones code that lacks defensive programming constructs, and is typically \hlt{more complex} (per line of code) compared to human-written code. Fuzzing has revealed that LLM-generated code is more \hlt{prone to hangs and crashes} than human-written code.}
   {chong2024artificial}
 
-  % false sense of security means less scrutiny, more silent bugs slipping through
-  % Repetition of existing errors: once LLM finds it in the source code it copies
-  % LLM doesn't know what code it copies -- violation of licenses
-  % Invisible leak of data to LLM provider: passwords or private Bitcoin keys
-  % management pressure
+\lnQuote
+  [Altaf Allah Abbassi]
+  {altaf-allah-abbassi}
+  {33.54\% of the studied sample exhibited multiple \hlt{inefficiencies}, indicating that inefficiencies in LLM-generated code are diverse and interconnected. Our findings highlight a \hlt{critical gap} in LLMs' capability to generate correct, optimized, and high-quality code.}
+  {abbassi2025taxonomy}
 
-\plush{\pptChapter[Defense]{How Can We Defend Ourselves?}}
+\lnPitch{\pptSection[Repetition]{2. Repetition of Existing Errors}}
 
-  % focus on quality standards, in written way
-  % explain the architecture - it matters for AI
-  % focus on reviews!
-  % more tests!
-  % traceability matters much more -- who wrote this code?
-  % separate AI written code from others
+\lnPitch{\pptSection[Leak]{3. Accidental Leakage of Data}}
+
+\lnPitch{\pptSection[Pressure]{4. Management Pressure}}
+
+\lnPitch{\pptChapter[Defense]{How Can We Defend Ourselves?}}
+
+\lnPitch{\pptSection[Standards]{1. Write Up Quality Standards}}
+
+\lnPitch{\pptSection[Architecture]{2. Explain the Architecture}}
+
+\lnPitch{\pptSection[Tests]{3. Create More and Better Tests}}
+
+\lnPitch{\pptSection[Reviews]{4. Practice Stricter Code Reviews}}
+
+\lnQuote
+  [Adam Alami]
+  {adam-alami}
+  {Introduction of an LLM into the social system of code review causes a \hlt{disruption} to the inherent social dynamics of the process and to the transition of \hlt{accountability} from individual to collective.}
+  {alami2025accountability}
 
 \plush{
   \begin{multicols}{2}
