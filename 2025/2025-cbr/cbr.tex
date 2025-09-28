@@ -1,0 +1,93 @@
+% SPDX-FileCopyrightText: Copyright (c) 2023 Yegor Bugayenko
+% SPDX-License-Identifier: MIT
+
+\documentclass{article}
+\usepackage{../../lecture-notes/notes}
+\usepackage{svg}
+\usepackage{tikz}
+  \usetikzlibrary{shadows}
+
+\graphicspath{{../../faces/}}
+
+\newcommand*{\thetitle}{We Are at a War!}
+\newcommand*{\thesubtitle}{AI vs Humans}
+\newcommand*{\theauthor}{Yegor Bugayenko}
+
+\begin{document}
+
+\pptLeft{October 29th, 2025}
+\pptRight{@yegor256}
+
+\definecolor{innoBackground}{HTML}{6C717B}
+\pagecolor{innoBackground}
+\plush{
+  \begin{pptMiddle}
+    \pptTitle{\color{black}{\thetitle}}{\color{black}{\thesubtitle}}\par
+    {\color{white}\scshape \theauthor}
+    \newline
+    {\color{white}\small Zerocracy\par}
+  \end{pptMiddle}
+}
+\newpage
+\pagecolor{white}
+
+% who are our enemies?
+  % bugs: they are growing in amount
+  % inconsistent (dirty) code: duplicated, hard to read, too complex, not reusable
+  % security holes
+  % license violation
+% what's the key difference between a junior and an LLM?
+  % no conciousness
+  % no accountability
+  % no guilt
+% why now it's worse?
+  % false sense of security means less scrutiny, more silent bugs slipping through
+  % Repetition of existing errors: once LLM finds it in the source code it copies
+  % LLM doesn't know what code it copies -- violation of licenses
+  % Invisible leak of data to LLM provider: passwords or private Bitcoin keys
+  % management pressure
+% how can we defend ourselves?
+  % focus on quality standards, in written way
+  % explain the architecture - it matters for AI
+  % focus on reviews!
+  % more tests!
+  % traceability matters much more -- who wrote this code?
+  % separate AI written code from others
+
+\plush{\pptChapter[Enemies]{Who Are Our Enemies?}}
+
+\lnQuote
+  [Steve McConnell]
+  {steve-mcconnell}
+  {Microsoft experiences about \textbf{10–20 defects per 1000 lines of code} during in-house testing and 0.5 defects per 1000 lines of code in released product.}
+  {mcconnell2004code}
+
+\lnPitch{\pptBanner{A Few Open Source Repositories of Our Time}
+  {\ttfamily\small\begin{tabular}{llrr>{\color{orange}}r}
+  \toprule
+  Project & Stack & KLoC & Issues & I/KLoC \\
+  \midrule
+  \href{https://github.com/torvalds/kernel}{kernel} & C & 27,300 & 220,600 & 8.1 \\
+  \href{https://github.com/tensorflow/tensorflow}{tensorflow} & C++ & 3,600 & 40,200 & 11.2 \\
+  \href{https://github.com/flutter/flutter}{flutter} & Dart & 2,100 & 103,000 & 49.0 \\
+  \href{https://github.com/rust-lang/rust}{rust} & Rust & 2,100 & 56,500 & 26.9 \\
+  \href{https://github.com/microsoft/vscode}{vscode} & TypeScript & 1,500 & 210,000 & 140.0 \\
+  \href{https://github.com/apache/spark}{spark} & Java & 1,400 & 53,750 & 38.4 \\
+  \href{https://github.com/apache/kafka}{kafka} & Java & 980 & 19,800 & 20.2 \\
+  \href{https://github.com/angular/angular}{angular} & TypeScript & 800 & 28,700 & 35.9 \\
+  \href{https://github.com/google/guava}{guava} & Java & 346 & 3,600 & 10.4 \\
+  \bottomrule
+  \end{tabular}}}
+
+\plush{
+  \begin{multicols}{2}
+  \pptBanner{1)~Subscribe:}\par
+  \qrcode[height=8em]{https://t.me/yegor256news}\par
+  \href{https://t.me/yegor256news}{\texttt{@yegor256news}}
+  \par\columnbreak\par
+  \pptBanner{2)~Join:}\par
+  Join me in all your favorite social networks, including GitHub and Twitter:\par
+  {\Huge\texttt{@yegor256}}
+  \end{multicols}}
+
+\end{document}
