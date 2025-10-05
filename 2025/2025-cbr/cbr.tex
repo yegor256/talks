@@ -20,8 +20,6 @@
 \pptLeft{October 29th, 2025}
 \pptRight{@yegor256}
 
-\definecolor{innoBackground}{HTML}{6C717B}
-\pagecolor{innoBackground}
 \lnPitch{
   \pptTitle{\color{black}{\thetitle}}{\color{black}{\thesubtitle}}\par
   {\color{white}\scshape \theauthor}
@@ -156,10 +154,20 @@
   {Google \ul{does not enforce} any code coverage thresholds across the entire codebase. Projects (or groups of projects) are free to define their own thresholds and goals. Many projects opt-into a centralized voluntary alerting system that defines \ul{five levels} of code coverage thresholds.}
   {ivankovi2019}
 
-\lnPitch{\pptSection[3.Standards]{3. Quality Standards}}
+\lnPitch{\pptSection[3.Standards]{3. Coding Standards}}
+
+\lnPitch{
+  \pptPic{.8}{prompt.png}
+  \par
+  {\scriptsize\url{https://github.com/yegor256/prompt}}}
 
 \lnPitch{\pptSection[4.Architecture]{4. Written Architecture}}
 
+\lnQuote
+  [Simon Weber]
+  {simon-weber}
+  {Upon investigation, \ul{popular} projects were found to have \ul{larger READMEs} (median 2 kilobytes vs. 500 bytes). Also, 95\% of popular projects have nonempty READMEs, compared to only 65\% of unpopular projects.}
+  {weber2014makes}
 
 \plush{
   \begin{multicols}{2}
