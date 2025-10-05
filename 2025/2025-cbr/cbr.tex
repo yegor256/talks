@@ -9,11 +9,11 @@
 
 \graphicspath{{../../faces/}}
 
-\newcommand*{\thetitle}{We Are at a War!}
+\newcommand*{\thetitle}{Enemy at the Gate}
 \newcommand*{\thesubtitle}{AI vs Humans}
 \newcommand*{\theauthor}{Yegor Bugayenko}
 
-\newcommand\hlt[1]{\textcolor{orange}{\textbf{#1}}}
+\renewcommand\ul[1]{\textcolor{orange}{\textbf{#1}}}
 
 \begin{document}
 
@@ -33,12 +33,12 @@
 
 \lnPitch{\pptChapter[Threats]{What Are the Threats?}}
 
-\lnPitch{\pptSection[Defects]{1. Defects a.k.a Bugs}}
+\lnPitch{\pptSection[1.Defects]{1. Defects a.k.a Bugs}}
 
 \lnQuote
   [Steve McConnell]
   {steve-mcconnell}
-  {Microsoft experiences about \hlt{10–20 defects per 1000 lines of code} during in-house testing and 0.5 defects per 1000 lines of code in released product.}
+  {Microsoft experiences about \ul{10–20 defects per 1000 lines of code} during in-house testing and 0.5 defects per 1000 lines of code in released product.}
   {mcconnell2004code}
 
 \lnPitch{\pptBanner{A Few Open Source Repositories of Our Time}
@@ -58,10 +58,31 @@
   \bottomrule
   \end{tabular}}}
 
-\lnPitch{\pptSection[Holes]{2. Security Holes}}
+\lnPitch{\pptSection[2.Holes]{2. Security Holes}}
 
-\lnPitch{\pptSection[Dirty Code]{3. Dirty Code}}
-  % inconsistent (dirty) code: duplicated, hard to read, too complex, not reusable
+\lnQuote
+  {gary-mcgraw}
+  {A central and critical aspect of the computer \ul{security problem} is a software problem. Software defects with security ramifications—including implementation bugs such as buffer overflows and design flaws such as inconsistent error handling—promise to be with us \ul{for years}.}
+  {mcgraw2006software}
+
+\lnPitch{\pptSection[3.Dirt]{3. Complexity, Duplication, and Smells}}
+
+\lnQuote
+  {vladimir-khorikov}
+  {The \ul{simpler} your solution is, the \ul{better} you are as a software developer. Most software developers can write code that works. Creating code that works \ul{and} is as simple as possible --- that is the true challenge.}
+  {khorikov2015kiss}
+
+\lnQuote
+  [Robert C. Martin]
+  {robert-martin}
+  {Duplication is the \ul{primary enemy} of a well-designed system.}
+  {martin2008clean}
+
+\lnQuote
+  [Mark Seemann]
+  {mark-seemann}
+  {I like the gardening metaphor's emphasis on activities that combat disorder. Just as you must prune and weed a garden, you must refactor and pay off \ul{technical debt} in your code bases.}
+  {seemann2021code}
 
 \lnPitch{\pptChapter[LLM]{Why Now It's Getting Worse?}}
 
@@ -70,14 +91,20 @@
 \lnQuote
   [Chun Jie Chong]
   {chun-jie-chong}
-  {Quality-wise, we found that LLM generates bare-bones code that lacks defensive programming constructs, and is typically \hlt{more complex} (per line of code) compared to human-written code. Fuzzing has revealed that LLM-generated code is more \hlt{prone to hangs and crashes} than human-written code.}
+  {Quality-wise, we found that LLM generates bare-bones code that lacks defensive programming constructs, and is typically \ul{more complex} (per line of code) compared to human-written code. Fuzzing has revealed that LLM-generated code is more \ul{prone to hangs and crashes} than human-written code.}
   {chong2024artificial}
 
 \lnQuote
   [Altaf Allah Abbassi]
   {altaf-allah-abbassi}
-  {33.54\% of the studied sample exhibited multiple \hlt{inefficiencies}, indicating that inefficiencies in LLM-generated code are diverse and interconnected. Our findings highlight a \hlt{critical gap} in LLMs' capability to generate correct, optimized, and high-quality code.}
+  {33.54\% of the studied sample exhibited multiple \ul{inefficiencies}, indicating that inefficiencies in LLM-generated code are diverse and interconnected. Our findings highlight a \ul{critical gap} in LLMs' capability to generate correct, optimized, and high-quality code.}
   {abbassi2025taxonomy}
+
+\lnQuote
+  [Adam Alami]
+  {adam-alami}
+  {Introduction of an LLM into the social system of code review causes a \ul{disruption} to the inherent social dynamics of the process and to the transition of \ul{accountability} from individual to collective.}
+  {alami2025accountability}
 
 \lnPitch{\pptSection[Repetition]{2. Repetition of Existing Errors}}
 
@@ -94,12 +121,6 @@
 \lnPitch{\pptSection[Tests]{3. Create More and Better Tests}}
 
 \lnPitch{\pptSection[Reviews]{4. Practice Stricter Code Reviews}}
-
-\lnQuote
-  [Adam Alami]
-  {adam-alami}
-  {Introduction of an LLM into the social system of code review causes a \hlt{disruption} to the inherent social dynamics of the process and to the transition of \hlt{accountability} from individual to collective.}
-  {alami2025accountability}
 
 \plush{
   \begin{multicols}{2}
