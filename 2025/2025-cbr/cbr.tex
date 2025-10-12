@@ -241,6 +241,34 @@
 
 \lnPitch{\pptSection[5.\rus{Архитектура}{Architecture}]{5. \rus{Описание архитектуры}{Written Architecture}}}
 
+\begin{lnSnippet}[foo.java]
+class Foo {
+  int save_content(char* path) {
+    if cant_read() (*@\textcolor{orange}{return -1}@*);
+    // do the rest
+    (*@\textcolor{orange}{return 0}@*);
+  }
+}
+\end{lnSnippet}
+\begin{lnSnippet}[bar.java]
+class Bar {
+  char* save() {
+    if cant_save()
+      (*@\textcolor{orange}{throw}@*) "Can't save file"
+    // do the rest
+  }
+}
+\end{lnSnippet}
+\lnPitch{
+  \pptBanner{Some Bugs Are at the Design Level:}
+  \begin{pptWide}{2}
+  Error code:\par
+  {\small\ffinput{foo.java}}
+  \par\columnbreak\par
+  Exception:\par
+  {\small\ffinput{bar.java}}
+  \end{pptWide}}
+
 \lnQuote
   [Simon Weber]
   {simon-weber}
