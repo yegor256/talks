@@ -2,6 +2,18 @@
 % SPDX-License-Identifier: MIT
 
 \documentclass{article}
+
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainlanguage{russian}
+\setotherlanguage{english}
+\setmainfont{Noto Serif}
+\setsansfont{Noto Sans}
+\setmonofont{Roboto Mono}
+\newfontfamily\cyrillicfont{Noto Serif}
+\newfontfamily\cyrillicfontsf{Noto Sans}
+\newfontfamily\cyrillicfonttt{Roboto Mono}
+
 \usepackage{../../lecture-notes/notes}
 \usepackage{svg}
 \usepackage{tikz}
@@ -11,13 +23,17 @@
 
 \newcommand*{\thetitle}{Enemy at the Gate: AI}
 \newcommand*{\thesubtitle}{What is the weapon to defend our code?}
-\newcommand*{\theauthor}{Yegor Bugayenko}
+\newcommand*{\theauthor}{\rus{Егор Бугаенко}{Yegor Bugayenko}}
+
+\newcommand\rus[2]{#1}
 
 \renewcommand\ul[1]{\textcolor{orange}{#1}}
 
 \begin{document}
 
-\pptLeft{October 29th, 2025}
+\rmfamily
+
+\pptLeft{\rus{29-е октября 2025}{October 29th, 2025}}
 \pptRight{@yegor256}
 
 \lnPitch{
@@ -29,7 +45,15 @@
 \newpage
 \pagecolor{white}
 
-\lnPitch{\pptChapter[Threats]{What Are the Threats?}}
+\lnPitch{\pptChapter[\rus{Помехи}{Threats}]{\rus{Что Нам Мешает?}{What Are the Threats?}}}
+
+\lnPitch{
+  \pptBanner{From What We Programmers Suffer Most:}
+  \begin{enumerate}
+    \item \rus{Баги}{Bugs}
+    \item \rus{Дыры в безопасности}{Security Holes}
+    \item \rus{Грязный код}{Dirty Code}
+  \end{enumerate}}
 
 \lnPitch{\pptSection[1.Defects]{1. Defects a.k.a Bugs}}
 
@@ -39,10 +63,10 @@
   {Microsoft experiences about \ul{10–20 defects per 1000 lines of code} during in-house testing and 0.5 defects per 1000 lines of code in released product.}
   {mcconnell2004code}
 
-\lnPitch{\pptBanner{A Few Open Source Repositories of Our Time}
+\lnPitch{\pptBanner{\rus{Статистика нскольких современных продуктов}{A Few Open Source Repositories of Our Time}}
   {\ttfamily\small\begin{tabular}{llrr>{\color{orange}}r}
   \toprule
-  Project & Stack & KLoC & Issues & I/KLoC \\
+  \rus{Продукт}{Repository} & Stack & KLoC & Issues & I/KLoC \\
   \midrule
   \href{https://github.com/torvalds/kernel}{kernel} & C & 27,300 & 220,600 & 8.1 \\
   \href{https://github.com/tensorflow/tensorflow}{tensorflow} & C++ & 3,600 & 40,200 & 11.2 \\
@@ -169,15 +193,15 @@
   {Upon investigation, \ul{popular} projects were found to have \ul{larger READMEs} (median 2 kilobytes vs. 500 bytes). Also, 95\% of popular projects have nonempty READMEs, compared to only 65\% of unpopular projects.}
   {weber2014makes}
 
-\plush{
-  \begin{multicols}{2}
-  \pptBanner{1)~Subscribe:}\par
-  \qrcode[height=8em]{https://t.me/yegor256news}\par
-  \href{https://t.me/yegor256news}{\texttt{@yegor256news}}
-  \par\columnbreak\par
-  \pptBanner{2)~Join:}\par
-  Join me in all your favorite social networks, including GitHub and Twitter:\par
-  {\Huge\texttt{@yegor256}}
-  \end{multicols}}
+% \plush{
+%   \begin{multicols}{2}
+%   \pptBanner{1)~Subscribe:}\par
+%   \qrcode[height=8em]{https://t.me/yegor256news}\par
+%   \href{https://t.me/yegor256news}{\texttt{@yegor256news}}
+%   \par\columnbreak\par
+%   \pptBanner{2)~Join:}\par
+%   Join me in all your favorite social networks, including GitHub and Twitter:\par
+%   {\Huge\texttt{@yegor256}}
+%   \end{multicols}}
 
 \end{document}
