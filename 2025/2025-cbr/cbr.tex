@@ -243,7 +243,7 @@
 
 \begin{lnSnippet}[foo.java]
 class Foo {
-  int save_content(char* path) {
+  int get_content(char* path) {
     if cant_read() (*@\textcolor{orange}{return -1}@*);
     // do the rest
     (*@\textcolor{orange}{return 0}@*);
@@ -252,7 +252,7 @@ class Foo {
 \end{lnSnippet}
 \begin{lnSnippet}[bar.java]
 class Bar {
-  char* save() {
+  char* store_it() {
     if cant_save()
       (*@\textcolor{orange}{throw}@*) "Can't save file"
     // do the rest
