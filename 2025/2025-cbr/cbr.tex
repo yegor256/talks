@@ -16,6 +16,7 @@
 
 \usepackage{../../lecture-notes/notes}
 \usepackage{svg}
+\usepackage{csquotes}
 \usepackage{tikz}
   \usetikzlibrary{shadows}
 
@@ -33,7 +34,7 @@
 
 \rmfamily
 
-\pptLeft{\rus{29-е октября 2025}{October 29th, 2025}}
+\pptLeft{\rus{29 октября 2025}{October 29th, 2025}}
 \pptRight{@yegor256}
 
 \lnPitch{
@@ -63,7 +64,7 @@
   {\rus{Microsoft обнаруживает около \ul{10–20 дефектов на 1000 строк кода} во время внутреннего тестирования и 0.5 дефектов на 1000 строк кода в выпущенном продукте.}{Microsoft experiences about \ul{10–20 defects per 1000 lines of code} during in-house testing and 0.5 defects per 1000 lines of code in released product.}}
   {mcconnell2004code}
 
-\lnPitch{\pptBanner{\rus{Статистика нскольких современных продуктов}{A Few Open Source Repositories of Our Time}}
+\lnPitch{\pptBanner{\rus{Статистика нескольких современных продуктов}{A Few Open Source Repositories of Our Time}}
   {\ttfamily\small\begin{tabular}{llrr>{\color{orange}}r}
   \toprule
   \rus{Продукт}{Repository} & Stack & KLoC & Issues & I/KLoC \\
@@ -87,7 +88,7 @@
   {\rus{Центральный и критический аспект компьютерной \ul{проблемы безопасности} — это проблема программного обеспечения. Дефекты ПО с последствиями для безопасности — включая ошибки реализации, такие как переполнение буфера, и недостатки проектирования, такие как непоследовательная обработка ошибок — обещают быть с нами \ul{годами}.}{A central and critical aspect of the computer \ul{security problem} is a software problem. Software defects with security ramifications—including implementation bugs such as buffer overflows and design flaws such as inconsistent error handling—promise to be with us \ul{for years}.}}
   {mcgraw2006software}
 
-\lnPitch{\pptSection[3.\rus{Грязь}{Dirt}]{\rus{3. Сложность, Дублирование и Smells}{3. Complexity, Duplication, and Smells}}}
+\lnPitch{\pptSection[3.\rus{Грязь}{Dirt}]{3. \rus{Сложность, Дублирование и Smells}{Complexity, Duplication, and Smells}}}
 
 \lnQuote
   {vladimir-khorikov}
@@ -136,7 +137,7 @@
   {\rus{Стиль кодирования человеческого кода может быть подвержен влиянию LLM: они могут не только отражать существующие нормы, но и тонко изменять их, постепенно подталкивая разработчиков к большему стилистическому соответствию с \ul{конвенциями, предпочитаемыми LLM}.}{The coding style of human-written code may be influenced by LLMs: they may not only mirror existing norms but also subtly reshape them, gradually pushing human developers toward greater stylistic alignment with \ul{LLM-preferred conventions}.}}
   {xu2025transformed}
 
-\lnPitch{\pptSection[3.\rus{Утечки}{Leakage}]{3. \rus{Случайная утечка данных}{3. Accidental Leakage of Data}}}
+\lnPitch{\pptSection[3.\rus{Утечки}{Leakage}]{\rus{3. Случайная утечка данных}{3. Accidental Leakage of Data}}}
 
 \lnPitch{
   \includesvg[height=1in]{gemini.svg}
@@ -163,7 +164,7 @@
 \lnPitch{\pptChapter[Defense]{\rus{Как мы можем защититься?}{How Can We Defend Ourselves?}}}
 
 \lnPitch{
-  \pptBanner{\rus{Наше оружие против ИИ}{Our Amunition Against LLM}:}
+  \pptBanner{\rus{Наше оружие против ИИ}{Our Ammunition Against LLM}:}
   \begin{enumerate}
     \item \rus{Ревью кода}{Code Reviews}
     \item \rus{Автоматизированные тесты}{Automated Tests}
@@ -226,7 +227,7 @@
     \item 130+ \rus{в}{in} Checkstyle (Java)
     \item 120+ \rus{в}{in} Pylint (Python)
   \end{itemize}
-  \par{\small\rus{Некоторые/большинство правил не только проверяют стиль, но и находят баги.}{Some/most of the rules no only check style, but also find bugs.}\par}}
+  \par{\small\rus{Некоторые/большинство правил не только проверяют стиль, но и находят баги.}{Some/most of the rules not only check style, but also find bugs.}\par}}
 
 \lnPitch{
   \pptBanner{\rus{Экзотические контролёры стиля}{Some Exotic Style Checkers}:}
@@ -280,6 +281,10 @@ class Bar {
   \includegraphics[width=.8\linewidth]{archunit.png}
   \par
   {\scriptsize\url{https://www.archunit.org/}}}
+
+\lnPitch{
+  \pptBanner{\rus{Вывод}{Conclusion}:}
+  \enquote{\rus{ИИ помогает как нам, так и нашим врагам.}{AI helps us, but it also helps our enemies.}}}
 
 % \plush{
 %   \begin{multicols}{2}
