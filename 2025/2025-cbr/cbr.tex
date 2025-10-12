@@ -45,22 +45,22 @@
 \newpage
 \pagecolor{white}
 
-\lnPitch{\pptChapter[\rus{Помехи}{Threats}]{\rus{Что Нам Мешает?}{What Are the Threats?}}}
+\lnPitch{\pptChapter[\rus{Помехи}{Threats}]{\rus{Что нам мешает?}{What Are the Threats?}}}
 
 \lnPitch{
-  \pptBanner{From What We Programmers Suffer Most:}
+  \pptBanner{\rus{От чего программисты страдают больше всего}{From What We Programmers Suffer Most}:}
   \begin{enumerate}
     \item \rus{Баги}{Bugs}
     \item \rus{Дыры в безопасности}{Security Holes}
     \item \rus{Грязный код}{Dirty Code}
   \end{enumerate}}
 
-\lnPitch{\pptSection[1.Defects]{1. Defects a.k.a Bugs}}
+\lnPitch{\pptSection[1.\rus{Баги}{Bugs}]{\rus{1. Дефекты (они же баги)}{1. Defects a.k.a Bugs}}}
 
 \lnQuote
   [Steve McConnell]
   {steve-mcconnell}
-  {Microsoft experiences about \ul{10–20 defects per 1000 lines of code} during in-house testing and 0.5 defects per 1000 lines of code in released product.}
+  {\rus{Microsoft обнаруживает около \ul{10–20 дефектов на 1000 строк кода} во время внутреннего тестирования и 0.5 дефектов на 1000 строк кода в выпущенном продукте.}{Microsoft experiences about \ul{10–20 defects per 1000 lines of code} during in-house testing and 0.5 defects per 1000 lines of code in released product.}}
   {mcconnell2004code}
 
 \lnPitch{\pptBanner{\rus{Статистика нскольких современных продуктов}{A Few Open Source Repositories of Our Time}}
@@ -80,63 +80,63 @@
   \bottomrule
   \end{tabular}}}
 
-\lnPitch{\pptSection[2.Holes]{2. Security Holes}}
+\lnPitch{\pptSection[2.\rus{Дыры}{Holes}]{\rus{2. Дыры в Безопасности}{2. Security Holes}}}
 
 \lnQuote
   {gary-mcgraw}
-  {A central and critical aspect of the computer \ul{security problem} is a software problem. Software defects with security ramifications—including implementation bugs such as buffer overflows and design flaws such as inconsistent error handling—promise to be with us \ul{for years}.}
+  {\rus{Центральный и критический аспект компьютерной \ul{проблемы безопасности} — это проблема программного обеспечения. Дефекты ПО с последствиями для безопасности — включая ошибки реализации, такие как переполнение буфера, и недостатки проектирования, такие как непоследовательная обработка ошибок — обещают быть с нами \ul{годами}.}{A central and critical aspect of the computer \ul{security problem} is a software problem. Software defects with security ramifications—including implementation bugs such as buffer overflows and design flaws such as inconsistent error handling—promise to be with us \ul{for years}.}}
   {mcgraw2006software}
 
-\lnPitch{\pptSection[3.Dirt]{3. Complexity, Duplication, and Smells}}
+\lnPitch{\pptSection[3.\rus{Грязь}{Dirt}]{\rus{3. Сложность, Дублирование и Smells}{3. Complexity, Duplication, and Smells}}}
 
 \lnQuote
   {vladimir-khorikov}
-  {The \ul{simpler} your solution is, the \ul{better} you are as a software developer. Most software developers can write code that works. Creating code that works \ul{and} is as simple as possible --- that is the true challenge.}
+  {\rus{Чем \ul{проще} ваше решение, тем \ul{лучше} вы как разработчик. Большинство разработчиков могут написать код, который работает. Создать код, который работает \ul{и} настолько прост, насколько это возможно — вот истинный вызов.}{The \ul{simpler} your solution is, the \ul{better} you are as a software developer. Most software developers can write code that works. Creating code that works \ul{and} is as simple as possible --- that is the true challenge.}}
   {khorikov2015kiss}
 
 \lnQuote
   [Robert C. Martin]
   {robert-martin}
-  {Duplication is the \ul{primary enemy} of a well-designed system.}
+  {\rus{Дублирование — это \ul{главный враг} хорошо спроектированной системы.}{Duplication is the \ul{primary enemy} of a well-designed system.}}
   {martin2008clean}
 
 \lnQuote
   [Mark Seemann]
   {mark-seemann}
-  {I like the gardening metaphor's emphasis on activities that combat disorder. Just as you must prune and weed a garden, you must refactor and pay off \ul{technical debt} in your code bases.}
+  {\rus{Мне нравится, как метафора садоводства подчеркивает действия, которые борются с беспорядком. Точно так же, как вы должны обрезать и пропалывать сад, вы должны рефакторить и погашать \ul{технический долг} в вашей кодовой базе.}{I like the gardening metaphor's emphasis on activities that combat disorder. Just as you must prune and weed a garden, you must refactor and pay off \ul{technical debt} in your code bases.}}
   {seemann2021code}
 
-\lnPitch{\pptChapter[LLM]{Why Now It's Getting Worse?}}
+\lnPitch{\pptChapter[LLM]{\rus{Почему Сейчас Становится Хуже?}{Why Now It's Getting Worse?}}}
 
-\lnPitch{\pptSection[1.Quality]{1. False Sense of Quality}}
+\lnPitch{\pptSection[1.\rus{Качество}{Quality}]{1. \rus{Ложное чувство качества}{False Sense of Quality}}}
 
 \lnQuote
   [Chun Jie Chong]
   {chun-jie-chong}
-  {Quality-wise, we found that LLM generates bare-bones code that lacks defensive programming constructs, and is typically \ul{more complex} (per line of code) compared to human-written code. Fuzzing has revealed that LLM-generated code is more \ul{prone to hangs and crashes} than human-written code.}
+  {\rus{С точки зрения качества, мы обнаружили, что LLM генерирует голый код, лишенный конструкций защитного программирования, и обычно \ul{более сложный} (на строку кода) по сравнению с кодом, написанным человеком. Фаззинг показал, что код, сгенерированный LLM, более \ul{склонен к зависаниям и сбоям}, чем код, написанный человеком.}{Quality-wise, we found that LLM generates bare-bones code that lacks defensive programming constructs, and is typically \ul{more complex} (per line of code) compared to human-written code. Fuzzing has revealed that LLM-generated code is more \ul{prone to hangs and crashes} than human-written code.}}
   {chong2024artificial}
 
 \lnQuote
   [Altaf Allah Abbassi]
   {altaf-allah-abbassi}
-  {33.54\% of the studied sample exhibited multiple \ul{inefficiencies}, indicating that inefficiencies in LLM-generated code are diverse and interconnected. Our findings highlight a \ul{critical gap} in LLMs' capability to generate correct, optimized, and high-quality code.}
+  {\rus{33.54\% изученных образцов продемонстрировали множественные \ul{неэффективности}, указывая на то, что неэффективности в коде, сгенерированном LLM, разнообразны и взаимосвязаны. Наши результаты выявляют \ul{критический пробел} в способности LLM генерировать корректный, оптимизированный и высококачественный код.}{33.54\% of the studied sample exhibited multiple \ul{inefficiencies}, indicating that inefficiencies in LLM-generated code are diverse and interconnected. Our findings highlight a \ul{critical gap} in LLMs' capability to generate correct, optimized, and high-quality code.}}
   {abbassi2025taxonomy}
 
 \lnQuote
   [Adam Alami]
   {adam-alami}
-  {Introduction of an LLM into the social system of code review causes a \ul{disruption} to the inherent social dynamics of the process and to the transition of \ul{accountability} from individual to collective.}
+  {\rus{Внедрение LLM в социальную систему ревью кода вызывает \ul{нарушение} присущей социальной динамики процесса и переход \ul{ответственности} от индивидуальной к коллективной.}{Introduction of an LLM into the social system of code review causes a \ul{disruption} to the inherent social dynamics of the process and to the transition of \ul{accountability} from individual to collective.}}
   {alami2025accountability}
 
-\lnPitch{\pptSection[2.Influence]{2. Bad Influence}}
+\lnPitch{\pptSection[2.\rus{Влияние}{Influence}]{2. \rus{Дурное влияние}{Bad Influence}}}
 
 \lnQuote
   [Xuanhua Shi]
   {xuanhua-shi}
-  {The coding style of human-written code may be influenced by LLMs: they may not only mirror existing norms but also subtly reshape them, gradually pushing human developers toward greater stylistic alignment with \ul{LLM-preferred conventions}.}
+  {\rus{Стиль кодирования человеческого кода может быть подвержен влиянию LLM: они могут не только отражать существующие нормы, но и тонко изменять их, постепенно подталкивая разработчиков к большему стилистическому соответствию с \ul{конвенциями, предпочитаемыми LLM}.}{The coding style of human-written code may be influenced by LLMs: they may not only mirror existing norms but also subtly reshape them, gradually pushing human developers toward greater stylistic alignment with \ul{LLM-preferred conventions}.}}
   {xu2025transformed}
 
-\lnPitch{\pptSection[3.Leakage]{3. Accidental Leakage of Data}}
+\lnPitch{\pptSection[3.\rus{Утечки}{Leakage}]{3. \rus{Случайная утечка данных}{3. Accidental Leakage of Data}}}
 
 \lnPitch{
   \includesvg[height=1in]{gemini.svg}
@@ -152,45 +152,51 @@
   \par
   {\scriptsize\url{https://developers.sber.ru/docs/ru/policies/gigachat-agreement/beta}}}
 
-\lnPitch{\pptSection[4.Bosses]{4. Management Pressure}}
+\lnPitch{\pptSection[4.\rus{Начальство}{Bosses}]{4. \rus{Давление менеджмента}{Management Pressure}}}
 
-\lnPitch{\pptChapter[Defense]{How Can We Defend Ourselves?}}
+\lnPitch{
+  \pptBanner{\rus{Недавний опрос в моем Telegram канале}{Recently Asked in My Telegram Channel}:}
+  \includegraphics[width=.5\linewidth]{poll.png}
+  \par
+  {\scriptsize\url{https://t.me/yegor256news/1721}}}
 
-\lnPitch{\pptSection[1.Reviews]{1. Code Reviews}}
+\lnPitch{\pptChapter[Defense]{\rus{Как мы можем защититься?}{How Can We Defend Ourselves?}}}
+
+\lnPitch{\pptSection[1.\rus{Ревью}{Reviews}]{1. \rus{Ревью кода}{Code Reviews}}}
 
 \lnQuote
   [James Whittaker]
   {james-whittaker}
-  {Google centers its development process around code reviews. There is far more \ul{fanfare} about reviewing code than there is about writing it.}
+  {\rus{Google строит свой процесс разработки вокруг ревью кода. Гораздо больше \ul{шумихи} вокруг ревью кода, чем вокруг его написания.}{Google centers its development process around code reviews. There is far more \ul{fanfare} about reviewing code than there is about writing it.}}
   {whittaker2012google}
 
 \lnQuote
   [\nospell{Caitlin Sadowski}]
   {caitlin-sadowski}
-  {A correlation between \ul{change size} and \ul{review quality} is acknowledged by Google and developers are strongly encouraged to make small, incremental changes (with the exception of large deletions and automated refactoring).}
+  {\rus{Корреляция между \ul{размером изменения} и \ul{качеством ревью} признается Google, и разработчикам настоятельно рекомендуется вносить небольшие, инкрементальные изменения (за исключением больших удалений и автоматизированного рефакторинга).}{A correlation between \ul{change size} and \ul{review quality} is acknowledged by Google and developers are strongly encouraged to make small, incremental changes (with the exception of large deletions and automated refactoring).}}
   {sadowski2018modern}
 
-\lnPitch{\pptSection[2.Tests]{2. Test Coverage}}
+\lnPitch{\pptSection[2.\rus{Тесты}{Tests}]{2. \rus{Покрытие Тестами}{Test Coverage}}}
 
 \lnQuote
   [Goran Petrovi{\'c}]
   {goran-petrovic}
-  {Google \ul{does not enforce} any code coverage thresholds across the entire codebase. Projects (or groups of projects) are free to define their own thresholds and goals. Many projects opt-into a centralized voluntary alerting system that defines \ul{five levels} of code coverage thresholds.}
+  {\rus{Google \ul{не применяет принудительно} никаких порогов покрытия кода по всей кодовой базе. Проекты (или группы проектов) свободны определять свои собственные пороги и цели. Многие проекты подключаются к централизованной добровольной системе оповещения, которая определяет \ul{пять уровней} порогов покрытия кода.}{Google \ul{does not enforce} any code coverage thresholds across the entire codebase. Projects (or groups of projects) are free to define their own thresholds and goals. Many projects opt-into a centralized voluntary alerting system that defines \ul{five levels} of code coverage thresholds.}}
   {ivankovi2019}
 
-\lnPitch{\pptSection[3.Standards]{3. Coding Standards}}
+\lnPitch{\pptSection[3.\rus{Стандарты}{Standards}]{3. \rus{Стандарты Кодирования}{Coding Standards}}}
 
 \lnPitch{
   \pptPic{.8}{prompt.png}
   \par
   {\scriptsize\url{https://github.com/yegor256/prompt}}}
 
-\lnPitch{\pptSection[4.Architecture]{4. Written Architecture}}
+\lnPitch{\pptSection[4.\rus{Архитектура}{Architecture}]{4. \rus{Описание архитектуры}{Written Architecture}}}
 
 \lnQuote
   [Simon Weber]
   {simon-weber}
-  {Upon investigation, \ul{popular} projects were found to have \ul{larger READMEs} (median 2 kilobytes vs. 500 bytes). Also, 95\% of popular projects have nonempty READMEs, compared to only 65\% of unpopular projects.}
+  {\rus{В ходе исследования было обнаружено, что \ul{популярные} проекты имеют \ul{более объемные README} (медиана 2 килобайта против 500 байт). Также 95\% популярных проектов имеют непустые README, по сравнению с только 65\% непопулярных проектов.}{Upon investigation, \ul{popular} projects were found to have \ul{larger READMEs} (median 2 kilobytes vs. 500 bytes). Also, 95\% of popular projects have nonempty READMEs, compared to only 65\% of unpopular projects.}}
   {weber2014makes}
 
 % \plush{
