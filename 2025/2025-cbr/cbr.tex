@@ -19,6 +19,8 @@
 
 \renewcommand\ul[1]{\textcolor{orange}{#1}}
 
+\newcommand\bysora[1]{{\color{gray}\fontsize{12}{12}\selectfont Image by \href{https://sora.chatgpt.com/g/gen_#1}{Sora} \par}}
+
 \begin{document}
 
 \rmfamily
@@ -30,7 +32,7 @@
   \begin{textblock}{8}[1,1](15,15)%
     \raggedleft%
     \includegraphics[width=.6\linewidth]{arnie.png}\\
-    {\color{gray}\fontsize{12}{12}\selectfont Image by \href{https://sora.chatgpt.com/g/gen_01k7xe5sppe8s984jq26grme12}{Sora} \par}
+    \bysora{01k7xe5sppe8s984jq26grme12}
   \end{textblock}%
   \pptTitle{\thetitle}{\thesubtitle}
   \par
@@ -41,7 +43,13 @@
 \newpage
 \pagecolor{white}
 
-\lnPitch{\pptChapter[\rus{Помехи}{Threats}]{\rus{Что нам всегда мешает?}{What Are the Threats?}}}
+\lnPitch{
+  \pptChapter[\rus{Помехи}{Threats}]{\rus{Что нам всегда мешает?}{What Are the Threats?}}
+  \begin{textblock}{8}[1,0](15,2)%
+    \raggedleft%
+    \includegraphics[width=.6\linewidth]{coder.png}\\
+    \bysora{01k7xjeqxxf9zv3dh82jnpyz7r}
+  \end{textblock}}
 
 \lnPitch{
   \pptBanner{\rus{От чего программисты страдают больше всего}{From What We Programmers Suffer Most}:}
@@ -128,7 +136,11 @@ while (!(x = read()))
   {\rus{Мне нравится, как метафора садоводства подчеркивает действия, которые борются с беспорядком. Точно так же, как вы должны обрезать и пропалывать сад, вы должны рефакторить и погашать \ul{технический долг} в вашей кодовой базе.}{I like the gardening metaphor's emphasis on activities that combat disorder. Just as you must prune and weed a garden, you must refactor and pay off \ul{technical debt} in your code bases.}}
   {seemann2021code}
 
-\lnPitch{\pptChapter[LLM]{\rus{Почему сейчас становится хуже?}{Why Now It's Getting Worse?}}}
+\lnPitch{
+  \pptChapter[LLM]{\rus{Почему сейчас становится хуже?}{Why Now It's Getting Worse?}}
+  \begin{textblock}{8}[0,1](1,14)%
+    \includegraphics[width=.4\linewidth]{wall-e.png}
+  \end{textblock}}
 
 \lnPitch{\pptSection[1.\rus{Качество}{Quality}]{1. \rus{Ложное чувство качества}{False Sense of Quality}}}
 
@@ -208,7 +220,7 @@ while (!(x = read()))
   {\rus{Корреляция между \ul{размером изменения} и \ul{качеством ревью} признается Google, и разработчикам настоятельно рекомендуется вносить небольшие, инкрементальные изменения (за исключением больших удалений и автоматизированного рефакторинга).}{A correlation between \ul{change size} and \ul{review quality} is acknowledged by Google and developers are strongly encouraged to make small, incremental changes (with the exception of large deletions and automated refactoring).}}
   {sadowski2018modern}
 
-\lnPitch{\pptSection[2.\rus{Тесты}{Tests}]{2. \rus{Покрытие Тестами}{Test Coverage}}}
+\lnPitch{\pptSection[2.\rus{Тесты}{Tests}]{2. \rus{Покрытие тестами}{Test Coverage}}}
 
 \lnQuote
   [Goran Petrovi{\'c}]
@@ -216,7 +228,7 @@ while (!(x = read()))
   {\rus{Google \ul{не применяет принудительно} никаких порогов покрытия кода по всей кодовой базе. Проекты (или группы проектов) свободны определять свои собственные пороги и цели. Многие проекты подключаются к централизованной добровольной системе оповещения, которая определяет \ul{пять уровней} порогов покрытия кода.}{Google \ul{does not enforce} any code coverage thresholds across the entire codebase. Projects (or groups of projects) are free to define their own thresholds and goals. Many projects opt-into a centralized voluntary alerting system that defines \ul{five levels} of code coverage thresholds.}}
   {ivankovi2019}
 
-\lnPitch{\pptSection[3.\rus{Стандарты}{Standards}]{3. \rus{Стандарты Кодирования}{Coding Standards}}}
+\lnPitch{\pptSection[3.\rus{Стандарты}{Standards}]{3. \rus{Стандарты кодирования}{Coding Standards}}}
 
 \lnPitch{
   \pptPic{.8}{prompt.png}
