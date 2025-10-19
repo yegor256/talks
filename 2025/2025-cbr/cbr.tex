@@ -85,14 +85,31 @@ int[] nn = {1, 2, 3, 4, 5};
   \bottomrule
   \end{tabular}}}
 
-\lnPitch{\pptSection[2.\rus{Дыры}{Holes}]{\rus{2. Дыры в безопасности}{2. Security Holes}}}
+\begin{lnSnippet}[loophole.java]
+"SELECT * FROM user WHERE name = (*@\textcolor{orange}{'" + name + "'"}@*)
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[2.\rus{Дыры}{Holes}]{\rus{2. Дыры в безопасности}{2. Security Holes}}
+  \begin{textblock}{10}[1,1](15,14)%
+    \ffinput{loophole.java}
+  \end{textblock}}
 
 \lnQuote
   {gary-mcgraw}
   {\rus{Центральный и критический аспект компьютерной \ul{проблемы безопасности} — это проблема программного обеспечения. Дефекты ПО с последствиями для безопасности — включая ошибки реализации, такие как переполнение буфера, и недостатки проектирования, такие как непоследовательная обработка ошибок — обещают быть с нами \ul{годами}.}{A central and critical aspect of the computer \ul{security problem} is a software problem. Software defects with security ramifications—including implementation bugs such as buffer overflows and design flaws such as inconsistent error handling—promise to be with us \ul{for years}.}}
   {mcgraw2006software}
 
-\lnPitch{\pptSection[3.\rus{Грязь}{Dirt}]{3. \rus{Сложность, Дублирование и Smells}{Complexity, Duplication, and Smells}}}
+\begin{lnSnippet}[smell.java]
+while (!(x = read()))
+  if (x = 5 && !(b & 3))
+    print(x--);
+    else return;
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[3.\rus{Грязь}{Dirt}]{3. \rus{Сложность, дублирование и smells}{Complexity, Duplication, and Smells}}
+  \begin{textblock}{6}[1,1](15,14)%
+    \ffinput{smell.java}
+  \end{textblock}}
 
 \lnQuote
   {vladimir-khorikov}
