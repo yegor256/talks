@@ -51,7 +51,16 @@
     \item \rus{Грязный код}{Dirty Code}
   \end{enumerate}}
 
-\lnPitch{\pptSection[1.\rus{Баги}{Bugs}]{\rus{1. Дефекты (они же баги)}{1. Defects a.k.a Bugs}}}
+\begin{lnSnippet}[bug.java]
+int[] nn = {1, 2, 3, 4, 5};
+  for (int i = 0; i (*@\textcolor{orange}{<=}@*) nn.length; i++)
+    System.out.println(i);
+\end{lnSnippet}
+\lnPitch{
+  \pptSection[1.\rus{Баги}{Bugs}]{\rus{1. Дефекты (они же баги)}{1. Defects a.k.a Bugs}}
+  \begin{textblock}{8}[1,1](15,14)%
+    \ffinput{bug.java}
+  \end{textblock}}
 
 \lnQuote
   [Steve McConnell]
