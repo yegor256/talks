@@ -206,13 +206,7 @@ while (!(x = read()))
     \item \rus{Описание архитектуры}{Written Architecture}
   \end{enumerate}}
 
-\lnPitch{\pptSection[1.\rus{Ревью}{Reviews}]{1. \rus{Ревью кода}{Code Reviews}}}
-
-\lnQuote
-  [James Whittaker]
-  {james-whittaker}
-  {\rus{Google строит свой процесс разработки вокруг ревью кода. Гораздо больше \ul{шумихи} вокруг ревью кода, чем вокруг его написания.}{Google centers its development process around code reviews. There is far more \ul{fanfare} about reviewing code than there is about writing it.}}
-  {whittaker2012google}
+\lnPitch{\pptSection[1.\rus{Ревью}{Reviews}]{1. \rus{Ревью кода малыми порциями}{Reviews in Small Pull Requests}}}
 
 \lnQuote
   [\nospell{Caitlin Sadowski}]
@@ -220,7 +214,15 @@ while (!(x = read()))
   {\rus{Корреляция между \ul{размером изменения} и \ul{качеством ревью} признается Google, и разработчикам настоятельно рекомендуется вносить небольшие, инкрементальные изменения (за исключением больших удалений и автоматизированного рефакторинга).}{A correlation between \ul{change size} and \ul{review quality} is acknowledged by Google and developers are strongly encouraged to make small, incremental changes (with the exception of large deletions and automated refactoring).}}
   {sadowski2018modern}
 
-\lnPitch{\pptSection[2.\rus{Тесты}{Tests}]{2. \rus{Покрытие тестами}{Test Coverage}}}
+\lnPitch{
+  \begin{multicols}{2}
+  \includegraphics[width=.7\linewidth]{lines-per-pr.png}\par
+  \lnSource{rigby2013convergent}
+  \par\columnbreak\par
+  \enquote{Both Android and AMD have a median change size of 44 lines. This median change size is larger than Apache, \ul{25 lines}, and Linux, \ul{32 lines}, but much smaller than Lucent where the number of non-comment lines changed is \ul{263 lines}. Bing, Chrome’s median change is \ul{78 lines} and includes 5 files.}
+  \end{multicols}}
+
+\lnPitch{\pptSection[2.\rus{Тесты}{Tests}]{2. \rus{Контроль покрытия тестами}{Test Coverage Control}}}
 
 \lnQuote
   [Goran Petrovi{\'c}]
@@ -228,14 +230,33 @@ while (!(x = read()))
   {\rus{Google \ul{не применяет принудительно} никаких порогов покрытия кода по всей кодовой базе. Проекты (или группы проектов) свободны определять свои собственные пороги и цели. Многие проекты подключаются к централизованной добровольной системе оповещения, которая определяет \ul{пять уровней} порогов покрытия кода.}{Google \ul{does not enforce} any code coverage thresholds across the entire codebase. Projects (or groups of projects) are free to define their own thresholds and goals. Many projects opt-into a centralized voluntary alerting system that defines \ul{five levels} of code coverage thresholds.}}
   {ivankovi2019}
 
+\lnPitch{
+  \pptBanner{Code Coverage Threshold Levels in Google}
+  \includegraphics[width=.6\textwidth]{levels.png}
+  \lnSource{ivankovi2019}}
+
 \lnPitch{\pptSection[3.\rus{Стандарты}{Standards}]{3. \rus{Стандарты кодирования}{Coding Standards}}}
 
 \lnPitch{
-  \pptPic{.8}{prompt.png}
-  \par
-  {\scriptsize\url{https://github.com/yegor256/prompt}}}
+  \pptPic{.9}{karpathy.png}
+  {\scriptsize \url{https://x.com/karpathy/status/1617979122625712128}\par}}
 
-\lnPitch{\pptSection[4.\rus{Стиль}{Style}]{4. \rus{Контроль стиля}{Style Checkers}}}
+\lnPitch{
+  \pptBanner{Our \enquote{Agent Coding Manifest}}
+  \pptPic{.7}{prompt.png}
+  {\small\url{https://github.com/yegor256/prompt}}}
+
+\lnPitch{
+  \pptBanner{Leaked System Prompts:}
+  \href{https://github.com/asgeirtj/system_prompts_leaks}{asgeirtj/system_prompts_leaks}}
+
+\lnPitch{
+  \pptSection[4.\rus{Стиль}{Style}]{4. \rus{Контроль стиля}{Style Checkers}}
+  \begin{textblock}{8}[1,1](14,14)%
+    \raggedleft%
+    \includegraphics[width=.5\linewidth]{girl.png}\\
+    \bysora{01k7xmxhcfedwr5qa3wekfegtm}
+  \end{textblock}}
 
 \lnPitch{
   \pptBanner{\rus{Несколько популярных контролёров стиля}{Some Popular Style Checkers}:}
@@ -319,15 +340,8 @@ class Bar {
   \pptBanner{\rus{Вывод}{Conclusion}:}
   \enquote{\rus{ИИ помогает как нам, так и нашим врагам.}{AI helps us, but it also helps our enemies.}}}
 
-% \plush{
-%   \begin{multicols}{2}
-%   \pptBanner{1)~Subscribe:}\par
-%   \qrcode[height=8em]{https://t.me/yegor256news}\par
-%   \href{https://t.me/yegor256news}{\texttt{@yegor256news}}
-%   \par\columnbreak\par
-%   \pptBanner{2)~Join:}\par
-%   Join me in all your favorite social networks, including GitHub and Twitter:\par
-%   {\Huge\texttt{@yegor256}}
-%   \end{multicols}}
+\lnPitch{
+  \pptBanner{\rus{Вопросы?}{Questions?}}\par
+  \qrcode[height=12em]{https://t.me/yegor256news}}
 
 \end{document}
