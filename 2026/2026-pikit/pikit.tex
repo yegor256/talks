@@ -210,22 +210,15 @@
 
 \lnThought*{How about a few more examples of RQs?}
 
-\lnPitch{
-  \pptBanner[orange]{RQ1: How long Java objects live after instantiation?}
-  \includegraphics[width=.6\linewidth]{../2025/2025-rd/spec.png}
-  \par
-  ``We observe that Java programs generate a substantial amount of \hi{short-lived objects} (up to 99\%).''
-  \lnSource{kim2000memory}}
-
-\print{\pptBanner[orange]{RQ2: Larger pull requests mean lower quality?}}
+\print{\pptBanner[orange]{RQ1: Do larger pull requests mean lower quality?}}
 \lnQuote
   [\nospell{Caitlin Sadowski}]
   {caitlin-sadowski}
-  {A correlation between \hi{change size} and \hi{review quality} is acknowledged by Google and developers are strongly encouraged to make small, incremental changes (with the exception of large deletions and automated refactoring).}
+  {A correlation between change size and \hi{review quality} is acknowledged by Google and developers are strongly encouraged to make small, incremental changes (with the exception of large deletions and automated refactoring).}
   {sadowski2018modern}
 
 \plush{
-  \pptBanner[orange]{RQ3: Blank lines inside Java methods are code smell?}
+  \pptBanner[orange]{RQ2: Blank lines inside Java methods are code smell?}
   \begin{multicols}{2}
   \includegraphics[width=.9\linewidth]{../2025/2025-rd/blank-lines.png}
   \par\columnbreak\par
@@ -235,6 +228,13 @@
   along with a positive non-linear relationship with MIDX.''
   \lnSource{galiullin2024}
   \end{multicols}}
+
+\lnPitch{
+  \pptBanner[orange]{RQ3: How long Java objects live after instantiation?}
+  \includegraphics[width=.6\linewidth]{../2025/2025-rd/spec.png}
+  \par
+  ``We observe that Java programs generate a substantial amount of \hi{short-lived objects} (up to 99\%).''
+  \lnSource{kim2000memory}}
 
 \lnThought*{How to write and publish the \hi{first} paper?}
 
