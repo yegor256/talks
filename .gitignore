@@ -1,7 +1,6 @@
-_minted-*/
-_minted-wp/
-.DS_Store
-.idea/
+# SPDX-FileCopyrightText: Copyright (c) 2025 Yegor Bugayenko
+# SPDX-License-Identifier: MIT
+
 *.aux
 *.bbl
 *.bcf
@@ -20,6 +19,12 @@ _minted-wp/
 *.run.xml
 *.toc
 *.xcp
+*.bbl-SAVE-ERROR
+*.bcf-SAVE-ERROR
+.DS_Store
+.idea/
+_minted-*/
+_minted-wp/
 node_modules/
 svg-inkscape/
 target/

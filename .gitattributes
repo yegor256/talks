@@ -1,1 +1,4 @@
+# SPDX-FileCopyrightText: Copyright (c) 2025 Yegor Bugayenko
+# SPDX-License-Identifier: MIT
+
 *.key filter=lfs diff=lfs merge=lfs -text
