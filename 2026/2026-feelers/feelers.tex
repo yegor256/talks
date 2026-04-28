@@ -1,0 +1,116 @@
+% SPDX-FileCopyrightText: Copyright (c) 2023 Yegor Bugayenko
+% SPDX-License-Identifier: MIT
+
+\documentclass{article}
+\PassOptionsToPackage{olditem}{paralist}
+\usepackage[template,scheme=light,nominutes]{ppt-slides}
+\usepackage[static]{clicks}
+\usepackage{../../lecture-notes/notes}
+\usepackage{svg}
+\usepackage{tikz}
+  \usetikzlibrary{shadows}
+
+\graphicspath{{../../faces/}}
+
+\newcommand*{\thetitle}{Feelers}
+\newcommand*{\thesubtitle}{What Can You Do For Me, Human?}
+\newcommand*{\theauthor}{Yegor Bugayenko}
+
+\newcommand\hi[1]{\textcolor{orange}{#1}}
+
+\begin{document}
+
+\pptLeft{%
+  %   \includesvg[height=2em]{pikit-logo-black.svg}\\
+  May 23rd, 2026}
+\pptRight{@yegor256}
+
+% \definecolor{pikitBackground}{HTML}{406B86}
+% \pagecolor{pikitBackground}
+\plush{
+  \begin{textblock}{8}[1,1](15,15)%
+    \raggedleft%
+    \includegraphics[width=.5\linewidth]{robot.jpg}
+  \end{textblock}%
+  \begin{pptMiddle}
+    % \includesvg[height=4em]{pikit-logo-white.svg}
+    \pptTitle{\textcolor{black}{\thetitle}}{\textcolor{white}{\thesubtitle}}\par
+    {\textcolor{white}{\scshape \theauthor{} @ Zerocracy}}
+  \end{pptMiddle}
+}
+\newpage
+\pagecolor{white}
+
+\plush{
+  \pptBanner{When AI is uncertain, it asks me.}
+  \begin{itemize}
+  \item something is missing in the "intent"
+  \item most often it asks about design, not implementation details
+  \item it understands the implication
+  \item it expects me to fill the \textbf{gaps}
+  \end{itemize}
+  }
+
+\plush{
+  \pptBanner{We, humans, are the integrators.}
+  \begin{itemize}
+  \item responsibility is ours, we understand the consequences
+  \item we put pieces together and delegate implementation to AI
+  \item bottleneck was never code --- it was holding the system in our head
+  \item AI now writes; we still hold --- that's what \textbf{burns us out}
+  \end{itemize}
+  }
+
+\plush{
+  \pptBanner{AI holds the system. We hold the intent.}
+  \begin{itemize}
+  \item every abstraction ate the one below, since Assembly
+  \item SSH, SQL, IDEs, editors --- the next layer to disappear
+  \item AI will know it all: software, data, servers, network, hardware
+  \item we will only tell it what we \textbf{need}
+  \end{itemize}
+  }
+
+\plush{
+  \pptBanner{Then the machine asks us.}
+  \begin{itemize}
+  \item the system is text --- AI reads it
+  \item the org, the politics, the user's frustration --- not text
+  \item AI must ask: go there, ask that person, come back with the answer
+  \item AI will know how systems work --- we will \textbf{feel them}
+  \end{itemize}
+  }
+
+\plush{
+  \pptBanner{We become the senses.}
+  \begin{itemize}
+  \item we become concern providers --- AI's senses: ears, eyes, skin
+  \item pay follows scarcity: free code is worthless
+  \item what a user actually feels --- AI cannot do alone
+  \item the key skill: talking about your \textbf{feelings and emotions}
+  \end{itemize}
+  }
+
+\plush{
+  \pptBanner{But can we trust them?}
+  \begin{itemize}
+  \item same as with humans: tests, review, observability
+  \item their knowledge is portable --- just text files
+  \item but AI doesn't get defensive, moody, or resentful
+  \item it accepts our concerns and just \textbf{fixes, fixes, fixes}
+  \end{itemize}
+  }
+
+\plush{
+  \pptBanner{AI will feel us.}
+  \begin{itemize}
+  \item anything writeable migrates to AI; tech is fully delegated
+  \item what it feels like to be a person --- stays ours
+  \item tech geeks of the past become humanitarians of the future
+  \item the last unexportable skill is \textbf{empathy}
+  \end{itemize}
+  }
+
+\plush{\qrcode[height=12em]{https://t.me/yegor256news}}
+
+\end{document}
