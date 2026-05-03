@@ -2,19 +2,20 @@
 % SPDX-License-Identifier: MIT
 
 \documentclass{article}
-\PassOptionsToPackage{olditem}{paralist}
 \usepackage[template,scheme=light,nominutes]{ppt-slides}
 \usepackage[static]{clicks}
-\usepackage{../../lecture-notes/notes}
+\usepackage[russian]{../../lecture-notes/notes}
 \usepackage{svg}
 \usepackage{tikz}
   \usetikzlibrary{shadows}
 
 \graphicspath{{../../faces/}}
 
-\newcommand*{\thetitle}{Feelers}
-\newcommand*{\thesubtitle}{What Can You Do For Me, Human?}
-\newcommand*{\theauthor}{Yegor Bugayenko}
+\newcommand\bi[2]{#2}
+
+\newcommand*{\thetitle}{\bi{Feelers}{Чувствуй!}}
+\newcommand*{\thesubtitle}{\bi{What Can You Do For Me, Human?}{Зачем ты мне, человек?}}
+\newcommand*{\theauthor}{\bi{Yegor Bugayenko}{Егор Бугаенко}}
 
 \newcommand\hi[1]{\textcolor{orange}{#1}}
 
@@ -35,7 +36,7 @@
   \begin{pptMiddle}
     % \includesvg[height=4em]{pikit-logo-white.svg}
     \pptTitle{\textcolor{black}{\thetitle}}{\textcolor{white}{\thesubtitle}}\par
-    {\textcolor{white}{\scshape \theauthor{} @ Zerocracy}}
+    {\textcolor{white}{\theauthor{} @ Zerocracy}}
   \end{pptMiddle}
 }
 \newpage

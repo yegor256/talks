@@ -1,4 +1,4 @@
-$latex = 'latex %O --shell-escape %S';
-$pdflatex = 'pdflatex %O --shell-escape %S';
+$pdf_mode = 5;
+$pdflatex = 'xelatex %O --shell-escape %S';
 $clean_ext = 'crumbs';
 $success_cmd = 'texqc && texsc';
