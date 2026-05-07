@@ -3,7 +3,7 @@
 
 \documentclass{article}
 \usepackage[template,scheme=dark-mono,nominutes]{ppt-slides}
-\usepackage[static]{clicks}
+\usepackage{clicks}
 \usepackage[russian]{../../lecture-notes/notes}
 \usepackage{svg}
 \usepackage{tikz}
@@ -47,85 +47,95 @@
 }
 \newpage
 
-\plick{\pptBanner{\bi{I Am a Software Developer}{Я работаю программистом}}}
-\plick{\bi{Top-5 GitHub contributor in China}{Вхожу в топ-5 GitHub активистов (в Китае)}}
-\plick{\bi{Co-designer of EO programming language}{Создатель EO, нового языка программирования}
-\plick{\bi{Author of seven books about coding and testing}{Автор семи книг о кодировании и тестировании}}
-\plush{\bi{Founder of Zerocracy, AI manager of software teams}{Основатель Zerocracy, где ИИ управляет кодерами}}
+\plick{\pptBanner{\bi{I Am a Software Developer}
+  {Я уже 25 лет работаю программистом}}
+  \vspace*{2em}}
+  \plick{\bi{Top-5 GitHub contributor in China}
+    {Вхожу в топ-5 GitHub активистов (в Китае)}}
+  \plick{\bi{Co-designer of EO programming language}
+    {С коллегами разработал \emph{новый язык} программирования}}
+  \plick{\bi{Author of seven books about coding and testing}
+    {Написал семь книг о кодировании и тестировании}}
+  \plush{\bi{Founder of Zerocracy, AI manager of software teams}
+    {Создал Zerocracy, где ИИ управляет разработкой}}
 
-\plush{
-  \pptBanner{Now, When AI Is Uncertain, It Asks Me}
-  \begin{itemize}
-  \item I tell AI what to do, explaining the intent
-  \item it asks me to refine the design, not implementation details
-  \item it expects me to fill the \textbf{gaps}
-  \end{itemize}
-  }
+\newcommand\pitch[6]{
+  \plush{
+    \pptBanner{\bi{#1}{#2}}
+    \vspace*{2em}
+    \enquote{\bi{#3}{#4}}\\
+    \href{#5}{#6}}}
 
-\plush{
-  \pptBanner{Today, We Humans Are the Integrators}
-  \begin{itemize}
-  \item works fine, but responsibility is still ours
-  \item we put pieces together and only delegate implementation to AI
-  \item AI writes, we hold the architecture --- it \textbf{burns us out}
-  \end{itemize}
-  }
+\pitch
+  {Now, When AI Is Uncertain, It Asks Me}
+  {Когда ИИ не знает что делать, спрашивает меня}
+  {Context engineering is the delicate art and science of filling
+    the context window with just the right information for the next step.}
+  {Контекст-инжиниринг --- это тонкое искусство и наука наполнения
+    контекстного окна именно той информацией, которая нужна для следующего шага.}
+  {https://x.com/karpathy/status/1937902205765607626}
+  {Andrej Karpathy, Co-Founder of OpenAI, 25 Jun 2025}
 
-\plush{
-  \pptBanner{Soon, AI Holds the Entire System --- We Hold the Intent}
-  \begin{itemize}
-  \item AI will know it all: software, data, servers, network, hardware
-  \item we won't touch SSH, SQL console, even IDEs or text editors
-  \item we will only tell it what we need, in plain \textbf{text}
-  \end{itemize}
-  }
+\pitch
+  {Today, We Humans Are the Integrators}
+  {Сегодня, мы - интеграторы}
+  {Once coding speed jumps, everything around it becomes the constraint:
+    clarifying requirements, reviewing changes, validating correctness and performance,
+    getting to production safely.}
+  {Когда скорость написания кода резко возрастает, всё остальное становится
+    узким местом: уточнение требований, ревью изменений, проверка корректности
+    и производительности, безопасный вывод в продакшн.}
+  {https://x.com/pauldix/status/2006423514446749965}
+  {Paul Dix, CTO of InfluxDB, 31 Dec 2025}
 
-\plush{
-  \pptBanner{The Flip: The Machine Will Ask Us}
-  \begin{itemize}
-  \item AI starts asking: go there, ask that person, collect the data
-  \item the asker becomes the answerer
-  \item since for AI, everything is text, we all become \textbf{writers}
-  \end{itemize}
-  }
+\pitch
+  {Soon, AI Holds the Entire System --- We Hold the Intent}
+  {Скоро: ИИ знает продукт, мы знаем замысел}
+  {Humans steer. Agents execute.}
+  {Люди направляют. Агенты исполняют.}
+  {https://openai.com/index/harness-engineering/}
+  {Ryan Lopopolo, OpenAI, 11 Feb 2026}
 
-\plush{
-  \pptBanner{Then, We Become the Senses}
-  \begin{itemize}
-  \item our real value for AI would be our senses
-  \item what a user actually feels --- AI cannot do alone
-  \item we'll have value if we can turn what we see into into \textbf{text}
-  \end{itemize}
-  }
+\pitch
+  {The Flip: The Machine Will Ask Us, We Become Writers}
+  {Скоро: ИИ ждет от нас прозы, ему нужны писатели}
+  {Claude Code pauses for clarification more often than humans interrupt it.}
+  {Claude Code останавливается за уточнениями чаще, чем люди его прерывают.}
+  {https://www.anthropic.com/research/measuring-agent-autonomy}
+  {Anthropic, 18 Feb 2026}
 
-\plush{
-  \pptBanner{But Can We Trust Them?}
-  \begin{itemize}
-  \item we can't trust humans either
-  \item however, humans get resentful when we voice it
-  \item but AI doesn't get defensive or moody
-  \item it gladly accepts our concerns and just \textbf{fixes, fixes, fixes}
-  \end{itemize}
-  }
+\pitch
+  {Then, We Become the Senses}
+  {Затем мы станем их органами чувств}
+  {In a world where agents handle most cognitive processing,
+    humans become the irreplaceable sensors and attestors
+    of ground truth about the real world.}
+  {В мире, где агенты выполняют большую часть когнитивной работы,
+    люди становятся незаменимыми сенсорами и свидетелями
+    истины о реальном мире.}
+  {https://medium.com/\%40dmik/humans-as-sensors-why-the-agent-revolution-needs-a-new-kind-of-human-contribution-cabb57a7c2e6}
+  {Dima Mikhaylov, 21 Feb 2026}
 
-\plush{
-  \pptBanner{Eventually, AI Will Feel Us}
-  \begin{itemize}
-  \item AI has no feelings of its own --- that's why it needs ours
-  \item what it feels like to be a person --- stays ours
-  \item tech geeks of the past become humanitarians of the future
-  \item the last unexportable skill is \textbf{empathy}
-  \end{itemize}
-  }
+\plick{\pptBanner{\bi{Eventually, AI Will Feel Through Us}
+  {В конце концов, ИИ будет чувствовать через нас}}
+  \vspace*{2em}}
+  \plick{\bi{AI has no feelings of its own - that's why it needs ours}
+    {У ИИ нет собственных чувств --- поэтому ему нужны наши}}
+  \plick{\bi{What it feels like to be a person - stays ours}
+    {Каково это --- быть человеком --- остаётся за нами}}
+  \plick{\bi{Tech geeks of the past become humanitarians of the future}
+    {Технари прошлого становятся гуманитариями будущего}}
+  \plush{\bi{The last unexportable skill is \textbf{empathy}}
+    {Последний неэкспортируемый навык --- это \textbf{эмпатия}}}
 
-\plush{
-  \pptBanner{For Example}
-  \begin{itemize}
-  \item AI: "this module is messy --- safe to refactor?"
-  \item me: "Betty shipped it Friday --- she's \textbf{proud} of it"
-  \item AI waits
-  \end{itemize}
-  }
+\plush{\begin{pptMiddle}\ttfamily
+  \bi{
+    AI: "This module is messy - safe to refactor?" \\
+    me: "Betty shipped it Friday - she's proud of it" \\
+    AI: "OK, I'll submit a few polite improvements"}
+  {ИИ: <<Этот модуль написан грязно --- можно его отрефакторить?>> \\
+    я: <<Бетти выкатила его в пятницу --- она им гордится>> \\
+    ИИ: <<Хорошо, я отправлю пару вежливых улучшений>>}\end{pptMiddle}}
 
 \plush{\qrcode[height=12em]{https://t.me/yegor256news}}
 
