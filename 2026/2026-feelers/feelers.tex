@@ -11,6 +11,8 @@
 
 \graphicspath{{../../faces/}}
 
+\definecolor{myred}{HTML}{ED474A}
+
 \newcommand\bi[2]{#2}
 
 \newcommand*{\thetitle}{\bi{What Can You Do For Me, Human?}{Зачем ты мне, человек?}}
@@ -24,7 +26,9 @@
 \begin{document}
 
 \pptLeft{%
-  \includegraphics[height=3em]{sbergile-logo.png}\\
+  \begin{textblock}{3}(1,1)%
+    \includegraphics[height=3em]{sbergile-logo.png}
+  \end{textblock}%
   \bi{May 23rd, 2026}{23 мая 2026}}
 \pptRight{@yegor256}
 
@@ -60,7 +64,7 @@
     {Создал Zerocracy, где ИИ управляет разработкой}}
 
 \newcommand\pitch[6]{
-  \plush{
+  \lnPitch{
     \pptBanner{\bi{#1}{#2}}
     \vspace*{2em}
     \enquote{\bi{#3}{#4}}\par
@@ -69,16 +73,14 @@
 \pitch
   {Now, When AI Is Uncertain, It Asks Me}
   {Когда ИИ не знает что делать, спрашивает меня}
-  {Context engineering is the delicate art and science of filling
-    the context window with just the right information for the next step.}
-  {Контекст-инжиниринг - это тонкое искусство и наука наполнения
-    контекстного окна именно той информацией, которая нужна для следующего шага.}
-  {https://x.com/karpathy/status/1937902205765607626}
-  {Andrej Karpathy, Co-Founder of OpenAI, 25 Jun 2025}
+  {Claude Code pauses for clarification more often than humans interrupt it.}
+  {Claude Code останавливается за уточнениями чаще, чем люди его прерывают.}
+  {https://www.anthropic.com/research/measuring-agent-autonomy}
+  {Anthropic, 18 Feb 2026}
 
 \pitch
   {Today, We Humans Are the Integrators}
-  {Сегодня, мы - интеграторы}
+  {Мы - интеграторы}
   {Once coding speed jumps, everything around it becomes the constraint:
     clarifying requirements, reviewing changes, validating correctness and performance,
     getting to production safely.}
@@ -90,7 +92,7 @@
 
 \pitch
   {Soon, AI Holds the Entire System --- We Hold the Intent}
-  {Скоро: ИИ знает продукт, мы знаем замысел}
+  {ИИ будет знать продукт, а мы - замысел}
   {Humans steer. Agents execute.}
   {Люди направляют. Агенты исполняют.}
   {https://openai.com/index/harness-engineering/}
@@ -98,40 +100,46 @@
 
 \pitch
   {The Flip: The Machine Will Ask Us, We Become Writers}
-  {Скоро: ИИ ждет от нас прозы, ему нужны писатели}
-  {Claude Code pauses for clarification more often than humans interrupt it.}
-  {Claude Code останавливается за уточнениями чаще, чем люди его прерывают.}
-  {https://www.anthropic.com/research/measuring-agent-autonomy}
-  {Anthropic, 18 Feb 2026}
+  {ИИ будет ждать от нас прозы}
+  {The hottest new programming language is English.}
+  {Самый популярный язык программирования - это английский.}
+  {https://x.com/karpathy/status/1617979122625712128}
+  {Andrej Karpathy, Co-Founder of OpenAI, 24 Jan 2023}
+
+  % {Context engineering is the delicate art and science of filling
+  %   the context window with just the right information for the next step.}
+  % {Контекст-инжиниринг - это тонкое искусство и наука наполнения
+  %   контекстного окна именно той информацией, которая нужна для следующего шага.}
+  % {https://x.com/karpathy/status/1937902205765607626}
+  % {Andrej Karpathy, Co-Founder of OpenAI, 25 Jun 2025}
 
 \pitch
   {Then, We Become the Senses}
-  {Затем мы станем их органами чувств}
+  {Мы станем их органами чувств}
   {In a world where agents handle most cognitive processing,
     humans become the irreplaceable sensors and attestors
     of ground truth about the real world.}
   {В мире, где агенты выполняют большую часть когнитивной работы,
-    люди становятся незаменимыми сенсорами и свидетелями
-    истины о реальном мире.}
+    люди становятся незаменимыми сенсорами и \textcolor{myred}{свидетелями истины}
+    о реальном мире.}
   {https://medium.com/\%40dmik/humans-as-sensors-why-the-agent-revolution-needs-a-new-kind-of-human-contribution-cabb57a7c2e6}
   {Dima Mikhaylov, 21 Feb 2026}
 
-\plush{
+\lnPitch{
   \pptBanner{\bi{Tech Geeks are Future Artists}
     {Технари прошлого это гуманитарии будущего}}
   \vspace*{2em}
-  \definecolor{myred}{HTML}{ED474A}
   \bi{The last unexportable skill is \textbf{empathy}}
-    {Последний неэкспортируемый навык - это \textbf{\textcolor{myred}{эмпатия}}.}}
+    {Последний неэкспортируемый навык - это \textcolor{myred}{эмпатия}.}}
 
-\plush{\begin{pptMiddle}\ttfamily
+\lnPitch{
   \bi{
     AI: "This module is messy - safe to refactor?" \par
     me: "Betty shipped it Friday - she's proud of it" \par
     AI: "OK, I'll submit a few polite improvements"}
   {ИИ: Код грязный, будем рефакторить?\par
     Я: Саша выложила его в пятницу и гордится им.\par
-    ИИ: Хорошо, учту.}\end{pptMiddle}}
+    ИИ: Хорошо, учту.}}
 
 \plush{
   \qrcode[height=10em]{https://t.me/yegor256news}}
