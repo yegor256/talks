@@ -2,7 +2,7 @@
 % SPDX-License-Identifier: MIT
 
 \documentclass{article}
-\usepackage[template,scheme=dark-mono,nominutes]{ppt-slides}
+\usepackage[template,scheme=dark,nominutes]{ppt-slides}
 \usepackage{clicks}
 \usepackage[russian]{../../lecture-notes/notes}
 \usepackage{svg}
@@ -63,7 +63,7 @@
   \plush{
     \pptBanner{\bi{#1}{#2}}
     \vspace*{2em}
-    \enquote{\bi{#3}{#4}}\\
+    \enquote{\bi{#3}{#4}}\par
     \href{#5}{#6}}}
 
 \pitch
@@ -71,7 +71,7 @@
   {Когда ИИ не знает что делать, спрашивает меня}
   {Context engineering is the delicate art and science of filling
     the context window with just the right information for the next step.}
-  {Контекст-инжиниринг --- это тонкое искусство и наука наполнения
+  {Контекст-инжиниринг - это тонкое искусство и наука наполнения
     контекстного окна именно той информацией, которая нужна для следующего шага.}
   {https://x.com/karpathy/status/1937902205765607626}
   {Andrej Karpathy, Co-Founder of OpenAI, 25 Jun 2025}
@@ -116,28 +116,24 @@
   {https://medium.com/\%40dmik/humans-as-sensors-why-the-agent-revolution-needs-a-new-kind-of-human-contribution-cabb57a7c2e6}
   {Dima Mikhaylov, 21 Feb 2026}
 
-\plick{\pptBanner{\bi{Eventually, AI Will Feel Through Us}
-  {В конце концов, ИИ будет чувствовать через нас}}
-  \vspace*{2em}}
-  \plick{\bi{AI has no feelings of its own - that's why it needs ours}
-    {У ИИ нет собственных чувств - поэтому ему нужны наши}}
-  \plick{\bi{What it feels like to be a person - stays ours}
-    {Каково это - быть человеком - остаётся за нами}}
-  \plick{\bi{Tech geeks of the past become humanitarians of the future}
-    {Технари прошлого становятся гуманитариями будущего}}
+\plush{
+  \pptBanner{\bi{Tech Geeks are Future Artists}
+    {Технари прошлого это гуманитарии будущего}}
+  \vspace*{2em}
   \definecolor{myred}{HTML}{ED474A}
-  \plush{\bi{The last unexportable skill is \textbf{empathy}}
-    {Последний неэкспортируемый навык - это \textbf{\textcolor{myred}{эмпатия}}}}
+  \bi{The last unexportable skill is \textbf{empathy}}
+    {Последний неэкспортируемый навык - это \textbf{\textcolor{myred}{эмпатия}}.}}
 
 \plush{\begin{pptMiddle}\ttfamily
   \bi{
-    AI: "This module is messy - safe to refactor?" \\
-    me: "Betty shipped it Friday - she's proud of it" \\
+    AI: "This module is messy - safe to refactor?" \par
+    me: "Betty shipped it Friday - she's proud of it" \par
     AI: "OK, I'll submit a few polite improvements"}
-  {ИИ: <<Код грязный, будем рефакторить?>> \\
-    я: <<Саша выложила его в пятницу и гордится им>> \\
-    ИИ: <<Хорошо, пришлю пару аккуратных PR>>}\end{pptMiddle}}
+  {ИИ: Код грязный, будем рефакторить?\par
+    Я: Саша выложила его в пятницу и гордится им.\par
+    ИИ: Хорошо, учту.}\end{pptMiddle}}
 
-\plush{\qrcode[height=12em]{https://t.me/yegor256news}}
+\plush{
+  \qrcode[height=10em]{https://t.me/yegor256news}}
 
 \end{document}
