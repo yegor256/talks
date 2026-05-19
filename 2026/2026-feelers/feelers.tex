@@ -15,11 +15,18 @@
 \definecolor{myblack}{HTML}{000000}
 \definecolor{myred}{HTML}{ED474A}
 
+\newcommand\citch[1]{
+  \plush{
+  \begin{textblock}{16}[0.5,0.5](8,8)%
+    \centering #1%
+  \end{textblock}
+  }}
+
 \newcommand\pitch[6]{
   \lnPitch{
-    \pptBanner{\bi{#1}{#2}}
-    \vspace*{2em}
-    {\large\enquote{\bi{#3}{#4}}}\par
+    \pptBanner{\bi{#1}{#2}}%
+    \vspace*{2em}%
+    {\large\enquote{\bi{#3}{#4}}}\par%
     \href{#5}{#6}}}
 
 \newcommand\bi[2]{#2}
@@ -105,7 +112,7 @@
   \plush{\large\bi{Founder of Zerocracy, AI manager of software teams}
     {Создал Zerocracy, где ИИ управляет разработкой}}
 
-\lnPitch{
+\citch{
   \includegraphics[height=13em]{laptops.jpg}\\
   {\scriptsize\url{https://x.com/cormachayden_/status/2050773588521992642}}
   }
@@ -176,7 +183,17 @@
     Я: Саша выложила его в пятницу и гордится им.\par
     ИИ: Хорошо, \textcolor{myred}{учту}.}}
 
-\plush{
-  \qrcode[height=14em]{https://t.me/yegor256news}}
+\citch{%
+  \Large%
+  \href{https://github.com/yegor256/plugins}{yegor256/plugins}
+  \par
+  }
+
+\citch{%
+  \qrcode[height=12em]{https://t.me/yegor256news}
+  \par
+  \href{https://t.me/yegor256news}{@yegor256news}
+  \par
+  }
 
 \end{document}
