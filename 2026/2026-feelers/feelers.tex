@@ -15,6 +15,8 @@
 \definecolor{myblack}{HTML}{000000}
 \definecolor{myred}{HTML}{ED474A}
 
+\renewcommand\emph[1]{\textcolor{myred}{#1}}
+
 \newcommand\citch[1]{
   \plush{
   \begin{textblock}{16}[0.5,0.5](8,8)%
@@ -92,27 +94,27 @@
   {LLMversus, 6 Apri 2026}
 
 \plick{
-  \begin{textblock}{7}(4,7)
-    \pptBanner[red]{\bi{February 2026}{Февраль 2026}}
+  \begin{textblock}{7}(4,8)
+    \pptBanner{\bi{February 2026}{Февраль 2026}}
     \bi{6 programmers}{10 программистов}\par
     \bi{All part-time}{Все удаленно}\par
-    \bi{\$4,000 monthly}{\$4000 в месяц}\par
+    \bi{\$4,000 monthly}{\emph{\$4000} в месяц}\par
   \end{textblock}
   }
 \plush{
-  \begin{textblock}{7}(10,4)
+  \begin{textblock}{7}(10,3)
     \includegraphics[height=4em]{claude-code.png}\par
     \pptBanner{\bi{May 2026}{Май 2026}}
     \bi{1 Claude account}{1 Claude аккаунт}\par
-    \bi{\$108 monthly}{\$108 в месяц}\par
+    \bi{\$108 monthly}{\emph{\$108} в месяц}\par
   \end{textblock}
   }
 
 \plick{\pptBanner{\bi{I Am a Software Developer}
-  {Я уже 25 лет работаю программистом}}
+  {Я - программист}}
   \vspace*{2em}}
   \plick{\large\bi{Top-5 GitHub contributor in China}
-    {Вхожу в топ-5 GitHub активистов (в Китае)}}
+    {Более 25 лет в профессии}}
   \plick{\large\bi{Co-designer of EO programming language}
     {С коллегами разработал новый язык программирования}}
   \plick{\large\bi{Author of seven books about coding and testing}
@@ -140,7 +142,7 @@
     clarifying requirements, reviewing changes, validating correctness and performance,
     getting to production safely.}
   {Когда скорость написания кода резко возрастает, всё остальное становится
-    \textcolor{myred}{узким местом}: уточнение требований, ревью изменений, проверка корректности
+    \emph{узким местом}: уточнение требований, ревью изменений, проверка корректности
     и производительности, безопасный вывод в продакшн.}
   {https://x.com/pauldix/status/2006423514446749965}
   {Paul Dix, CTO of InfluxDB, 31 Dec 2025}
@@ -168,7 +170,7 @@
     humans become the irreplaceable sensors and attestors
     of ground truth about the real world.}
   {В мире, где агенты выполняют большую часть когнитивной работы,
-    люди становятся незаменимыми сенсорами и \textcolor{myred}{свидетелями истины}
+    люди становятся незаменимыми сенсорами и \emph{свидетелями истины}
     о реальном мире.}
   {https://medium.com/\%40dmik/humans-as-sensors-why-the-agent-revolution-needs-a-new-kind-of-human-contribution-cabb57a7c2e6}
   {Dima Mikhaylov, 21 Feb 2026}
@@ -179,17 +181,17 @@
   \vspace*{2em}
   \large
   \bi{The last unexportable skill is \textbf{empathy}}
-    {Последний неэкспортируемый навык - это \textcolor{myred}{эмпатия}.}}
+    {Последний неэкспортируемый навык - это \emph{эмпатия}.}}
 
 \lnPitch{
   \large
   \bi{
     AI: "This module is messy - safe to refactor?" \par
     me: "Betty shipped it Friday - she's proud of it" \par
-    AI: "OK, I'll submit a few \textcolor{myred}{polite} improvements"}
+    AI: "OK, I'll submit a few \emph{polite} improvements"}
   {ИИ: Код грязный, будем рефакторить?\par
     Я: Саша выложила его в пятницу и гордится им.\par
-    ИИ: Хорошо, \textcolor{myred}{учту}.}}
+    ИИ: Хорошо, \emph{учту}.}}
 
 \citch{%
   \Huge\ttfamily%
