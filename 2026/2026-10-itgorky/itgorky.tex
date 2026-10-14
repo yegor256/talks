@@ -1,0 +1,64 @@
+% SPDX-FileCopyrightText: Copyright (c) 2023 Yegor Bugayenko
+% SPDX-License-Identifier: MIT
+
+\documentclass{article}
+\usepackage[nominutes,template,scheme=dark]{ppt-slides}
+\usepackage[static]{clicks}
+\usepackage{multicol}
+\usepackage[synonym=hs,colored,color=orange]{handstroke}
+\usepackage{../../lecture-notes/notes}
+\usepackage{svg}
+\usepackage{tikz}
+  \usetikzlibrary{shadows}
+
+\graphicspath{{../../faces/}}
+
+\newcommand\citch[1]{
+  \plush{
+    \begin{textblock}{10}[0.5,0.5](8,8)%
+      \color{.}
+      \centering #1%
+    \end{textblock}}}
+
+\newcommand\pitch[6]{
+  \lnPitch{
+    \pptBanner{#1}%
+    \vspace*{2em}%
+    {\large\enquote{#2}}\par%
+    \href{#3}{#4}}}
+
+\RemoveFromHook{enddocument}[notes]
+
+\begin{document}
+
+\newcommand*{\thedate}{October 17th, 2026}
+\newcommand*{\thetitle}{Open Source}
+\newcommand*{\thesubtitle}{Our Typical Mistakes When Using AI}
+\newcommand*{\theauthor}{Yegor Bugayenko}
+
+\pptLeft{\thedate}
+\pptRight{@yegor256}
+
+\citch{
+  \pptTitle{\thetitle}{\thesubtitle}
+  \par
+  \theauthor
+  \\
+  \thedate
+  }
+
+\lnPitch{
+  \color{.}
+  According to GitHub leadership, the platform processed roughly 1 billion commits in 2025. In 2026, that number is expected to exceed 14 billion commits.
+  \par
+  \small
+  --- @naro7217 \href{how-github-handles-billions-of-commits-while-ai-coding-tools-flood-the-platform-aa02577be670}{on Medium}, Jul 24, 2026}
+
+\citch{%
+  \qrcode[height=12em]{https://t.me/yegor256news}
+  \par
+  \href{https://t.me/yegor256news}{@yegor256news}
+  \par
+  }
+
+\end{document}
