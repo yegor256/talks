@@ -27,6 +27,12 @@
     {\large\enquote{#2}}\par%
     \href{#3}{#4}}}
 
+\newcommand\where[1]{%
+  \par
+  \small
+  \color{gray}
+  --- #1}
+
 \RemoveFromHook{enddocument}[notes]
 
 \begin{document}
@@ -50,18 +56,45 @@
 \lnPitch{
   \color{.}
   The cost of achieving a given level of AI performance has fallen about 47\% per quarter since 2023, or 13× per year.
-  \par
-  \small
-  \color{gray}
-  --- Luke Emberson and David Roodman from \href{https://epoch.ai/publications/the-plunging-price-of-thought}{Epoch AI}; Sep 22, 2026}
+  \where{Luke Emberson and David Roodman from \href{https://epoch.ai/publications/the-plunging-price-of-thought}{Epoch AI}; Sep 22, 2026}}
 
 \lnPitch{
   \color{.}
   According to GitHub leadership, the platform processed roughly 1 billion commits in 2025. In 2026, that number is expected to exceed 14 billion commits.
-  \par
-  \small
-  \color{gray}
-  --- @naro7217 \href{how-github-handles-billions-of-commits-while-ai-coding-tools-flood-the-platform-aa02577be670}{on Medium}; Jul 24, 2026}
+  \where{@naro7217 \href{how-github-handles-billions-of-commits-while-ai-coding-tools-flood-the-platform-aa02577be670}{on Medium}; Jul 24, 2026}}
+
+\lnPitch{
+  \color{.}
+  Providing an LLM with "incorrect" documentation can greatly hinder code understanding, while incomplete or missing documentation does not seem to significantly affect an LLM's ability to understand code.
+  \where{William Macke and Michael Doyle \href{https://arxiv.org/abs/2404.03114}{on arXiv}; Apr 3, 2024}}
+
+\citch{
+  \includegraphics[width=.9\linewidth]{featbench.png}
+  \where{Haorui Chen, Chengze Li, and Jia Li \href{https://arxiv.org/abs/2509.22237}{on arXiv}; Feb 18, 2026}
+  }
+
+\lnPitch{
+  \color{.}
+  The cost of code improvements has dropped so low that we can afford a zero tolerance attitude to minor code smells and inconveniences.
+  \where{Simon Willison \href{https://simonwillison.net/guides/agentic-engineering-patterns/better-code/}{on his blog}; 2025}}
+
+
+
+% accept:
+
+% - measure the impact (of PR)
+
+% - demand small changes (pr-size)
+
+% - learn contributor's reputation
+
+% submit:
+
+% -
+
+% - disclose your agent details (model number, etc)
+
+% - code base, not lines of code
 
 \citch{%
   \qrcode[height=12em]{https://t.me/yegor256news}
