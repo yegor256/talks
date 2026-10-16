@@ -26,10 +26,14 @@
     {\large\enquote{#2}}\par%
     \href{#3}{#4}}}
 
+\newcounter{boom}
 \newcommand\boom[1]{%
+  \stepcounter{boom}%
+  \expandafter\boomat\expandafter{\the\value{boom}}{#1}}
+\newcommand\boomat[2]{%
   \AddToHookNext{shipout/foreground}{%
     \put(3\TPHorizModule,-3\TPVertModule){%
-      \makebox(0,0)[tl]{\rotatebox{10}{\pptBanner[orange]{\LARGE #1}}}}}}
+      \makebox(0,0)[tl]{\rotatebox{10}{\pptBanner[orange]{\LARGE #1: #2}}}}}}
 
 \newcommand\where[1]{%
   \par
