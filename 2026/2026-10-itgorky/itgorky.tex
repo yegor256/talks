@@ -27,13 +27,13 @@
     \href{#3}{#4}}}
 
 \newcounter{boom}
-\newcommand\boom[1]{%
+\newcommand\boom[2]{%
   \stepcounter{boom}%
-  \expandafter\boomat\expandafter{\the\value{boom}}{#1}}
-\newcommand\boomat[2]{%
+  \expandafter\boomat\expandafter{\the\value{boom}}{#1}{#2}}
+\newcommand\boomat[3]{%
   \AddToHookNext{shipout/foreground}{%
-    \put(3\TPHorizModule,-2.5\TPVertModule){%
-      \makebox(0,0)[tl]{\rotatebox{10}{\pptBanner[orange]{\LARGE #1: #2}}}}}}
+    \put(3\TPHorizModule,-3\TPVertModule){%
+      \makebox(0,0)[tl]{\rotatebox{5}{\color{.}\LARGE #1: \pptBanner[orange]{\LARGE #2} \(\to\) \pptBanner[orange]{\LARGE #3}}}}}}
 
 \newcommand\where[1]{%
   \par
@@ -72,52 +72,52 @@
 \lnPitch{
   Providing an LLM with "incorrect" documentation can \hs{greatly hinder} code understanding, while incomplete or missing documentation does not seem to significantly affect an LLM's ability to understand code.
   \where{William Macke and Michael Doyle \href{https://arxiv.org/abs/2404.03114}{on arXiv}; Apr 3, 2024}
-  \boom{No Code Comments}
+  \boom{Readable}{Sharp}
   }
 
-\citch{
-  \includegraphics[width=.9\linewidth]{featbench.png}
-  \where{Haorui Chen, Chengze Li, and Jia Li \href{https://arxiv.org/abs/2509.22237}{on arXiv}; Feb 18, 2026}
-  \boom{No More Monoliths}
-  }
+% \citch{
+%   \includegraphics[width=.75\linewidth]{featbench.png}
+%   \where{Haorui Chen, Chengze Li, and Jia Li \href{https://arxiv.org/abs/2509.22237}{on arXiv}; Feb 18, 2026}
+%   \boom{Monoliths}{One-File Libs}
+%   }
 
 \lnPitch{
   In the past, uplifting a legacy codebase used to be a risky and expensive endeavour. Many are the technical debt backlogs that never got priority. The economics for dealing with \hs{technical debt} have changed. Dramatically.
   \par
   A legacy uplift that would traditionally have been a 12–18 month, high-risk engineering project was completed in \hs{three weeks} of part-time work for roughly \$4,000 in AI costs.
   \where{Adam Tornhill \href{https://codescene.com/blog/case-study-refactoring-at-scale-with-agents}{on CodeScene blog}; Sep 24, 2026}
-  \boom{No Codebase Is a Legacy}
+  \boom{Rewrite}{Revive}
   }
 
 \lnPitch{
   In practice, reviews of agent-generated code become \hs{rubber-stamps}: the human approves because the code looks correct, because the tests pass, and because the \hs{cognitive cost} of genuine scrutiny is prohibitive. The assurance that review is supposed to provide is illusory.
   \where{Martin Monperrus \href{https://arxiv.org/html/2606.13175v1}{on arXiv}; Jun 11, 2026}
-  \boom{No Manual Triage}
+  \boom{Attention}{Distraction}
   }
 
 \lnPitch{
   The cost of code improvements has dropped so low that we can afford a \hs{zero tolerance} attitude to minor code smells and inconveniences.
   \where{Simon Willison \href{https://simonwillison.net/guides/agentic-engineering-patterns/better-code/}{on his blog}; 2025}
-  \boom{No Reason to Reject} % pr-size for example
+  \boom{Respect}{Reject} % pr-size for example
   }
 
 \lnPitch{
   YAML is code. It is precise and \hs{diff-friendly}. [...]
   YAML holds the source of truth; the renderer is the lens.
   \where{Weiwen Weng in \href{https://dev.to/weiwen-weng/why-manual-test-cases-should-live-in-yaml-223k}{dev.to}; Jun 30, 2026}
-  \boom{No Tests, Just YAML}
+  \boom{Maintainability}{Visibility}
   }
 
 \lnPitch{
   My current strategy is to \hs{not read any of the code} written by my agents. That's the only way I can take advantage of their productivity.
   \where{Robert C. Martin \href{https://x.com/unclebobmartin/status/2080257779395154409}{on X}; Jul 23, 2026}
-  \boom{Measure the Impact, Ignore the Diff}
+  \boom{Diff}{Impact}
   }
 
 \lnPitch{
   Higher AI adoption is associated with an increase in both software delivery throughput and software delivery \hs{instability}.
   \where{Jessica Baolin and Nathen Harvey in \href{https://dora.dev/insights/balancing-ai-tensions/}{DORA Report}; Mar 10, 2026}
-  \boom{Merge Fast, Fix Later}
+  \boom{Stability}{Speed}
   }
 
 \citch{%
