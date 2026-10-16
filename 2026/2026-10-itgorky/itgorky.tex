@@ -2,7 +2,6 @@
 % SPDX-License-Identifier: MIT
 
 \documentclass{article}
-\PassOptionsToPackage{overlay}{textpos}
 \usepackage[nominutes,template,scheme=dark]{ppt-slides}
 \usepackage[static]{clicks}
 \usepackage{multicol}
@@ -27,11 +26,10 @@
     {\large\enquote{#2}}\par%
     \href{#3}{#4}}}
 
-\newcommand\boom[1]{
-  \begin{textblock}{10}(3,3)%
-    \rotatebox{10}{\pptBanner[orange]{\LARGE #1}}
-  \end{textblock}
-  }
+\newcommand\boom[1]{%
+  \AddToHookNext{shipout/foreground}{%
+    \put(3\TPHorizModule,-3\TPVertModule){%
+      \makebox(0,0)[tl]{\rotatebox{10}{\pptBanner[orange]{\LARGE #1}}}}}}
 
 \newcommand\where[1]{%
   \par
@@ -108,7 +106,12 @@
   \boom{Merge Fast, Fix Later}
   }
 
-% ask agents to make their changes extremely visible (YAML test fixtures)
+\lnPitch{
+  YAML is code. It is precise and \hs{diff-friendly}. [...]
+  YAML holds the source of truth; the renderer is the lens.
+  \where{Weiwen Weng in \href{https://dev.to/weiwen-weng/why-manual-test-cases-should-live-in-yaml-223k}{dev.to}; Jun 30, 2026}
+  \boom{Write Tests in YAML}
+  }
 
 \citch{%
   \qrcode[height=12em]{https://t.me/yegor256news}
