@@ -32,7 +32,7 @@
   \expandafter\boomat\expandafter{\the\value{boom}}{#1}}
 \newcommand\boomat[2]{%
   \AddToHookNext{shipout/foreground}{%
-    \put(3\TPHorizModule,-3\TPVertModule){%
+    \put(3\TPHorizModule,-2.5\TPVertModule){%
       \makebox(0,0)[tl]{\rotatebox{10}{\pptBanner[orange]{\LARGE #1: #2}}}}}}
 
 \newcommand\where[1]{%
@@ -102,16 +102,16 @@
   }
 
 \lnPitch{
-  My current strategy is to \hs{not read any of the code} written by my agents. That's the only way I can take advantage of their productivity.
-  \where{Robert C. Martin \href{https://x.com/unclebobmartin/status/2080257779395154409}{on X}; Jul 23, 2026}
-  \boom{Measure the Impact, Ignore the Diff}
-  }
-
-\lnPitch{
   YAML is code. It is precise and \hs{diff-friendly}. [...]
   YAML holds the source of truth; the renderer is the lens.
   \where{Weiwen Weng in \href{https://dev.to/weiwen-weng/why-manual-test-cases-should-live-in-yaml-223k}{dev.to}; Jun 30, 2026}
   \boom{No Tests, Just YAML}
+  }
+
+\lnPitch{
+  My current strategy is to \hs{not read any of the code} written by my agents. That's the only way I can take advantage of their productivity.
+  \where{Robert C. Martin \href{https://x.com/unclebobmartin/status/2080257779395154409}{on X}; Jul 23, 2026}
+  \boom{Measure the Impact, Ignore the Diff}
   }
 
 \lnPitch{
@@ -121,6 +121,7 @@
   }
 
 \citch{%
+  \color{.}
   \qrcode[height=12em]{https://t.me/yegor256news}
   \par
   \href{https://t.me/yegor256news}{@yegor256news}
